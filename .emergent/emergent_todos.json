@@ -5,30 +5,30 @@
   },
   {
     "content": "Get design guidelines from design_agent for DYNICTY landing",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Get template imagery via vision_expert_agent (9 categories)",
-    "status": "pending"
+    "status": "cancelled"
   },
   {
     "content": "Phase 2: Backend - leads module (free-trial, newsletter, contact, stats)",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Phase 2: Frontend - Landing page all 11 sections + brand logo",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Phase 2: SEO (helmet, OG, JSON-LD, robots, favicon)",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Phase 2: All user stories covered in development",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Phase 2: End-to-End Testing via testing_agent_v3",
-    "status": "pending"
+    "status": "in_progress"
   }
 ]
