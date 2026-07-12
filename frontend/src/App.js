@@ -4,10 +4,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { Toaster } from "@/components/ui/sonner";
 import LandingPage from "@/pages/LandingPage";
+import ContactPage from "@/pages/ContactPage";
 import PrivacyPage from "@/pages/PrivacyPage";
 import TermsPage from "@/pages/TermsPage";
-import BlogPage from "@/pages/BlogPage";
-import LoginRedirect from "@/pages/LoginRedirect";
 import NotFoundPage from "@/pages/NotFoundPage";
 
 function App() {
@@ -23,10 +22,9 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<LandingPage />} />
+            <Route path="/kontak" element={<ContactPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/terms" element={<TermsPage />} />
-            <Route path="/blog" element={<BlogPage />} />
-            <Route path="/login" element={<LoginRedirect />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </BrowserRouter>

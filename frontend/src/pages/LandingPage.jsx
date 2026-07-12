@@ -2,11 +2,13 @@ import React from "react";
 import SEO from "@/components/seo/SEO";
 import Navbar from "@/components/landing/Navbar";
 import Hero from "@/components/landing/Hero";
-import Trusted from "@/components/landing/Trusted";
-import Features from "@/components/landing/Features";
-import TemplateShowcase from "@/components/landing/TemplateShowcase";
+import Problems from "@/components/landing/Problems";
+import Paradigm from "@/components/landing/Paradigm";
+import Solution from "@/components/landing/Solution";
 import HowItWorks from "@/components/landing/HowItWorks";
-import FeatureShowcase from "@/components/landing/FeatureShowcase";
+import TemplateShowcase from "@/components/landing/TemplateShowcase";
+import Features from "@/components/landing/Features";
+import Compare from "@/components/landing/Compare";
 import Pricing from "@/components/landing/Pricing";
 import Faq from "@/components/landing/Faq";
 import FinalCta from "@/components/landing/FinalCta";
@@ -19,11 +21,13 @@ export default function LandingPage() {
       <Navbar />
       <main>
         <Hero />
-        <Trusted />
-        <Features />
-        <TemplateShowcase />
+        <Problems />
+        <Paradigm />
+        <Solution />
         <HowItWorks />
-        <FeatureShowcase />
+        <TemplateShowcase />
+        <Features />
+        <Compare />
         <Pricing />
         <Faq />
         <FinalCta />

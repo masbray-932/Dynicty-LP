@@ -1,24 +1,24 @@
 {
-  "timestamp": "2026-07-11T19:14:24.469995",
-  "total_tests": 9,
-  "passed": 9,
+  "timestamp": "2026-07-12T08:31:24.768595",
+  "total_tests": 11,
+  "passed": 11,
   "failed": 0,
   "success_rate": "100.0%",
   "test_results": [
     {
       "test": "Health Check",
       "passed": true,
-      "details": "Status: 200, Response: {'status': 'ok', 'time': '2026-07-11T19:14:23.413567+00:00'}"
+      "details": "Status: 200, Response: {'status': 'ok', 'time': '2026-07-12T08:31:23.426794+00:00'}"
     },
     {
       "test": "GET /api/leads/stats",
       "passed": true,
-      "details": "All 4 counters present and positive: {'websites_created': 1241, 'active_tenants': 380, 'deployments': 5623, 'customers': 982}"
+      "details": "All 4 counters present and positive: {'websites_created': 1243, 'active_tenants': 381, 'deployments': 5629, 'customers': 987}"
     },
     {
       "test": "POST /api/leads/free-trial (valid)",
       "passed": true,
-      "details": "Lead created successfully with ID: 50987a20-16b2-4909-b2d4-4ab1e6302554"
+      "details": "Lead created successfully with ID: 1adc6f5e-9cdd-4e81-8c72-ae97788fec48"
     },
     {
       "test": "POST /api/leads/free-trial (invalid email)",
@@ -44,6 +44,16 @@
       "test": "POST /api/leads/contact (valid)",
       "passed": true,
       "details": "Contact form submitted successfully: Pesan Anda telah kami terima. Tim Dynicty akan segera merespons."
+    },
+    {
+      "test": "POST /api/leads/contact (invalid email)",
+      "passed": true,
+      "details": "Status: 422"
+    },
+    {
+      "test": "POST /api/leads/contact (honeypot)",
+      "passed": true,
+      "details": "Honeypot accepted silently: Pesan Anda telah kami terima."
     },
     {
       "test": "Honeypot handling",

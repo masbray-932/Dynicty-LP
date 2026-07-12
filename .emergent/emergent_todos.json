@@ -1,34 +1,62 @@
 [
   {
-    "content": "Audit existing React/FastAPI template structure",
+    "content": "Setup: prepare brand assets (rename, generate favicon variants, OG/Twitter cards)",
     "status": "completed"
   },
   {
-    "content": "Get design guidelines from design_agent for DYNICTY landing",
+    "content": "Cleanup: remove v1 frontend components no longer in PRD v2.1 scope",
     "status": "completed"
   },
   {
-    "content": "Get template imagery via vision_expert_agent (9 categories)",
-    "status": "cancelled"
-  },
-  {
-    "content": "Phase 2: Backend - leads module (free-trial, newsletter, contact, stats)",
+    "content": "Cleanup: remove framer-motion dependency (per correction)",
     "status": "completed"
   },
   {
-    "content": "Phase 2: Frontend - Landing page all 11 sections + brand logo",
+    "content": "Backend: /kontak endpoint verification + keep existing endpoints internal (no new pricing endpoint)",
     "status": "completed"
   },
   {
-    "content": "Phase 2: SEO (helmet, OG, JSON-LD, robots, favicon)",
+    "content": "Frontend: constants (feature matrix, plans, templates, testIds, brand assets)",
     "status": "completed"
   },
   {
-    "content": "Phase 2: All user stories covered in development",
+    "content": "Frontend: shared UI + animation hooks (IntersectionObserver, no framer-motion)",
     "status": "completed"
   },
   {
-    "content": "Phase 2: End-to-End Testing via testing_agent_v3",
+    "content": "Frontend: Navbar (with Hubungi Kami CTA, no login/blog)",
     "status": "completed"
+  },
+  {
+    "content": "Frontend: Hero (storefront tenant mockup, locked copy)",
+    "status": "completed"
+  },
+  {
+    "content": "Frontend: Section 3-9 (Masalah, Paradigma, Solusi, Cara Kerja, Templates, Fitur, Perbandingan)",
+    "status": "completed"
+  },
+  {
+    "content": "Frontend: Pricing (Segera Diumumkan, no popular badge)",
+    "status": "completed"
+  },
+  {
+    "content": "Frontend: FAQ + Final CTA + Footer (no social, no newsletter)",
+    "status": "completed"
+  },
+  {
+    "content": "Frontend: /kontak page (contact form with validation, loading, success, error, honeypot)",
+    "status": "completed"
+  },
+  {
+    "content": "Frontend: SEO (helmet, OG using official logo, JSON-LD, robots, sitemap - updated)",
+    "status": "completed"
+  },
+  {
+    "content": "Privacy audit: grep for app.dynicty.com / login / free-trial UI references",
+    "status": "completed"
+  },
+  {
+    "content": "Quality gates: ESLint PASS, yarn build PASS, testing_agent_v3 PASS",
+    "status": "in_progress"
   }
 ]

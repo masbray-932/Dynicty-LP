@@ -1,160 +1,80 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { Check, Sparkles } from "lucide-react";
+import React from "react";
+import { Link } from "react-router-dom";
+import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import TryFreeModal from "@/components/landing/TryFreeModal";
 import { PRICING } from "@/constants/testIds";
+import { PRICING_PLANS } from "@/constants/plans";
+import { ctaHref } from "@/lib/cta";
+import { useRevealClass } from "@/hooks/useInView";
 
-const plans = [
-  {
-    key: "starter",
-    name: "Starter",
-    price: "Rp 199rb",
-    period: "/bulan",
-    tagline: "UMKM baru mulai jualan online.",
-    features: [
-      "1 Website Aktif",
-      "Template Engine (all templates)",
-      "Domain custom (bawa sendiri)",
-      "Payment Gateway lokal",
-      "Email support",
-    ],
-    highlighted: false,
-    cta: "Coba Gratis",
-  },
-  {
-    key: "growth",
-    name: "Growth",
-    price: "Rp 499rb",
-    period: "/bulan",
-    tagline: "Brand yang siap scale ke level berikutnya.",
-    features: [
-      "3 Website / Multi Outlet",
-      "Template Designer (drag & drop)",
-      "Subscription & Feature Package",
-      "Marketing Automation & Kupon",
-      "Priority support 12/7",
-    ],
-    highlighted: true,
-    badge: "Paling Populer",
-    cta: "Mulai Growth",
-  },
-  {
-    key: "enterprise",
-    name: "Enterprise",
-    price: "Custom",
-    period: "",
-    tagline: "Agency, distributor, dan white label reseller.",
-    features: [
-      "Unlimited Website & Tenant",
-      "White Label Penuh (tanpa branding Dynicty)",
-      "Deployment engine terisolasi",
-      "SLA & dedicated onboarding",
-      "Custom integration & API",
-    ],
-    highlighted: false,
-    cta: "Hubungi Sales",
-  },
-];
+const PlanCard = ({ plan, delay }) => {
+  const r = useRevealClass(delay);
+  return (
+    <div
+      ref={r.ref}
+      style={r.style}
+      data-testid={PRICING.card}
+      className={`${r.className} relative rounded-2xl border border-white/10 bg-white/[0.03] p-6 flex flex-col`}
+    >
+      <div className="flex items-center justify-between">
+        <h3 className="text-lg font-semibold text-white">{plan.name}</h3>
+      </div>
+      <div className="mt-3">
+        <span className="text-2xl sm:text-3xl font-semibold text-white">{plan.priceDisplay}</span>
+      </div>
+      <p className="mt-2 text-sm text-white/65">{plan.tagline}</p>
+
+      <ul className="mt-5 space-y-2.5 flex-1">
+        {plan.features.map((f) => (
+          <li key={f} className="flex items-start gap-2 text-sm text-white/85">
+            <span className="mt-0.5 inline-flex h-4 w-4 items-center justify-center rounded-full dyn-brand-gradient-bg shrink-0">
+              <Check className="h-3 w-3 text-white" />
+            </span>
+            <span>{f}</span>
+          </li>
+        ))}
+      </ul>
+
+      <Link to={ctaHref({ paket: plan.name, source: "pricing" })} className="mt-6 block">
+        <Button
+          data-testid={PRICING.cta}
+          className="h-11 w-full text-sm dyn-brand-gradient-bg text-white border-0 hover:opacity-90"
+        >
+          {plan.ctaLabel}
+        </Button>
+      </Link>
+    </div>
+  );
+};
 
 const Pricing = () => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [defaultPaket, setDefaultPaket] = useState("");
-
-  const openModal = (planName) => {
-    setDefaultPaket(planName);
-    setModalOpen(true);
-  };
-
   return (
     <section
-      id="pricing"
+      id="harga"
       data-testid={PRICING.section}
       className="relative bg-[hsl(var(--dyn-bg-0))] dyn-section"
     >
       <div className="dyn-container">
         <div className="text-center max-w-2xl mx-auto">
-          <div className="dyn-eyebrow">Harga Transparan</div>
+          <div className="dyn-eyebrow">Harga</div>
           <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-white">
-            Paket untuk setiap <span className="dyn-brand-gradient-text">tahap bisnis</span>.
+            Paket untuk <span className="dyn-brand-gradient-text">setiap tahap bisnis.</span>
           </h2>
-          <p className="mt-4 text-white/60">
-            Coba gratis 14 hari. Upgrade, downgrade, atau batalkan kapan pun tanpa hidden fee.
+          <p className="mt-4 text-white/65">
+            Harga resmi akan segera diumumkan. Untuk informasi lebih lanjut mengenai paket dan onboarding, silakan hubungi tim kami.
           </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6 items-stretch">
-          {plans.map((p, i) => (
-            <motion.div
-              key={p.key}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              data-testid={PRICING.card}
-              className={`relative rounded-2xl border p-6 flex flex-col ${
-                p.highlighted
-                  ? "border-white/25 bg-white/[0.05] shadow-[0_1px_0_rgba(255,255,255,0.08),0_40px_120px_-20px_rgba(139,92,246,0.35)]"
-                  : "border-white/10 bg-white/[0.03]"
-              }`}
-            >
-              {p.highlighted && (
-                <div className="absolute -inset-px rounded-2xl pointer-events-none" style={{ padding: 1 }}>
-                  <div className="h-full w-full rounded-2xl dyn-brand-gradient-bg opacity-40" style={{ WebkitMask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)", WebkitMaskComposite: "xor", maskComposite: "exclude", padding: 1 }} />
-                </div>
-              )}
-
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold text-white">{p.name}</h3>
-                {p.highlighted && (
-                  <Badge
-                    data-testid={PRICING.popular}
-                    className="dyn-brand-gradient-bg text-white border-0 gap-1"
-                  >
-                    <Sparkles className="h-3 w-3" />
-                    {p.badge}
-                  </Badge>
-                )}
-              </div>
-              <div className="mt-3 flex items-end gap-1">
-                <span className="text-3xl sm:text-4xl font-semibold text-white">{p.price}</span>
-                <span className="text-white/50 text-sm mb-1.5">{p.period}</span>
-              </div>
-              <p className="mt-2 text-sm text-white/60">{p.tagline}</p>
-
-              <ul className="mt-5 space-y-2.5 flex-1">
-                {p.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2 text-sm text-white/80">
-                    <span className="mt-0.5 inline-flex h-4 w-4 items-center justify-center rounded-full dyn-brand-gradient-bg">
-                      <Check className="h-3 w-3 text-white" />
-                    </span>
-                    {f}
-                  </li>
-                ))}
-              </ul>
-
-              <Button
-                data-testid={PRICING.cta}
-                onClick={() => openModal(p.name)}
-                className={`mt-6 h-11 w-full text-sm ${
-                  p.highlighted
-                    ? "dyn-brand-gradient-bg text-white border-0 hover:opacity-90"
-                    : "bg-white/5 hover:bg-white/10 border border-white/15 text-white"
-                }`}
-              >
-                {p.cta}
-              </Button>
-            </motion.div>
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6 items-stretch">
+          {PRICING_PLANS.map((plan, i) => (
+            <PlanCard key={plan.key} plan={plan} delay={i * 80} />
           ))}
         </div>
 
-        <p className="mt-6 text-center text-xs text-white/40">
-          Harga belum termasuk PPN. Butuh paket khusus reseller/agency? <button onClick={() => openModal("Enterprise")} className="underline underline-offset-2 text-white/70 hover:text-white">Hubungi tim kami</button>.
+        <p className="mt-6 text-center text-xs text-white/45 max-w-2xl mx-auto">
+          Harga belum termasuk pajak yang berlaku. Biaya payment gateway dan layanan pihak ketiga dapat berlaku sesuai metode yang digunakan. Fitur per paket dapat berubah seiring pengembangan produk.
         </p>
       </div>
-
-      <TryFreeModal open={modalOpen} onOpenChange={setModalOpen} defaultPaket={defaultPaket} />
     </section>
   );
 };

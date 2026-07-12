@@ -271,6 +271,62 @@ class DynictyAPITester:
             self.log_result("POST /api/leads/contact (valid)", False, f"Error: {str(e)}")
             return False
 
+    def test_contact_invalid_email(self):
+        """Test POST /api/leads/contact with invalid email returns 422"""
+        payload = {
+            "nama": "Test Contact",
+            "email": "invalid-email-format",
+            "pesan": "This is a test message"
+        }
+        
+        try:
+            response = requests.post(
+                f"{self.base_url}/api/leads/contact",
+                json=payload,
+                headers={"Content-Type": "application/json"},
+                timeout=10
+            )
+            
+            passed = response.status_code == 422
+            details = f"Status: {response.status_code}"
+            self.log_result("POST /api/leads/contact (invalid email)", passed, details)
+            return passed
+        except Exception as e:
+            self.log_result("POST /api/leads/contact (invalid email)", False, f"Error: {str(e)}")
+            return False
+
+    def test_contact_honeypot(self):
+        """Test POST /api/leads/contact with honeypot returns 200 but silently discards"""
+        timestamp = datetime.now().strftime("%H%M%S")
+        payload = {
+            "nama": "Spam Bot Contact",
+            "email": f"spamcontact{timestamp}@example.com",
+            "pesan": "This is spam",
+            "honeypot": "filled-by-bot"
+        }
+        
+        try:
+            response = requests.post(
+                f"{self.base_url}/api/leads/contact",
+                json=payload,
+                headers={"Content-Type": "application/json"},
+                timeout=10
+            )
+            
+            passed = response.status_code == 200
+            if passed:
+                data = response.json()
+                details = f"Honeypot accepted silently: {data.get('message')}"
+                self.log_result("POST /api/leads/contact (honeypot)", True, details)
+                return True
+            else:
+                details = f"Status: {response.status_code}"
+                self.log_result("POST /api/leads/contact (honeypot)", False, details)
+                return False
+        except Exception as e:
+            self.log_result("POST /api/leads/contact (honeypot)", False, f"Error: {str(e)}")
+            return False
+
     def test_honeypot_handling(self):
         """Test honeypot field is accepted without saving spam"""
         timestamp = datetime.now().strftime("%H%M%S")
@@ -324,6 +380,8 @@ class DynictyAPITester:
         self.test_newsletter_valid()
         self.test_newsletter_duplicate()
         self.test_contact_valid()
+        self.test_contact_invalid_email()
+        self.test_contact_honeypot()
         self.test_honeypot_handling()
         
         # Print summary

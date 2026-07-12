@@ -1,42 +1,35 @@
 import React from "react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { FAQ } from "@/constants/testIds";
 
 const items = [
-  {
-    q: "Apakah Dynicty bisa full white label tanpa branding Dynicty?",
-    a: "Ya. Paket Enterprise memungkinkan Anda menghilangkan seluruh jejak Dynicty — logo, domain, email, dashboard — sehingga terlihat seratus persen brand Anda sendiri.",
-  },
-  {
-    q: "Berapa lama sampai website siap dipakai?",
-    a: "Rata-rata setup memakan waktu 10–30 menit. Deployment Engine kami akan menyiapkan environment, template, dan domain otomatis.",
-  },
-  {
-    q: "Apakah bisa pakai domain sendiri?",
-    a: "Tentu. Anda cukup mengarahkan DNS ke server Dynicty. SSL akan diterbitkan otomatis lewat Domain Binding engine.",
-  },
-  {
-    q: "Apakah ada Template Designer drag & drop?",
-    a: "Ya. Setiap section, layout, dan blok konten bisa Anda modifikasi lewat visual editor tanpa perlu ngoding.",
-  },
-  {
-    q: "Bagaimana sistem Subscription & Feature Package bekerja?",
-    a: "Subscription Engine mengatur billing dan siklus paket. Feature Package memungkinkan Anda mengaktifkan/menonaktifkan modul per tenant, cocok untuk agency & reseller.",
-  },
-  {
-    q: "Apakah bisa multi akun untuk tim?",
-    a: "Ya. Anda bisa menambahkan anggota tim dengan role & permission granular — admin, staff, marketing, finance, dsb.",
-  },
-  {
-    q: "Apakah ada dukungan onboarding untuk agency/reseller?",
-    a: "Ya. Paket Enterprise mencakup dedicated onboarding, technical assistance, dan playbook white label reseller.",
-  },
+  { q: "Saya belum pernah bikin website. Apakah bisa pakai Dynicty?",
+    a: "Dynicty dirancang agar mudah digunakan bahkan bagi yang belum pernah bikin website. Anda tinggal memilih template, menyesuaikan branding, dan menambahkan produk." },
+  { q: "Apakah saya harus menutup toko Shopee/TikTok Shop/Tokopedia saya?",
+    a: "Tidak. Marketplace tetap tempat penting untuk menemukan pelanggan baru. Dynicty membantu Anda memiliki channel penjualan sendiri sebagai pelengkap." },
+  { q: "Apa saja yang bisa saya kelola di Dynicty?",
+    a: "Anda bisa mengelola produk, kategori, pesanan, pelanggan, banner promosi, laporan penjualan, dan pengaturan toko dari satu dashboard." },
+  { q: "Apakah Dynicty mengambil komisi dari setiap penjualan?",
+    a: "Dynicty tidak mengambil komisi marketplace atas transaksi di website Anda. Biaya payment gateway dan layanan pihak ketiga dapat berlaku sesuai metode yang digunakan." },
+  { q: "Apakah saya bisa mengubah tampilan template?",
+    a: "Ya. Anda bisa menyesuaikan branding — logo, warna, teks, dan foto produk — sesuai brand Anda." },
+  { q: "Metode pembayaran apa saja yang tersedia?",
+    a: "Untuk paket yang mendukung pembayaran online, Dynicty terintegrasi dengan Midtrans. Metode lainnya akan ditambahkan seiring pengembangan produk." },
+  { q: "Bagaimana kalau saya butuh integrasi dengan sistem lain?",
+    a: "Paket Enterprise menyediakan integrasi Jubelio, marketplace, dan akses API untuk kebutuhan integrasi lanjutan." },
+  { q: "Bagaimana cara mulai menggunakan Dynicty?",
+    a: "Silakan hubungi tim kami melalui halaman kontak untuk informasi paket dan proses onboarding lebih lanjut." },
 ];
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: items.map((it) => ({
+    "@type": "Question",
+    name: it.q,
+    acceptedAnswer: { "@type": "Answer", text: it.a },
+  })),
+};
 
 const Faq = () => {
   return (
@@ -49,7 +42,7 @@ const Faq = () => {
         <div className="text-center">
           <div className="dyn-eyebrow">Pertanyaan Umum</div>
           <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-white">
-            Masih ragu? <span className="dyn-brand-gradient-text">Kami jawab</span>.
+            Masih bertanya-tanya? <span className="dyn-brand-gradient-text">Kami jawab.</span>
           </h2>
         </div>
 
@@ -64,12 +57,17 @@ const Faq = () => {
               <AccordionTrigger className="text-left text-white hover:no-underline text-base py-4">
                 {item.q}
               </AccordionTrigger>
-              <AccordionContent className="text-white/65 text-sm leading-relaxed pb-4">
+              <AccordionContent className="text-white/70 text-sm leading-relaxed pb-4">
                 {item.a}
               </AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
       </div>
     </section>
   );
