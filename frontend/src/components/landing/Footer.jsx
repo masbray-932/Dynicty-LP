@@ -43,7 +43,7 @@ const Footer = () => {
       <div className="dyn-container py-12">
         <div className="grid lg:grid-cols-12 gap-10">
           <div className="lg:col-span-5">
-            <BrandLogo height={28} />
+            <BrandLogo height={0} className="h-10 w-auto object-contain" />
             <p className="mt-4 text-sm text-white/65 max-w-sm">
               Dynicty membantu UMKM dan seller marketplace membangun toko online
               profesional dengan branding sendiri.

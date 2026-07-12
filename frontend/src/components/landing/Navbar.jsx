@@ -79,17 +79,17 @@ const Navbar = () => {
         }}
       />
 
-      <div className="mx-auto max-w-[80rem] px-6 sm:px-10 lg:px-14 flex h-[76px] md:h-[88px] lg:h-[96px] items-center justify-between gap-4">
+      <div className="mx-auto max-w-[80rem] pl-6 pr-4 sm:px-10 lg:px-14 flex h-[76px] md:h-[84px] lg:h-[92px] items-center justify-between gap-4">
         <Link
           to="/"
           data-testid={NAV.logo}
-          className="flex items-center group shrink-0"
+          className="flex items-center group shrink-0 ml-1 lg:ml-2"
           aria-label="Dynicty — Beranda"
         >
           <span className="block">
             <BrandLogo
               height={0}
-              className="h-12 md:h-14 lg:h-16 w-auto transition-transform duration-500 group-hover:scale-[1.04]"
+              className="h-12 md:h-14 lg:h-16 w-auto object-contain transition-transform duration-500 group-hover:scale-[1.03]"
             />
           </span>
         </Link>
@@ -176,8 +176,10 @@ const Navbar = () => {
               className="bg-[hsl(var(--dyn-bg-1))] border-l border-white/10 text-white w-[86vw] sm:w-96"
             >
               <SheetTitle className="sr-only">Menu navigasi</SheetTitle>
-              <div className="flex flex-col gap-6 mt-2">
-                <BrandLogo height={0} className="h-10 w-auto" />
+              <div className="flex flex-col gap-6 mt-4">
+                <div className="flex items-center justify-center pt-4 pb-5">
+                  <BrandLogo height={0} className="h-16 w-auto object-contain" />
+                </div>
                 <nav className="flex flex-col gap-1">
                   {navItems.map((item) => {
                     const id = item.href.replace("#", "");
