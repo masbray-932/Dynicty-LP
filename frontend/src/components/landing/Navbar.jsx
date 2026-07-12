@@ -89,7 +89,7 @@ const Navbar = () => {
           <span className="block">
             <BrandLogo
               height={0}
-              className="h-12 md:h-14 lg:h-16 w-auto object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+              className="h-11 md:h-12 lg:h-[52px] w-auto object-contain transition-transform duration-500 group-hover:scale-[1.03] drop-shadow-[0_2px_10px_rgba(109,94,247,0.25)]"
             />
           </span>
         </Link>
@@ -178,7 +178,7 @@ const Navbar = () => {
               <SheetTitle className="sr-only">Menu navigasi</SheetTitle>
               <div className="flex flex-col gap-6 mt-4">
                 <div className="flex items-center justify-center pt-4 pb-5">
-                  <BrandLogo height={0} className="h-16 w-auto object-contain" />
+                  <BrandLogo height={0} className="h-14 w-auto object-contain drop-shadow-[0_2px_12px_rgba(109,94,247,0.3)]" />
                 </div>
                 <nav className="flex flex-col gap-1">
                   {navItems.map((item) => {

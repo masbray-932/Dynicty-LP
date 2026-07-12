@@ -24,7 +24,7 @@
 - ✅ Pricing “Segera Diumumkan” (tanpa angka) + CTA “Pelajari Paket/Hubungi Tim Dynicty” → /kontak.
 - ✅ Template compliance: hanya “Sinar Telur” preview aktif; lainnya “Segera Hadir”.
 - ✅ Feature matrix akurat + badge paket minimum di setiap feature card.
-- ✅ Brand assets resmi digunakan apa adanya; favicon + OG + Twitter card dibuat dari logo resmi tanpa modifikasi.
+- ✅ Brand assets: **logo horizontal resmi sudah terpasang untuk Navbar/Mobile Drawer/Footer**.
 - ✅ testing_agent_v3: 100% pass (backend 11/11, frontend 26/26). `CI=true yarn build` PASS.
 
 ---
@@ -61,7 +61,7 @@
   - Contact: `{nama, email, pesan, honeypot?}`
 - REST endpoints (aktif):
   - `POST /api/leads/contact` **(dipakai v2.1 via /kontak)**
-  - `POST /api/leads/free-trial` (tetap ada untuk Phase 2; **tidak dipakai UI v1**) 
+  - `POST /api/leads/free-trial` (tetap ada untuk Phase 2; **tidak dipakai UI v1**)
   - `POST /api/leads/newsletter` (tetap ada untuk Phase 2; **tidak dipakai UI v1**)
   - `GET /api/leads/stats` (tetap ada; **tidak dipakai UI v1**)
   - `GET /api/health`
@@ -117,10 +117,8 @@
   - FAQPage (inline di section FAQ)
 - `robots.txt` + `sitemap.xml` disesuaikan untuk v1 routes.
 - Brand assets:
-  - Logo resmi horizontal transparan dipakai di Navbar/Footer (tanpa redraw)
-  - App icon resmi dipakai untuk favicon set
-  - Favicon set file-based: `favicon.ico`, `favicon-16.png`, `favicon-32.png`, `favicon-192.png`, `favicon-512.png`, `apple-touch-icon.png`
-  - Social previews: `brand/og-image.png` dan `brand/twitter-card.png` dibuat dari logo resmi (tanpa modifikasi logo; hanya compositing di canvas)
+  - App icon resmi dipakai untuk favicon set.
+  - Social previews: `brand/og-image.png` dan `brand/twitter-card.png` dibuat dari logo resmi (tanpa modifikasi logo; hanya compositing di canvas).
 
 **Status:** ✅ Selesai.
 
@@ -141,33 +139,56 @@
 
 **Status:** ✅ Selesai.
 
+#### 2.6 Navbar Official Horizontal Logo Replacement (P0)
+> Menyelesaikan blocker sprint sebelumnya: mengganti logo Navbar + mobile drawer menjadi **asset horizontal resmi**.
+
+**Implementasi aktual (DONE):**
+- Aset logo horizontal resmi (icon DTY + wordmark **DYNICTY** + tagline **BUILD • GROW • EMPOWER**) diproses:
+  - Background dihapus (tetap mempertahankan warna/visual asli).
+  - Crop berdasarkan area alpha yang terlihat.
+  - Resize final menjadi **1000×241**.
+  - Rasio aspek ~**4.15:1**.
+- File yang dipakai aplikasi:
+  - ✅ Terpasang di: `/app/frontend/public/brand/dynicty-logo.png`
+  - (Logo stacked sebelumnya tidak lagi dipakai di path tersebut.)
+- Penyesuaian UI di `Navbar.jsx`:
+  - Desktop: `h-11 md:h-12 lg:h-[52px]` (w-auto, object-contain)
+  - Mobile navbar: tetap mengikuti komponen Navbar dengan height di atas
+  - Mobile drawer: `h-14`
+  - Tambahan subtle glow: `drop-shadow` ungu untuk menjaga keterbacaan di background gelap.
+- Verifikasi visual (DONE):
+  - Desktop viewport **1920×800**: logo terbaca jelas.
+  - Mobile viewport **390×800** + drawer terbuka: logo terbaca jelas.
+
+**Testing (DONE):**
+- ✅ Screenshot test: desktop + mobile + drawer
+- ✅ Build: `CI=true yarn build` PASS
+
+**Status:** ✅ Selesai — blocker P0 **RESOLVED**.
+
 ---
 
-### Phase 3 — Phase 2 Features (Deferred)
-**Tidak dikerjakan di v1 (sesuai keputusan):**
-- Kalkulator penghematan
+### Phase 3 — Phase 2 Features (Deferred / Pending Prioritization)
+**Belum dikerjakan (menunggu prioritas user):**
+- Kalkulator Penghematan (interactive)
+- Newsletter: UI + integrasi endpoint + double-opt (opsional)
+- Blog section
+- Dynamic Pricing via `GET /api/public/pricing` (menggantikan “Segera Diumumkan” saat harga resmi tersedia)
 - Customer stories/testimoni nyata (menunggu data + izin)
-- Newsletter + backend subscriber UI
-- Blog
-- Booking demo
-- Partner page
-- Conversion tracking / A-B testing
-- Pricing config-driven endpoint (menunggu harga resmi)
 
-**Status:** ⏳ Deferred.
+**Status:** ⏳ Pending prioritas.
 
 ---
 
 ## 3) Next Actions
-1. ✅ Review stakeholder untuk production readiness (copy, layout, CTA flow ke /kontak).
-2. (Opsional) Tambahkan rate-limit server-side yang lebih kuat untuk `/api/leads/contact` (mis. per IP) jika dibutuhkan.
-3. Kumpulkan data real untuk Phase 2:
-   - Template published tambahan (selain Sinar Telur)
-   - Pricing resmi + durasi paket (untuk config-driven pricing)
-   - Testimoni customer + izin penggunaan
-4. Setelah pricing resmi siap:
-   - Implement endpoint pricing publik read-only (Phase 2) dan ganti “Segera Diumumkan”.
-5. Jalankan quality gate setiap iterasi: ESLint, Ruff, Pytest, `CI=true yarn build`, testing_agent_v3.
+1. ✅ Navbar logo horizontal sudah beres dan tervalidasi screenshot.
+2. Tentukan prioritas Phase 2 (pilih 1):
+   - **P1:** Kalkulator Penghematan (paling berdampak untuk value proof)
+   - **P2:** Newsletter UI + integrasi endpoint
+   - **P2:** Blog section
+   - **P2:** Dynamic Pricing endpoint + UI (butuh harga resmi)
+3. (Opsional) Tambahkan rate-limit server-side yang lebih kuat untuk `/api/leads/contact` (mis. per IP) jika dibutuhkan.
+4. Jalankan quality gate setiap iterasi: ESLint, `CI=true yarn build`, testing_agent_v3, screenshot sanity check untuk navbar/hero.
 
 ---
 
@@ -180,4 +201,5 @@
 - ✅ Feature section akurat mengikuti feature matrix existing + badge paket minimum.
 - ✅ Tidak ada “Coba Gratis”, tidak ada login, tidak ada `app.dynicty.com`, tidak ada data internal.
 - ✅ SEO dasar siap produksi (OG/Twitter/meta/schema/robots/sitemap/favicon) + build production sukses.
-- ✅ Quality gate: Python 3.9 compatible, `CI=true yarn build` PASS, testing_agent_v3 100% pass.
+- ✅ Quality gate: `CI=true yarn build` PASS, testing_agent_v3 100% pass.
+- ✅ **Navbar + mobile drawer menggunakan logo horizontal resmi yang terbaca pada tema gelap.**
