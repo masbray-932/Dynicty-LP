@@ -20,7 +20,7 @@
         --accent-foreground: 0 0% 100%;
         --destructive: 0 84% 60%;
         --destructive-foreground: 230 100% 98%;
-        --border: 0 0% 100% / 0.1;
+        --border: 0 0% 100% / 0.08;
         --input: 0 0% 100% / 0.08;
         --ring: 217 91% 60%;
         --radius: 0.75rem;
@@ -40,6 +40,7 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         background-color: hsl(var(--dyn-bg-0));
+        text-rendering: optimizeLegibility;
     }
     body {
         margin: 0;
@@ -48,106 +49,284 @@
         font-family: "Figtree", ui-sans-serif, system-ui, -apple-system,
             "Segoe UI", Roboto, sans-serif;
         min-height: 100vh;
+        font-feature-settings: "cv02", "cv11", "ss01";
     }
     h1, h2, h3, h4, h5, h6 {
         font-family: "Space Grotesk", "Figtree", ui-sans-serif, system-ui, sans-serif;
-        letter-spacing: -0.01em;
+        letter-spacing: -0.02em;
     }
+    h1 { line-height: 1.02; }
+    h2 { line-height: 1.08; }
     code, pre, kbd, samp {
         font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
     }
     ::selection {
-        background-color: rgba(59, 130, 246, 0.35);
+        background-color: rgba(109, 94, 247, 0.42);
         color: #fff;
     }
     :focus-visible {
-        outline: 2px solid #3b82f6;
-        outline-offset: 2px;
-        border-radius: 4px;
+        outline: 2px solid #6d5ef7;
+        outline-offset: 3px;
+        border-radius: 6px;
     }
 }
 
 @layer utilities {
+    /* ---------- Text gradients ---------- */
     .dyn-text-gradient {
-        background: linear-gradient(90deg, #ffffff 0%, #cfd6ff 40%, #b7c1ff 100%);
+        background: linear-gradient(180deg, #ffffff 0%, #d3d9f2 60%, #b5bee7 100%);
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
     }
     .dyn-brand-gradient-text {
-        background: linear-gradient(90deg, #3b82f6 0%, #6d5ef7 55%, #8b5cf6 100%);
+        background: linear-gradient(96deg, #60a5fa 0%, #8a7cff 50%, #b28cff 100%);
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
     }
+
+    /* ---------- Brand gradient backgrounds ---------- */
     .dyn-brand-gradient-bg {
-        background: linear-gradient(90deg, #3b82f6 0%, #6d5ef7 55%, #8b5cf6 100%);
+        background: linear-gradient(96deg, #3b82f6 0%, #6d5ef7 55%, #8b5cf6 100%);
     }
     .dyn-brand-gradient-bg-2 {
         background: linear-gradient(135deg, #3b82f6 0%, #6d5ef7 50%, #8b5cf6 100%);
     }
+
+    /* ---------- Glass surfaces ---------- */
     .dyn-glass {
-        background-color: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
+        background-color: rgba(255, 255, 255, 0.035);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(20px) saturate(140%);
+        -webkit-backdrop-filter: blur(20px) saturate(140%);
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.04),
+            0 1px 0 rgba(255, 255, 255, 0.02);
     }
     .dyn-glass-hover {
-        transition: background-color 200ms ease, border-color 200ms ease,
-            transform 200ms ease;
+        transition:
+            background-color 260ms cubic-bezier(0.22, 1, 0.36, 1),
+            border-color 260ms cubic-bezier(0.22, 1, 0.36, 1),
+            transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+            box-shadow 260ms cubic-bezier(0.22, 1, 0.36, 1);
     }
     .dyn-glass-hover:hover {
-        background-color: rgba(255, 255, 255, 0.08);
+        background-color: rgba(255, 255, 255, 0.06);
         border-color: rgba(255, 255, 255, 0.16);
+        transform: translateY(-2px);
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.06),
+            0 20px 40px -20px rgba(0, 0, 0, 0.55),
+            0 0 0 1px rgba(109, 94, 247, 0.08);
     }
+
+    /* Premium card — use on Problem/Feature/Pricing */
+    .dyn-card {
+        position: relative;
+        border-radius: 1rem;
+        background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015)),
+            hsl(var(--dyn-bg-1));
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.05),
+            0 1px 0 rgba(255, 255, 255, 0.02),
+            0 12px 32px -18px rgba(0, 0, 0, 0.55);
+        transition:
+            transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+            border-color 300ms cubic-bezier(0.22, 1, 0.36, 1),
+            box-shadow 300ms cubic-bezier(0.22, 1, 0.36, 1),
+            background-color 300ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .dyn-card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(255, 255, 255, 0.18);
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.08),
+            0 24px 60px -22px rgba(0, 0, 0, 0.65),
+            0 0 0 1px rgba(109, 94, 247, 0.08),
+            0 0 40px -8px rgba(109, 94, 247, 0.12);
+    }
+
+    /* ---------- CTA buttons ---------- */
+    .dyn-cta-primary {
+        position: relative;
+        background: linear-gradient(96deg, #3b82f6 0%, #6d5ef7 55%, #8b5cf6 100%);
+        color: #fff;
+        border: 0;
+        box-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.14) inset,
+            0 10px 24px -10px rgba(59, 130, 246, 0.55),
+            0 18px 44px -14px rgba(139, 92, 246, 0.55);
+        transition:
+            transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+            box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1),
+            filter 220ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .dyn-cta-primary:hover {
+        transform: translateY(-1px);
+        filter: brightness(1.06) saturate(1.05);
+        box-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.2) inset,
+            0 14px 34px -10px rgba(59, 130, 246, 0.7),
+            0 26px 60px -18px rgba(139, 92, 246, 0.7);
+    }
+    .dyn-cta-primary:active {
+        transform: translateY(0);
+        filter: brightness(0.98);
+    }
+    .dyn-cta-secondary {
+        background-color: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        color: #fff;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        transition:
+            transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+            border-color 220ms, background-color 220ms;
+    }
+    .dyn-cta-secondary:hover {
+        background-color: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.28);
+        transform: translateY(-1px);
+    }
+
+    /* ---------- Hero ambient lighting ---------- */
     .dyn-hero-glow {
-        background: radial-gradient(
-            900px 420px at 20% 10%,
-            rgba(59, 130, 246, 0.28) 0%,
-            rgba(139, 92, 246, 0.22) 55%,
-            rgba(5, 6, 15, 0) 100%
-        );
+        background:
+            radial-gradient(1100px 520px at 10% -10%, rgba(59, 130, 246, 0.35) 0%, rgba(59, 130, 246, 0) 55%),
+            radial-gradient(900px 500px at 110% 20%, rgba(139, 92, 246, 0.30) 0%, rgba(139, 92, 246, 0) 60%),
+            radial-gradient(700px 340px at 50% 100%, rgba(109, 94, 247, 0.22) 0%, rgba(5, 6, 15, 0) 70%);
+    }
+    .dyn-hero-grid {
+        background-image:
+            linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+        background-size: 48px 48px;
+        mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 40%, transparent 100%);
+        -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 40%, transparent 100%);
+        opacity: 0.5;
     }
     .dyn-noise {
         background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.05 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-        opacity: 0.5;
+        opacity: 0.4;
+        pointer-events: none;
+        mix-blend-mode: overlay;
+    }
+
+    /* Premium mockup framing */
+    .dyn-mockup-frame {
+        position: relative;
+        transform-style: preserve-3d;
+        perspective: 1400px;
+    }
+    .dyn-mockup-frame > .dyn-mockup {
+        transform: rotateX(2deg) rotateY(-3deg);
+        transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+        box-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.06) inset,
+            0 40px 100px -30px rgba(0, 0, 0, 0.75),
+            0 60px 140px -50px rgba(59, 130, 246, 0.28),
+            0 0 0 1px rgba(255, 255, 255, 0.06);
+        border-radius: 20px;
+    }
+    .dyn-mockup-frame:hover > .dyn-mockup {
+        transform: rotateX(1deg) rotateY(-1.5deg) translateY(-4px);
+    }
+    .dyn-mockup-glow {
+        position: absolute;
+        inset: -14% -8% -18% -8%;
+        z-index: -1;
+        background:
+            radial-gradient(60% 60% at 30% 30%, rgba(59, 130, 246, 0.35) 0%, rgba(59, 130, 246, 0) 60%),
+            radial-gradient(60% 60% at 75% 70%, rgba(139, 92, 246, 0.40) 0%, rgba(139, 92, 246, 0) 60%);
+        filter: blur(60px);
+        opacity: 0.9;
         pointer-events: none;
     }
+    .dyn-mockup-reflection {
+        position: absolute;
+        left: 6%;
+        right: 6%;
+        bottom: -18%;
+        height: 22%;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0));
+        filter: blur(24px);
+        transform: scaleY(-1) skewX(-6deg);
+        opacity: 0.4;
+        pointer-events: none;
+    }
+
+    /* Section separators */
+    .dyn-section-divider {
+        position: relative;
+    }
+    .dyn-section-divider::before {
+        content: "";
+        position: absolute;
+        left: 15%;
+        right: 15%;
+        top: 0;
+        height: 1px;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.14),
+            transparent
+        );
+    }
+
+    /* ---------- Layout helpers ---------- */
     .dyn-container {
         margin-left: auto;
         margin-right: auto;
-        max-width: 72rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
+        max-width: 74rem;
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
     }
     @media (min-width: 640px) {
-        .dyn-container { padding-left: 1.5rem; padding-right: 1.5rem; }
-    }
-    @media (min-width: 1024px) {
         .dyn-container { padding-left: 2rem; padding-right: 2rem; }
     }
+    @media (min-width: 1024px) {
+        .dyn-container { padding-left: 2.5rem; padding-right: 2.5rem; }
+    }
     .dyn-section {
-        padding-top: 4rem;
-        padding-bottom: 4rem;
-        scroll-margin-top: 6rem;
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+        scroll-margin-top: 6.5rem;
     }
     @media (min-width: 1024px) {
-        .dyn-section { padding-top: 6rem; padding-bottom: 6rem; }
+        .dyn-section { padding-top: 7.5rem; padding-bottom: 7.5rem; }
     }
     .dyn-eyebrow {
-        font-size: 0.75rem;
-        letter-spacing: 0.18em;
+        font-size: 0.72rem;
+        letter-spacing: 0.22em;
         text-transform: uppercase;
-        color: rgba(245, 247, 255, 0.65);
+        color: rgba(196, 205, 240, 0.75);
         font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .dyn-eyebrow::before {
+        content: "";
+        width: 6px; height: 6px;
+        border-radius: 999px;
+        background: linear-gradient(96deg, #3b82f6, #8b5cf6);
+        box-shadow: 0 0 12px rgba(109, 94, 247, 0.6);
     }
 
-    /* Native reveal (IntersectionObserver-based) — replaces framer-motion */
+    /* Prose defaults for body copy */
+    .dyn-body { color: rgba(230, 235, 255, 0.72); line-height: 1.65; }
+    .dyn-body-strong { color: rgba(240, 244, 255, 0.85); }
+
+    /* ---------- Reveal (IntersectionObserver-based) ---------- */
     .dyn-reveal {
         opacity: 0;
-        transform: translateY(14px);
-        transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1),
-            transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+        transform: translateY(16px);
+        transition:
+            opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+            transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
         will-change: opacity, transform;
     }
     .dyn-reveal-in {
@@ -155,19 +334,32 @@
         transform: translateY(0);
     }
 
+    /* Floating decoration */
     @keyframes dyn-float {
         0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
+        50%      { transform: translateY(-8px); }
     }
-    .dyn-float { animation: dyn-float 6s ease-in-out infinite; }
-    .dyn-float-delayed {
-        animation: dyn-float 7s ease-in-out infinite;
-        animation-delay: -2s;
+    .dyn-float          { animation: dyn-float 6s ease-in-out infinite; }
+    .dyn-float-delayed  { animation: dyn-float 7s ease-in-out infinite; animation-delay: -2s; }
+
+    /* Aurora shimmer for hero eyebrow */
+    @keyframes dyn-aurora {
+        0%   { background-position: 0% 50%; }
+        100% { background-position: 200% 50%; }
+    }
+    .dyn-aurora {
+        background: linear-gradient(90deg, #60a5fa, #8a7cff, #b28cff, #60a5fa);
+        background-size: 200% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: dyn-aurora 8s linear infinite;
     }
 
     @media (prefers-reduced-motion: reduce) {
         .dyn-reveal, .dyn-reveal-in { transition: none; opacity: 1; transform: none; }
-        .dyn-float, .dyn-float-delayed { animation: none; }
+        .dyn-float, .dyn-float-delayed, .dyn-aurora { animation: none; }
+        .dyn-mockup-frame > .dyn-mockup { transform: none; }
         html { scroll-behavior: auto; }
     }
 
@@ -178,6 +370,6 @@
         border-radius: 999px;
     }
     ::-webkit-scrollbar-thumb:hover {
-        background: rgba(255, 255, 255, 0.16);
+        background: rgba(255, 255, 255, 0.18);
     }
 }

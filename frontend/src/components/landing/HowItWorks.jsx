@@ -21,18 +21,18 @@ const Step = ({ icon: Icon, title, desc, index, delay }) => {
       ref={r.ref}
       style={r.style}
       data-testid={HOW.step}
-      className={`${r.className} relative rounded-2xl border border-white/10 bg-white/[0.03] p-5`}
+      className={`${r.className} dyn-card p-6`}
     >
       <div className="flex items-center gap-3">
-        <div className="h-11 w-11 rounded-xl dyn-brand-gradient-bg-2 flex items-center justify-center shadow-[0_10px_24px_-8px_rgba(139,92,246,0.55)]">
+        <div className="h-12 w-12 rounded-xl dyn-brand-gradient-bg-2 flex items-center justify-center shadow-[0_10px_24px_-8px_rgba(139,92,246,0.55),inset_0_1px_0_rgba(255,255,255,0.16)]">
           <Icon className="h-5 w-5 text-white" />
         </div>
-        <span className="text-xs uppercase tracking-[0.24em] text-white/45">
+        <span className="text-[11px] uppercase tracking-[0.28em] text-white/45">
           Langkah {String(index + 1).padStart(2, "0")}
         </span>
       </div>
-      <h3 className="mt-4 text-lg font-semibold text-white">{title}</h3>
-      <p className="mt-1.5 text-sm text-white/65">{desc}</p>
+      <h3 className="mt-5 text-[19px] font-semibold text-white tracking-tight">{title}</h3>
+      <p className="mt-2 text-[14.5px] dyn-body">{desc}</p>
     </div>
   );
 };
@@ -47,10 +47,10 @@ const HowItWorks = () => {
       <div className="dyn-container">
         <div className="text-center max-w-2xl mx-auto">
           <div className="dyn-eyebrow">Cara Kerja</div>
-          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-white">
+          <h2 className="mt-3 text-[32px] sm:text-[40px] lg:text-[52px] font-semibold tracking-[-0.02em] leading-[1.05] text-white">
             Toko online Anda siap dalam <span className="dyn-brand-gradient-text">beberapa langkah sederhana.</span>
           </h2>
-          <p className="mt-4 text-white/65">
+          <p className="mt-4 text-white/70">
             Kalau Anda sudah terbiasa menggunakan aplikasi sehari-hari, Anda pasti bisa menggunakan Dynicty.
           </p>
         </div>

@@ -31,12 +31,12 @@ const Compare = () => {
       <div className="dyn-container">
         <div className="text-center max-w-2xl mx-auto">
           <div className="dyn-eyebrow">Perbandingan</div>
-          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-white">
+          <h2 className="mt-3 text-[32px] sm:text-[40px] lg:text-[52px] font-semibold tracking-[-0.02em] leading-[1.05] text-white">
             Kombinasi paling kuat: <span className="dyn-brand-gradient-text">Marketplace + Website Anda Sendiri.</span>
           </h2>
         </div>
 
-        <div ref={r.ref} style={r.style} className={`${r.className} mt-10 overflow-hidden rounded-2xl border border-white/10`}>
+        <div ref={r.ref} style={r.style} className={`${r.className} mt-12 overflow-hidden rounded-2xl border border-white/10 bg-[hsl(var(--dyn-bg-2))]/40 backdrop-blur-xl shadow-[0_1px_0_rgba(255,255,255,0.05)_inset,0_24px_60px_-30px_rgba(0,0,0,0.6)]`}>
           {/* Header */}
           <div className="grid grid-cols-3 bg-white/[0.03]">
             <div className="px-4 py-3 text-xs uppercase tracking-widest text-white/50">Aspek</div>

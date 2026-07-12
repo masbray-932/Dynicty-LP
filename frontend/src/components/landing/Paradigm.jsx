@@ -17,7 +17,7 @@ const Paradigm = () => {
         <div className="grid lg:grid-cols-12 gap-10 items-center">
           <div ref={r1.ref} style={r1.style} className={`${r1.className} lg:col-span-7`}>
             <div className="dyn-eyebrow">Bukan Marketplace vs Website</div>
-            <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-white">
+            <h2 className="mt-3 text-[32px] sm:text-[40px] lg:text-[52px] font-semibold tracking-[-0.02em] leading-[1.05] text-white">
               <span className="dyn-brand-gradient-text">Marketplace</span> membantu Anda ditemukan.
               <br />
               <span className="dyn-brand-gradient-text">Dynicty</span> membantu brand Anda dimiliki.

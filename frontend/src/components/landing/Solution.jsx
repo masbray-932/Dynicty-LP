@@ -18,13 +18,13 @@ const PillarCard = ({ icon: Icon, title, desc, delay }) => {
     <div
       ref={r.ref}
       style={r.style}
-      className={`${r.className} dyn-glass dyn-glass-hover rounded-2xl p-6`}
+      className={`${r.className} dyn-card p-6`}
     >
-      <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl dyn-brand-gradient-bg-2 shadow-[0_10px_24px_-8px_rgba(139,92,246,0.5)]">
+      <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl dyn-brand-gradient-bg-2 shadow-[0_10px_24px_-8px_rgba(139,92,246,0.5),inset_0_1px_0_rgba(255,255,255,0.18)]">
         <Icon className="h-6 w-6 text-white" />
       </div>
-      <h3 className="mt-4 text-lg font-semibold text-white">{title}</h3>
-      <p className="mt-1.5 text-sm text-white/65 leading-relaxed">{desc}</p>
+      <h3 className="mt-5 text-[19px] font-semibold text-white tracking-tight">{title}</h3>
+      <p className="mt-2 text-[14.5px] dyn-body leading-relaxed">{desc}</p>
     </div>
   );
 };
@@ -44,12 +44,12 @@ const Solution = () => {
       <div className="dyn-container">
         <div className="text-center max-w-2xl mx-auto">
           <div className="dyn-eyebrow">Kenalkan Dynicty</div>
-          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-white">
+          <h2 className="mt-3 text-[32px] sm:text-[40px] lg:text-[52px] font-semibold tracking-[-0.02em] leading-[1.05] text-white">
             Toko online Anda sendiri —
             <br />
             <span className="dyn-brand-gradient-text">dengan branding sendiri, tanpa perlu ngoding.</span>
           </h2>
-          <p className="mt-4 text-white/65">
+          <p className="mt-4 text-white/70">
             Pilih template. Sesuaikan branding. Kelola produk dan pesanan dari satu tempat. Semuanya mudah digunakan, bahkan untuk yang baru pertama kali punya website.
           </p>
         </div>

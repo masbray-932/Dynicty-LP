@@ -14,20 +14,22 @@ const PlanCard = ({ plan, delay }) => {
       ref={r.ref}
       style={r.style}
       data-testid={PRICING.card}
-      className={`${r.className} relative rounded-2xl border border-white/10 bg-white/[0.03] p-6 flex flex-col`}
+      className={`${r.className} dyn-card p-7 flex flex-col`}
     >
       <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-white">{plan.name}</h3>
+        <h3 className="text-xl font-semibold text-white tracking-tight">{plan.name}</h3>
       </div>
-      <div className="mt-3">
-        <span className="text-2xl sm:text-3xl font-semibold text-white">{plan.priceDisplay}</span>
+      <div className="mt-4">
+        <span className="text-[26px] sm:text-[30px] font-semibold text-white tracking-tight">{plan.priceDisplay}</span>
       </div>
-      <p className="mt-2 text-sm text-white/65">{plan.tagline}</p>
+      <p className="mt-2 text-[14px] dyn-body">{plan.tagline}</p>
 
-      <ul className="mt-5 space-y-2.5 flex-1">
+      <div className="mt-5 h-px w-full bg-gradient-to-r from-transparent via-white/12 to-transparent" />
+
+      <ul className="mt-5 space-y-3 flex-1">
         {plan.features.map((f) => (
-          <li key={f} className="flex items-start gap-2 text-sm text-white/85">
-            <span className="mt-0.5 inline-flex h-4 w-4 items-center justify-center rounded-full dyn-brand-gradient-bg shrink-0">
+          <li key={f} className="flex items-start gap-2.5 text-[14px] text-white/85">
+            <span className="mt-0.5 inline-flex h-4 w-4 items-center justify-center rounded-full dyn-brand-gradient-bg shrink-0 shadow-[0_4px_10px_-4px_rgba(109,94,247,0.6)]">
               <Check className="h-3 w-3 text-white" />
             </span>
             <span>{f}</span>
@@ -35,10 +37,10 @@ const PlanCard = ({ plan, delay }) => {
         ))}
       </ul>
 
-      <Link to={ctaHref({ paket: plan.name, source: "pricing" })} className="mt-6 block">
+      <Link to={ctaHref({ paket: plan.name, source: "pricing" })} className="mt-7 block">
         <Button
           data-testid={PRICING.cta}
-          className="h-11 w-full text-sm dyn-brand-gradient-bg text-white border-0 hover:opacity-90"
+          className="h-11 w-full text-[13.5px] dyn-cta-primary rounded-xl"
         >
           {plan.ctaLabel}
         </Button>
@@ -57,10 +59,10 @@ const Pricing = () => {
       <div className="dyn-container">
         <div className="text-center max-w-2xl mx-auto">
           <div className="dyn-eyebrow">Harga</div>
-          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-white">
+          <h2 className="mt-3 text-[32px] sm:text-[40px] lg:text-[52px] font-semibold tracking-[-0.02em] leading-[1.05] text-white">
             Paket untuk <span className="dyn-brand-gradient-text">setiap tahap bisnis.</span>
           </h2>
-          <p className="mt-4 text-white/65">
+          <p className="mt-4 text-white/70">
             Harga resmi akan segera diumumkan. Untuk informasi lebih lanjut mengenai paket dan onboarding, silakan hubungi tim kami.
           </p>
         </div>

@@ -43,7 +43,7 @@ const TemplateCard = ({ t, delay }) => {
       ref={r.ref}
       style={r.style}
       data-testid={TEMPLATES.card}
-      className={`${r.className} group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] hover:border-white/20 transition-colors`}
+      className={`${r.className} dyn-card group overflow-hidden`}
     >
       <div className="relative aspect-[16/10] overflow-hidden">
         <StorefrontIllustration accent={t.accent} />
@@ -100,10 +100,10 @@ const TemplateShowcase = () => {
       <div className="dyn-container">
         <div className="max-w-2xl">
           <div className="dyn-eyebrow">Template</div>
-          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-white">
+          <h2 className="mt-3 text-[32px] sm:text-[40px] lg:text-[52px] font-semibold tracking-[-0.02em] leading-[1.05] text-white">
             Dynicty sedang menyiapkan template untuk <span className="dyn-brand-gradient-text">berbagai kategori bisnis.</span>
           </h2>
-          <p className="mt-4 text-white/65 text-base max-w-xl">
+          <p className="mt-4 text-white/70 text-base max-w-xl">
             Sinar Telur tersedia sebagai template resmi pertama. Template kategori lainnya sedang kami siapkan.
           </p>
         </div>

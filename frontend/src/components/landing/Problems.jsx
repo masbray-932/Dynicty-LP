@@ -21,13 +21,13 @@ const ProblemCard = ({ icon: Icon, title, desc, delay }) => {
       ref={r.ref}
       style={r.style}
       data-testid={PROBLEMS.card}
-      className={`${r.className} dyn-glass dyn-glass-hover rounded-2xl p-5`}
+      className={`${r.className} dyn-card p-6`}
     >
-      <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/5 border border-white/10">
-        <Icon className="h-5 w-5 text-white" />
+      <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/[0.04] border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+        <Icon className="h-5 w-5 text-white/90" />
       </div>
-      <h3 className="mt-4 text-base font-semibold text-white">{title}</h3>
-      <p className="mt-1.5 text-sm text-white/65 leading-relaxed">{desc}</p>
+      <h3 className="mt-5 text-[17px] font-semibold text-white tracking-tight">{title}</h3>
+      <p className="mt-2 text-[14.5px] dyn-body leading-relaxed">{desc}</p>
     </div>
   );
 };
@@ -47,10 +47,10 @@ const Problems = () => {
       <div className="dyn-container">
         <div className="max-w-2xl">
           <div className="dyn-eyebrow">Tantangan Seller Marketplace</div>
-          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-white">
+          <h2 className="mt-3 text-[32px] sm:text-[40px] lg:text-[52px] font-semibold tracking-[-0.02em] leading-[1.05] text-white">
             Anda kerja keras. Tapi sebagian besar hasilnya... <span className="dyn-brand-gradient-text">belum sepenuhnya milik Anda.</span>
           </h2>
-          <p className="mt-4 text-white/65 text-base sm:text-lg max-w-xl">
+          <p className="mt-4 text-white/70 text-base sm:text-lg max-w-xl">
             Marketplace membantu Anda menemukan pelanggan baru. Namun brand, hubungan pelanggan, dan sebagian dari setiap transaksi tetap dipegang oleh platform mereka.
           </p>
         </div>

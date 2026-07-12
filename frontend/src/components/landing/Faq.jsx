@@ -41,7 +41,7 @@ const Faq = () => {
       <div className="dyn-container max-w-3xl">
         <div className="text-center">
           <div className="dyn-eyebrow">Pertanyaan Umum</div>
-          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-white">
+          <h2 className="mt-3 text-[32px] sm:text-[40px] lg:text-[52px] font-semibold tracking-[-0.02em] leading-[1.05] text-white">
             Masih bertanya-tanya? <span className="dyn-brand-gradient-text">Kami jawab.</span>
           </h2>
         </div>
@@ -52,12 +52,12 @@ const Faq = () => {
               key={item.q}
               value={`item-${i}`}
               data-testid={FAQ.item}
-              className="rounded-xl border border-white/10 bg-white/[0.03] px-4"
+              className="dyn-card px-5"
             >
-              <AccordionTrigger className="text-left text-white hover:no-underline text-base py-4">
+              <AccordionTrigger className="text-left text-white hover:no-underline text-[15.5px] py-5 font-medium">
                 {item.q}
               </AccordionTrigger>
-              <AccordionContent className="text-white/70 text-sm leading-relaxed pb-4">
+              <AccordionContent className="dyn-body text-[14.5px] leading-relaxed pb-5">
                 {item.a}
               </AccordionContent>
             </AccordionItem>

@@ -211,7 +211,7 @@ export default function ContactPage() {
                         onChange={(e) => set("nama", e.target.value)}
                         placeholder="Contoh: Andi Wijaya"
                         autoComplete="name"
-                        className="bg-white/5 border-white/10 text-white placeholder:text-white/30"
+                        className="bg-white/[0.04] border-white/10 text-white placeholder:text-white/30 rounded-lg h-11 focus-visible:ring-2 focus-visible:ring-purple-500/40 transition-shadow"
                         aria-invalid={!!errors.nama}
                       />
                       {errors.nama && <p className="text-xs text-red-300">{errors.nama}</p>}
@@ -224,7 +224,7 @@ export default function ContactPage() {
                         value={form.bisnis}
                         onChange={(e) => set("bisnis", e.target.value)}
                         placeholder="Contoh: Sinar Telur"
-                        className="bg-white/5 border-white/10 text-white placeholder:text-white/30"
+                        className="bg-white/[0.04] border-white/10 text-white placeholder:text-white/30 rounded-lg h-11 focus-visible:ring-2 focus-visible:ring-purple-500/40 transition-shadow"
                         aria-invalid={!!errors.bisnis}
                       />
                       {errors.bisnis && <p className="text-xs text-red-300">{errors.bisnis}</p>}
@@ -240,7 +240,7 @@ export default function ContactPage() {
                       onChange={(e) => set("kontak", e.target.value)}
                       placeholder="nama@brand.com atau +62 812 3456 7890"
                       autoComplete="email"
-                      className="bg-white/5 border-white/10 text-white placeholder:text-white/30"
+                      className="bg-white/[0.04] border-white/10 text-white placeholder:text-white/30 rounded-lg h-11 focus-visible:ring-2 focus-visible:ring-purple-500/40 transition-shadow"
                       aria-invalid={!!errors.kontak}
                     />
                     {errors.kontak && <p className="text-xs text-red-300">{errors.kontak}</p>}
@@ -271,7 +271,7 @@ export default function ContactPage() {
                       onChange={(e) => set("pesan", e.target.value)}
                       placeholder="Ceritakan sedikit tentang bisnis dan kebutuhan Anda."
                       rows={5}
-                      className="bg-white/5 border-white/10 text-white placeholder:text-white/30"
+                      className="bg-white/[0.04] border-white/10 text-white placeholder:text-white/30 rounded-lg h-11 focus-visible:ring-2 focus-visible:ring-purple-500/40 transition-shadow"
                       aria-invalid={!!errors.pesan}
                     />
                     {errors.pesan && <p className="text-xs text-red-300">{errors.pesan}</p>}

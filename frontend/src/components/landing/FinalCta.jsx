@@ -17,28 +17,32 @@ const FinalCta = () => {
         <div
           ref={r.ref}
           style={r.style}
-          className={`${r.className} relative overflow-hidden rounded-3xl dyn-brand-gradient-bg-2 p-8 sm:p-14 text-center`}
+          className={`${r.className} relative overflow-hidden rounded-[28px] p-10 sm:p-16 text-center border border-white/10`}
         >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.18),transparent_60%)] pointer-events-none" />
+          {/* Layered gradient background */}
+          <div className="absolute inset-0 dyn-brand-gradient-bg-2" aria-hidden />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.22),transparent_55%)] pointer-events-none" aria-hidden />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(0,0,0,0.28),transparent_55%)] pointer-events-none" aria-hidden />
+          <div className="absolute inset-0 dyn-noise pointer-events-none" aria-hidden />
           <div className="relative">
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/20 border border-white/30 px-3 py-1.5 text-[11px] uppercase tracking-[0.18em] text-white">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/[0.18] border border-white/25 px-3.5 py-1.5 text-[11px] uppercase tracking-[0.22em] text-white backdrop-blur">
               BUILD • GROW • EMPOWER
             </div>
-            <h2 className="mt-5 text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-white">
-              Saatnya punya <span className="underline decoration-white/50 decoration-2 underline-offset-4">rumah brand Anda sendiri.</span>
+            <h2 className="mt-6 text-[34px] sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-[1.05] text-white">
+              Saatnya punya <span className="underline decoration-white/50 decoration-2 underline-offset-[8px]">rumah brand Anda sendiri.</span>
             </h2>
-            <p className="mt-4 text-white/90 max-w-2xl mx-auto">
+            <p className="mt-5 text-white/90 max-w-2xl mx-auto text-[16px] leading-relaxed">
               Marketplace membantu Anda ditemukan. Dynicty membantu brand Anda dimiliki. Pelajari lebih lanjut tentang paket yang paling cocok untuk bisnis Anda.
             </p>
-            <div className="mt-7 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
               <Link to={ctaHref({ source: "final-cta" })}>
                 <Button
                   size="lg"
                   data-testid={FINAL_CTA.cta}
-                  className="bg-white text-[#0A0B1F] hover:bg-white/90 h-12 px-6"
+                  className="bg-white text-[#0A0B1F] hover:bg-white/95 h-12 px-7 rounded-xl font-semibold shadow-[0_12px_30px_-10px_rgba(0,0,0,0.5)]"
                 >
                   Hubungi Kami
-                  <ArrowRight className="h-4 w-4 ml-1.5" />
+                  <ArrowRight className="h-4 w-4 ml-2" />
                 </Button>
               </Link>
               <a
@@ -47,7 +51,7 @@ const FinalCta = () => {
                   e.preventDefault();
                   document.querySelector("#cara-kerja")?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="text-white hover:text-white/90 text-sm font-medium underline underline-offset-4"
+                className="text-white hover:text-white/95 text-[14px] font-medium underline underline-offset-[6px] decoration-white/40 hover:decoration-white/80"
               >
                 Pelajari Cara Kerja →
               </a>
