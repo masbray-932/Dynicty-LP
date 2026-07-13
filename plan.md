@@ -1,4 +1,4 @@
-# plan.md — DYNICTY Landing Page Repositioning v2.1 (Updated)
+# plan.md — DYNICTY Landing Page Repositioning v2.1 + SEO Foundation v1 (Updated)
 
 ## 1) Objectives
 - Membuat landing page resmi **dynicty.com** (public) untuk konversi lead **UMKM & seller marketplace** (Shopee/TikTok/Tokopedia/Instagram/Facebook/WhatsApp), sepenuhnya **Bahasa Indonesia**, modern-premium.
@@ -15,9 +15,10 @@
 - Pricing v1: **tidak hardcode** angka harga (menghindari asumsi). Tampilkan “Segera Diumumkan” untuk Starter/Growth dan “Hubungi Kami” untuk Enterprise.
 - Template v1: hanya template yang benar-benar published dipasarkan. Saat ini **hanya “Sinar Telur”** = tersedia; 8 kategori lain **Segera Hadir** dengan tombol preview disabled.
 - Feature marketing harus sesuai **Feature Package Matrix existing**; setiap feature di section fitur wajib memiliki badge paket minimum: Starter / Growth / Enterprise.
-- Performance & quality: fast-loading, responsive, accessible, SEO dasar siap produksi; **tanpa framer-motion** (gunakan CSS + IntersectionObserver native) demi ringan dan sesuai dependency policy.
+- Performance & quality: fast-loading, responsive, accessible; **tanpa framer-motion** (gunakan CSS + IntersectionObserver native) demi ringan dan sesuai dependency policy.
+- **SEO Foundation v1 (baru, DONE):** Fondasi SEO production-ready untuk landing page agar siap Google/Bing + social preview (FB/WA/Twitter/LinkedIn) dan **future-ready** untuk AI search.
 
-**Status Objective (per sprint v2.1):**
+**Status Objective (per sprint v2.1 + SEO v1):**
 - ✅ Landing page v2.1 selesai dan production-ready (13 section + /kontak + /privacy + /terms + 404).
 - ✅ Copywriting & positioning sudah sesuai PRD v2.1 (tanpa jargon teknis; tanpa klaim fiktif).
 - ✅ Semua CTA → /kontak, contact form functional, tersimpan ke MongoDB.
@@ -25,7 +26,8 @@
 - ✅ Template compliance: hanya “Sinar Telur” preview aktif; lainnya “Segera Hadir”.
 - ✅ Feature matrix akurat + badge paket minimum di setiap feature card.
 - ✅ Brand assets: **logo horizontal resmi sudah terpasang untuk Navbar/Mobile Drawer/Footer**.
-- ✅ testing_agent_v3: 100% pass (backend 11/11, frontend 26/26). `CI=true yarn build` PASS.
+- ✅ **SEO Foundation v1 DONE:** dynamic title/description/OG/Twitter/canonical/robots/sitemap/manifest + structured data lengkap (Org/WebSite/WebPage/Breadcrumb/SoftwareApplication/FAQ + 404 noindex).
+- ✅ testing_agent_v3: 100% pass (SEO Foundation v1 17/17). `CI=true yarn build` PASS.
 
 ---
 
@@ -108,10 +110,10 @@
 
 **Status:** ✅ Selesai.
 
-#### 2.3 SEO & Brand Assets
+#### 2.3 SEO & Brand Assets (v2.1 baseline)
 **Implementasi aktual (DONE):**
 - `react-helmet-async` untuk title/description/canonical, OG, Twitter card.
-- JSON-LD:
+- JSON-LD baseline:
   - Organization
   - WebSite
   - FAQPage (inline di section FAQ)
@@ -133,7 +135,7 @@
 
 #### 2.5 Quality Gates
 - ✅ `CI=true yarn build` PASS
-- ✅ testing_agent_v3 PASS 100% (backend 11/11, frontend 26/26)
+- ✅ testing_agent_v3 PASS 100% (backend 11/11, frontend 26/26 pada sprint v2.1)
 - ✅ Privacy audit: tidak ada referensi `app.dynicty.com`, login, atau “Coba Gratis” pada UI publik.
 - ESLint: clean untuk code landing; peringatan hanya dari komponen shadcn pre-existing.
 
@@ -150,10 +152,8 @@
   - Rasio aspek ~**4.15:1**.
 - File yang dipakai aplikasi:
   - ✅ Terpasang di: `/app/frontend/public/brand/dynicty-logo.png`
-  - (Logo stacked sebelumnya tidak lagi dipakai di path tersebut.)
 - Penyesuaian UI di `Navbar.jsx`:
   - Desktop: `h-11 md:h-12 lg:h-[52px]` (w-auto, object-contain)
-  - Mobile navbar: tetap mengikuti komponen Navbar dengan height di atas
   - Mobile drawer: `h-14`
   - Tambahan subtle glow: `drop-shadow` ungu untuk menjaga keterbacaan di background gelap.
 - Verifikasi visual (DONE):
@@ -168,13 +168,78 @@
 
 ---
 
-### Phase 3 — Phase 2 Features (Deferred / Pending Prioritization)
+### Phase 3 — SEO Foundation v1 (Landing Page Only) — **COMPLETED**
+> Sprint khusus landing page dynicty.com: audit, refactor minimal, future-ready untuk SEO Settings API.
+
+#### 3.1 Audit (DONE)
+- Audit React Router + page structure + existing Helmet/meta manager.
+- Audit `index.html`, `robots.txt`, `sitemap.xml`, favicon, OG/Twitter, structured data.
+- Temuan penting:
+  - `react-helmet-async` sudah ada dan dipakai.
+  - Risiko duplikasi meta tag jika `index.html` memuat OG/Twitter/title/description statis → diselesaikan pada sprint ini.
+
+#### 3.2 Central SEO Registry (DONE)
+**Deliverables:**
+- ✅ Tambah registry SEO terpusat: `/app/frontend/src/constants/seo.js`
+  - `SITE` config (canonical origin, images, theme color, locale, contact)
+  - `APPLICATION` descriptor (SoftwareApplication)
+  - `PAGES` map: `home`, `contact`, `privacy`, `terms`, `notFound`
+  - schema builders: Organization, WebSite, WebPage, BreadcrumbList, SoftwareApplication
+  - helper: `absoluteUrl()` + `getPageSeo()`
+
+**Future-ready:**
+- Sprint berikutnya cukup swap `SITE`/`PAGES` menjadi response `GET /api/public/seo` tanpa ubah page components.
+
+#### 3.3 SEO Component Refactor (DONE)
+- ✅ Refactor `/app/frontend/src/components/seo/SEO.jsx`:
+  - Konsumsi registry via `pageKey`
+  - Emit meta tags: title, description, canonical, robots
+  - OG lengkap: `og:title`, `og:description`, `og:image`, `og:url`, `og:type`, `og:site_name`, `og:locale`, `og:image:width`, `og:image:height`, `og:image:alt`
+  - Twitter lengkap: `twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`, `twitter:image:alt`, `twitter:site` (opsional)
+  - JSON-LD:
+    - Site-wide: Organization + WebSite
+    - Per-page: WebPage + BreadcrumbList
+    - Home: SoftwareApplication
+    - FAQPage tetap inline dari `Faq.jsx` (berjalan dan tervalidasi)
+
+#### 3.4 Page Migration (DONE)
+- ✅ Semua 5 pages migrate menjadi `<SEO pageKey="..." />`:
+  - LandingPage → `home`
+  - ContactPage → `contact`
+  - PrivacyPage → `privacy`
+  - TermsPage → `terms`
+  - NotFoundPage → `notFound`
+- **Zero hardcoded metadata** di page components.
+
+#### 3.5 Public SEO Files (DONE)
+- ✅ `public/robots.txt`: allow semua halaman marketing + disallow internal routes (`/admin`, `/dashboard`, `/platform`, `/api`, `/auth`, `/login`, `/oauth`, `/callback`, `/_next/`, dll) + directive sitemap.
+- ✅ `public/sitemap.xml`: hanya 4 URL indexable (`/`, `/kontak`, `/privacy`, `/terms`).
+- ✅ Tambah `public/manifest.json` (PWA/future-ready).
+- ✅ `public/index.html`: diperkaya baseline (theme-color, app-name, apple meta, dns-prefetch) dan **menghapus tag dinamis statis** (title/description/canonical/og:url/og:title/og:description/twitter:title/twitter:description) agar **Helmet menjadi single source** (hindari duplikasi).
+
+#### 3.6 Testing DoD (DONE)
+- ✅ `CI=true yarn build` PASS
+- ✅ testing_agent_v3: **100% pass** (17/17)
+- ✅ Validasi runtime:
+  - Setiap halaman memiliki 1 set meta tags (tanpa duplikasi)
+  - 404: `noindex, nofollow` + canonical `/404`
+  - Schema types:
+    - Home: Organization, WebSite, WebPage, BreadcrumbList, SoftwareApplication, FAQPage
+    - Kontak/Privacy/Terms: Organization, WebSite, WebPage, BreadcrumbList
+- ✅ Screenshot mockup preview Google Search + Facebook/WhatsApp preview tersimpan.
+
+**Status:** ✅ Selesai.
+
+---
+
+### Phase 4 — Phase 2 Features (Deferred / Pending Prioritization)
 **Belum dikerjakan (menunggu prioritas user):**
 - Kalkulator Penghematan (interactive)
-- Newsletter: UI + integrasi endpoint + double-opt (opsional)
+- Newsletter: UI + integrasi endpoint
 - Blog section
 - Dynamic Pricing via `GET /api/public/pricing` (menggantikan “Segera Diumumkan” saat harga resmi tersedia)
 - Customer stories/testimoni nyata (menunggu data + izin)
+- **Platform SEO Settings API (Future):** endpoint publik untuk mengganti registry statis (v1) menjadi dinamis (v2) tanpa refactor halaman.
 
 **Status:** ⏳ Pending prioritas.
 
@@ -182,13 +247,15 @@
 
 ## 3) Next Actions
 1. ✅ Navbar logo horizontal sudah beres dan tervalidasi screenshot.
-2. Tentukan prioritas Phase 2 (pilih 1):
+2. ✅ SEO Foundation v1 selesai dan tervalidasi (testing_agent_v3 100%).
+3. Tentukan prioritas Phase 2 (pilih 1):
    - **P1:** Kalkulator Penghematan (paling berdampak untuk value proof)
    - **P2:** Newsletter UI + integrasi endpoint
    - **P2:** Blog section
    - **P2:** Dynamic Pricing endpoint + UI (butuh harga resmi)
-3. (Opsional) Tambahkan rate-limit server-side yang lebih kuat untuk `/api/leads/contact` (mis. per IP) jika dibutuhkan.
-4. Jalankan quality gate setiap iterasi: ESLint, `CI=true yarn build`, testing_agent_v3, screenshot sanity check untuk navbar/hero.
+   - **P2:** Platform SEO Settings API (`GET /api/public/seo`) untuk mengganti registry statis
+4. (Opsional) Tambahkan rate-limit server-side yang lebih kuat untuk `/api/leads/contact` (mis. per IP) jika dibutuhkan.
+5. Jalankan quality gate setiap iterasi: ESLint, `CI=true yarn build`, testing_agent_v3, screenshot sanity check.
 
 ---
 
@@ -200,6 +267,14 @@
 - ✅ Template: hanya “Sinar Telur” tersedia; kategori lain “Segera Hadir” dengan preview disabled.
 - ✅ Feature section akurat mengikuti feature matrix existing + badge paket minimum.
 - ✅ Tidak ada “Coba Gratis”, tidak ada login, tidak ada `app.dynicty.com`, tidak ada data internal.
-- ✅ SEO dasar siap produksi (OG/Twitter/meta/schema/robots/sitemap/favicon) + build production sukses.
+- ✅ **SEO Foundation v1** siap produksi:
+  - Dynamic title/description per halaman
+  - Canonical benar (https://dynicty.com)
+  - OG + Twitter card lengkap dan konsisten
+  - `robots.txt` + `sitemap.xml` valid
+  - Structured data lengkap (Organization, WebSite, WebPage, BreadcrumbList, SoftwareApplication, FAQPage)
+  - 404 SEO `noindex,nofollow`
+  - manifest + performance baseline
+  - Registry SEO terpusat future-ready untuk Platform SEO Settings API
 - ✅ Quality gate: `CI=true yarn build` PASS, testing_agent_v3 100% pass.
 - ✅ **Navbar + mobile drawer menggunakan logo horizontal resmi yang terbaca pada tema gelap.**
