@@ -1,0 +1,33 @@
+{
+  "name": "Dynicty",
+  "short_name": "Dynicty",
+  "description": "Dynicty membantu UMKM dan seller marketplace di Indonesia membangun toko online profesional dengan branding sendiri.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#05060F",
+  "theme_color": "#05060F",
+  "lang": "id-ID",
+  "categories": ["business", "productivity", "ecommerce"],
+  "icons": [
+    {
+      "src": "/favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

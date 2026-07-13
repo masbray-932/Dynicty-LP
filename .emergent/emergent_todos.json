@@ -1,46 +1,46 @@
 [
   {
-    "content": "P1: Larger logo (42-48px desktop, 34-38px mobile) + spacing kiri lega",
+    "content": "Create centralized SEO registry `/app/frontend/src/constants/seo.js`",
     "status": "completed"
   },
   {
-    "content": "P2: Premium navbar (80-88px, better glass, softer border/shadow, wider spacing)",
+    "content": "Refactor `SEO.jsx` to consume registry via `pageKey`",
     "status": "completed"
   },
   {
-    "content": "P3: Hero depth (ambient blue+purple glows, radial gradients, subtle lighting layers)",
+    "content": "Update 5 pages to use `pageKey`",
     "status": "completed"
   },
   {
-    "content": "P4: Storefront mockup upgrade (perspective 2-3°, glow, soft shadow, reflection, float)",
+    "content": "Update `public/robots.txt` — Disallow admin/dashboard/platform/api/auth",
     "status": "completed"
   },
   {
-    "content": "P5: Typography tuning (line-height, softer gradient, brighter subheadline, readability)",
+    "content": "Update `public/sitemap.xml` — priorities aligned with registry",
     "status": "completed"
   },
   {
-    "content": "P6: CTA button polish (glow, hover/active/focus, premium shadow, micro-interaction)",
+    "content": "Add `public/manifest.json` for PWA/future-ready",
     "status": "completed"
   },
   {
-    "content": "P7: Card component polish (glass, border, shadow, hover lift, subtle glow) — all cards",
+    "content": "Enrich `public/index.html` baseline + remove duplicated dynamic tags",
     "status": "completed"
   },
   {
-    "content": "P8: Whitespace/vertical rhythm consistency across sections",
+    "content": "Verify all JSON-LD schemas render (Org/WebSite/WebPage/Breadcrumb/SoftwareApplication/FAQ)",
     "status": "completed"
   },
   {
-    "content": "P9: Micro-animations (fade/slide/lift) with prefers-reduced-motion respect — native only",
+    "content": "Final yarn build PASS",
     "status": "completed"
   },
   {
-    "content": "P10: Responsive polish desktop/tablet/mobile parity",
+    "content": "Generate Google/Facebook preview mockup screenshot",
     "status": "completed"
   },
   {
-    "content": "Verify: build, screenshots (desktop + mobile + kontak), zero PRD/copy regressions",
-    "status": "completed"
+    "content": "Testing agent verification (frontend SEO)",
+    "status": "in_progress"
   }
 ]

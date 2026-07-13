@@ -7,7 +7,7 @@ import Footer from "@/components/landing/Footer";
 export default function NotFoundPage() {
   return (
     <div className="min-h-screen bg-[hsl(var(--dyn-bg-0))] text-white">
-      <SEO title="404 — Halaman Tidak Ditemukan" description="Halaman yang Anda cari tidak ditemukan." noindex />
+      <SEO pageKey="notFound" />
       <Navbar />
       <main className="dyn-container py-24 text-center">
         <div className="dyn-eyebrow">Error 404</div>

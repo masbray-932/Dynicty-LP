@@ -17,7 +17,7 @@ import Footer from "@/components/landing/Footer";
 export default function LandingPage() {
   return (
     <div className="relative min-h-screen bg-[hsl(var(--dyn-bg-0))] text-white overflow-x-hidden">
-      <SEO />
+      <SEO pageKey="home" />
       <Navbar />
       <main>
         <Hero />

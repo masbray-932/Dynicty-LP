@@ -7,7 +7,7 @@ import Footer from "@/components/landing/Footer";
 export default function PrivacyPage() {
   return (
     <div className="min-h-screen bg-[hsl(var(--dyn-bg-0))] text-white">
-      <SEO title="Kebijakan Privasi — Dynicty" description="Kebijakan privasi Dynicty terkait pengumpulan dan penggunaan data pengguna." url="https://dynicty.com/privacy" noindex />
+      <SEO pageKey="privacy" />
       <Navbar />
       <main className="dyn-container py-16 lg:py-24 max-w-3xl">
         <div className="dyn-eyebrow">Legal</div>

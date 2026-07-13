@@ -4,7 +4,11 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#05060F" />
-        <meta name="description" content="Dynicty membantu UMKM dan seller marketplace di Indonesia membangun toko online profesional dengan branding sendiri, tanpa perlu memahami coding atau mengelola hosting." />
+        <meta name="application-name" content="Dynicty" />
+        <meta name="apple-mobile-web-app-title" content="Dynicty" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="format-detection" content="telephone=no" />
+        <link rel="manifest" href="/manifest.json" />
 
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
@@ -15,19 +19,20 @@
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
         <link
             href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
             rel="stylesheet"
         />
-        <title>Dynicty — Bangun Toko Online Sendiri untuk UMKM & Marketplace Seller</title>
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Dynicty — Bangun Toko Online Sendiri untuk UMKM & Marketplace Seller" />
-        <meta property="og:description" content="Marketplace membantu Anda ditemukan. Dynicty membantu brand Anda dimiliki." />
-        <meta property="og:site_name" content="Dynicty" />
-        <meta property="og:locale" content="id_ID" />
-        <meta property="og:image" content="/brand/og-image.png" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content="/brand/twitter-card.png" />
+
+        <!--
+          NOTE: All SEO tags (title, description, canonical, og:*, twitter:*)
+          are injected at runtime by <SEO /> (react-helmet-async) driven by
+          /src/constants/seo.js. Do NOT add static tags here — Helmet will
+          not dedupe pre-existing static tags and this would cause duplicate
+          meta tags which fail SEO validation.
+        -->
 
         <script>window.addEventListener("error",function(e){if(e.error instanceof DOMException&&e.error.name==="DataCloneError"&&e.message&&e.message.includes("PerformanceServerTiming")){e.stopImmediatePropagation();e.preventDefault()}},true);</script>
         <script src="https://assets.emergent.sh/scripts/emergent-main.js"></script>

@@ -7,7 +7,7 @@ import Footer from "@/components/landing/Footer";
 export default function TermsPage() {
   return (
     <div className="min-h-screen bg-[hsl(var(--dyn-bg-0))] text-white">
-      <SEO title="Syarat & Ketentuan — Dynicty" description="Syarat dan ketentuan layanan Dynicty." url="https://dynicty.com/terms" noindex />
+      <SEO pageKey="terms" />
       <Navbar />
       <main className="dyn-container py-16 lg:py-24 max-w-3xl">
         <div className="dyn-eyebrow">Legal</div>

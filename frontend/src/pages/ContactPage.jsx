@@ -101,11 +101,7 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-[hsl(var(--dyn-bg-0))] text-white">
-      <SEO
-        title="Hubungi Kami — Dynicty"
-        description="Hubungi tim Dynicty untuk informasi paket, onboarding, dan pertanyaan seputar toko online Anda sendiri."
-        url="https://dynicty.com/kontak"
-      />
+      <SEO pageKey="contact" />
       <Navbar />
       <main data-testid={CONTACT.root} className="dyn-container py-14 lg:py-20">
         <Link

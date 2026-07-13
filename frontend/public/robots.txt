@@ -1,4 +1,30 @@
+# robots.txt — Dynicty Landing Page (dynicty.com)
+# Marketing site only. Platform Owner Portal & Tenant Admin live on a
+# different origin (app.dynicty.com) and are NOT crawled from here.
+
 User-agent: *
 Allow: /
 
+# Internal routes / non-public endpoints
+Disallow: /admin
+Disallow: /admin/
+Disallow: /dashboard
+Disallow: /dashboard/
+Disallow: /platform
+Disallow: /platform/
+Disallow: /api
+Disallow: /api/
+Disallow: /auth
+Disallow: /auth/
+Disallow: /login
+Disallow: /logout
+Disallow: /callback
+Disallow: /oauth
+Disallow: /oauth/
+Disallow: /internal
+Disallow: /internal/
+Disallow: /_next/
+Disallow: /*.json$
+
+# Sitemap
 Sitemap: https://dynicty.com/sitemap.xml
