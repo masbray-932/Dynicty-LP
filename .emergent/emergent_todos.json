@@ -52,11 +52,7 @@
     "status": "completed"
   },
   {
-    "content": "Runtime verify — fallback + API mock success",
+    "content": "Testing agent verification — 100% PASS (34 tests)",
     "status": "completed"
-  },
-  {
-    "content": "Testing agent verification (frontend, API-consumer, fallback, SEO override, E2E)",
-    "status": "in_progress"
   }
 ]
