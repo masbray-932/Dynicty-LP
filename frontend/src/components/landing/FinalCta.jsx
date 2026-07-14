@@ -1,13 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { FINAL_CTA } from "@/constants/testIds";
-import { ctaHref } from "@/lib/cta";
+import CtaLink from "@/components/landing/CtaLink";
+import useContact from "@/hooks/useContact";
 import { useRevealClass } from "@/hooks/useInView";
 
 const FinalCta = () => {
   const r = useRevealClass();
+  const { ctaHref } = useContact();
   return (
     <section
       data-testid={FINAL_CTA.section}
@@ -35,7 +36,7 @@ const FinalCta = () => {
               Marketplace membantu Anda ditemukan. Dynicty membantu brand Anda dimiliki. Pelajari lebih lanjut tentang paket yang paling cocok untuk bisnis Anda.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Link to={ctaHref({ source: "final-cta" })}>
+              <CtaLink to={ctaHref({ source: "final-cta" })}>
                 <Button
                   size="lg"
                   data-testid={FINAL_CTA.cta}
@@ -44,7 +45,7 @@ const FinalCta = () => {
                   Hubungi Kami
                   <ArrowRight className="h-4 w-4 ml-2" />
                 </Button>
-              </Link>
+              </CtaLink>
               <a
                 href="#cara-kerja"
                 onClick={(e) => {

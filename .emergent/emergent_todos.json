@@ -1,46 +1,62 @@
 [
   {
-    "content": "Create centralized SEO registry `/app/frontend/src/constants/seo.js`",
+    "content": "Add REACT_APP_PLATFORM_API_URL to frontend/.env",
     "status": "completed"
   },
   {
-    "content": "Refactor `SEO.jsx` to consume registry via `pageKey`",
+    "content": "Create `constants/landingSettings.js` fallback + normalizer",
     "status": "completed"
   },
   {
-    "content": "Update 5 pages to use `pageKey`",
+    "content": "Create `context/LandingPageSettingsContext.jsx` Provider + hooks",
     "status": "completed"
   },
   {
-    "content": "Update `public/robots.txt` — Disallow admin/dashboard/platform/api/auth",
+    "content": "Create `hooks/useContact.js`",
     "status": "completed"
   },
   {
-    "content": "Update `public/sitemap.xml` — priorities aligned with registry",
+    "content": "Create `components/landing/FloatingWhatsApp.jsx`",
     "status": "completed"
   },
   {
-    "content": "Add `public/manifest.json` for PWA/future-ready",
+    "content": "Create `components/landing/CtaLink.jsx`",
     "status": "completed"
   },
   {
-    "content": "Enrich `public/index.html` baseline + remove duplicated dynamic tags",
+    "content": "Wire Provider at `App.js`",
     "status": "completed"
   },
   {
-    "content": "Verify all JSON-LD schemas render (Org/WebSite/WebPage/Breadcrumb/SoftwareApplication/FAQ)",
+    "content": "Update SEO.jsx to merge API SEO + verification tags",
     "status": "completed"
   },
   {
-    "content": "Final yarn build PASS",
+    "content": "Update Navbar/Hero/Pricing/FinalCta CTAs to use hook",
     "status": "completed"
   },
   {
-    "content": "Generate Google/Facebook preview mockup screenshot",
+    "content": "Update Footer to show WA/email/address from API",
     "status": "completed"
   },
   {
-    "content": "Testing agent verification (frontend SEO) — 100% PASS",
+    "content": "Update ContactPage to show WA/email/address from API",
     "status": "completed"
+  },
+  {
+    "content": "Update LandingPage to include FloatingWhatsApp",
+    "status": "completed"
+  },
+  {
+    "content": "yarn build PASS",
+    "status": "completed"
+  },
+  {
+    "content": "Runtime verify — fallback + API mock success",
+    "status": "completed"
+  },
+  {
+    "content": "Testing agent verification (frontend, API-consumer, fallback, SEO override, E2E)",
+    "status": "in_progress"
   }
 ]

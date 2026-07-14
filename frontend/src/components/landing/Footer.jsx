@@ -1,9 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Mail, MapPin, MessageCircle } from "lucide-react";
 import BrandLogo from "@/components/brand/BrandLogo";
+import useContact from "@/hooks/useContact";
 import { FOOTER } from "@/constants/testIds";
 
 const Footer = () => {
+  const { email, address, hasWhatsApp, whatsappUrl, mailtoUrl } = useContact();
+  const waHref = whatsappUrl();
+  const mailHref = mailtoUrl("Halo Dynicty");
+
   const scrollTo = (id) => {
     const el = document.querySelector(id);
     if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -51,6 +57,45 @@ const Footer = () => {
             <div className="mt-4 text-[11px] uppercase tracking-[0.24em] text-white/45">
               BUILD • GROW • EMPOWER
             </div>
+
+            {/* Contact block — driven by Platform Settings API */}
+            <ul
+              data-testid="footer-contact-block"
+              className="mt-6 space-y-2.5 text-sm"
+            >
+              {hasWhatsApp && waHref ? (
+                <li>
+                  <a
+                    href={waHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-testid="footer-whatsapp-link"
+                    className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors"
+                  >
+                    <MessageCircle className="h-4 w-4 text-[#25D366]" />
+                    <span>Chat WhatsApp</span>
+                  </a>
+                </li>
+              ) : null}
+              {mailHref ? (
+                <li>
+                  <a
+                    href={mailHref}
+                    data-testid="footer-email-link"
+                    className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors"
+                  >
+                    <Mail className="h-4 w-4" />
+                    <span>{email}</span>
+                  </a>
+                </li>
+              ) : null}
+              {address ? (
+                <li className="inline-flex items-center gap-2 text-white/55" data-testid="footer-address">
+                  <MapPin className="h-4 w-4" />
+                  <span>{address}</span>
+                </li>
+              ) : null}
+            </ul>
           </div>
 
           <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8">

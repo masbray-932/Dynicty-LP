@@ -13,6 +13,7 @@ import Pricing from "@/components/landing/Pricing";
 import Faq from "@/components/landing/Faq";
 import FinalCta from "@/components/landing/FinalCta";
 import Footer from "@/components/landing/Footer";
+import FloatingWhatsApp from "@/components/landing/FloatingWhatsApp";
 
 export default function LandingPage() {
   return (
@@ -33,6 +34,7 @@ export default function LandingPage() {
         <FinalCta />
       </main>
       <Footer />
+      <FloatingWhatsApp />
     </div>
   );
 }

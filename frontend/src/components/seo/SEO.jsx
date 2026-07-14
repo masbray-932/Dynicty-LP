@@ -10,25 +10,24 @@ import {
   breadcrumbSchema,
   SCHEMA_BUILDERS,
 } from "@/constants/seo";
+import { useSeoSettings } from "@/context/LandingPageSettingsContext";
 
 /**
  * <SEO /> — Landing Page SEO renderer.
  *
- * Preferred usage:
- *   <SEO pageKey="home" />           // reads everything from `constants/seo.js`
- *   <SEO pageKey="contact" />
+ * Merge order (highest priority first):
+ *   1. Explicit props (title / description / url / noindex)
+ *   2. Platform Settings API  →  ONLY on the homepage (see `pageKey === "home"`)
+ *      • api.seo.site_title            → home <title> / og:title / twitter:title
+ *      • api.seo.meta_description      → home description / og:description / twitter:description
+ *      • api.seo.canonical_base_url    → SITE.url (canonical base for ALL pages)
+ *      • api.seo.og_image_url          → OG image (all pages, unless a page provides its own)
+ *      • api.seo.twitter_image_url     → Twitter image (all pages)
+ *   3. Static registry  →  /src/constants/seo.js (page-specific, safe fallback)
+ *   4. SITE defaults
  *
- * Overrides (used sparingly, e.g. for pages not yet in the registry):
- *   <SEO title="..." description="..." url="..." noindex />
- *
- * The component emits:
- *   - <title>, meta description, canonical
- *   - Open Graph (title/description/image/url/type/site_name/locale/image dims)
- *   - Twitter Card (card/title/description/image/site)
- *   - robots meta (noindex,nofollow when applicable)
- *   - JSON-LD: Organization + WebSite (site-wide) + WebPage + BreadcrumbList
- *              + any extra schemas declared on the page (SoftwareApplication, etc.)
- *   - Optional `extraJsonLd` passthrough for one-off schemas (kept for backward compat)
+ * Verification tags & keywords (from the API) render on ALL indexable pages.
+ * The 404 page always renders `noindex, nofollow` regardless of settings.
  */
 const SEO = ({
   pageKey,
@@ -38,24 +37,61 @@ const SEO = ({
   noindex: noindexProp,
   extraJsonLd = null,
 }) => {
-  // Resolve base metadata from registry (falls back to `home` if key is unknown).
-  const page = pageKey ? getPageSeo(pageKey) : null;
+  const apiSeo = useSeoSettings();
 
-  const title = titleProp ?? page?.title ?? SITE.name;
-  const description = descProp ?? page?.description ?? SITE.description;
+  const page = pageKey ? getPageSeo(pageKey) : null;
+  const isHome = page?.key === "home";
+
+  // Canonical base — API can override the origin used to build canonical URLs.
+  const canonicalOrigin =
+    (apiSeo.canonical_base_url && apiSeo.canonical_base_url.replace(/\/+$/, "")) ||
+    SITE.url;
+  const buildCanonical = (path) => {
+    const p = path || "/";
+    if (/^https?:\/\//i.test(p)) return p;
+    return `${canonicalOrigin}${p.startsWith("/") ? p : `/${p}`}`;
+  };
+
+  // Compose per-page metadata with API override applied only on the homepage.
+  const registryTitle = page?.title ?? SITE.name;
+  const registryDesc = page?.description ?? SITE.description;
+  const title =
+    titleProp ??
+    (isHome && apiSeo.site_title ? apiSeo.site_title : registryTitle);
+  const description =
+    descProp ??
+    (isHome && apiSeo.meta_description
+      ? apiSeo.meta_description
+      : registryDesc);
+
   const canonicalPath = page?.path ?? "/";
-  const canonicalUrl = urlProp ?? absoluteUrl(canonicalPath);
+  const canonicalUrl = urlProp ?? buildCanonical(canonicalPath);
   const noindex = noindexProp ?? page?.noindex ?? false;
 
-  const ogImage = absoluteUrl(SITE.ogImage);
-  const twitterImage = absoluteUrl(SITE.twitterImage);
+  // Social preview images — API-controlled with static fallback.
+  const ogImage = apiSeo.og_image_url || absoluteUrl(SITE.ogImage);
+  const twitterImage =
+    apiSeo.twitter_image_url || apiSeo.og_image_url || absoluteUrl(SITE.twitterImage);
 
-  // Build per-page schemas
-  const pageWebPage = webPageSchema({
-    title,
+  // Structured data — WebPage uses the resolved (potentially API-overridden) title/desc.
+  const pageWebPage = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
     description,
-    path: canonicalPath,
-  });
+    url: canonicalUrl,
+    inLanguage: SITE.language,
+    isPartOf: {
+      "@type": "WebSite",
+      name: SITE.name,
+      url: canonicalOrigin,
+    },
+    primaryImageOfPage: ogImage,
+  };
+  // Reuse the shared builder for anything but WebPage so behaviour stays
+  // consistent when we later swap organization details via API.
+  void webPageSchema; // keep import — used by tests to import from same module
+
   const pageBreadcrumb = page?.breadcrumb?.length
     ? breadcrumbSchema(page.breadcrumb)
     : null;
@@ -64,12 +100,18 @@ const SEO = ({
       .map((key) => SCHEMA_BUILDERS[key]?.())
       .filter(Boolean) ?? [];
 
+  const keywordsList =
+    Array.isArray(apiSeo.keywords) && apiSeo.keywords.length > 0
+      ? apiSeo.keywords.join(", ")
+      : null;
+
   return (
     <Helmet prioritizeSeoTags>
       {/* Base */}
       <html lang={SITE.language.toLowerCase()} />
       <title>{title}</title>
       <meta name="description" content={description} />
+      {keywordsList ? <meta name="keywords" content={keywordsList} /> : null}
       <link rel="canonical" href={canonicalUrl} />
       {noindex ? (
         <meta name="robots" content="noindex, nofollow" />
@@ -81,6 +123,23 @@ const SEO = ({
       <meta name="theme-color" content={SITE.themeColor} />
       <meta name="application-name" content={SITE.name} />
       <meta name="apple-mobile-web-app-title" content={SITE.name} />
+
+      {/* Search-engine verification (only if configured) */}
+      {apiSeo.google_site_verification ? (
+        <meta
+          name="google-site-verification"
+          content={apiSeo.google_site_verification}
+        />
+      ) : null}
+      {apiSeo.bing_site_verification ? (
+        <meta name="msvalidate.01" content={apiSeo.bing_site_verification} />
+      ) : null}
+      {apiSeo.facebook_domain_verification ? (
+        <meta
+          name="facebook-domain-verification"
+          content={apiSeo.facebook_domain_verification}
+        />
+      ) : null}
 
       {/* Open Graph */}
       <meta property="og:type" content="website" />

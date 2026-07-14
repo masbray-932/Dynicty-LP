@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, Mail } from "lucide-react";
+import { Menu, X, Mail, MessageCircle } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import BrandLogo from "@/components/brand/BrandLogo";
+import CtaLink from "@/components/landing/CtaLink";
+import useContact from "@/hooks/useContact";
 import { NAV } from "@/constants/testIds";
 
 const navItems = [
@@ -20,6 +22,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeId, setActiveId] = useState("home");
+  const { ctaHref, ctaIsExternal } = useContact();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -134,9 +137,9 @@ const Navbar = () => {
 
         {/* CTA */}
         <div className="hidden lg:flex items-center pl-2">
-          <Link
-            to="/kontak"
-            data-testid={NAV.ctaContact}
+          <CtaLink
+            to={ctaHref({ source: "navbar" })}
+            testId={NAV.ctaContact}
             className="nav-cta group relative inline-flex items-center gap-2 h-11 px-5 rounded-xl text-[14px] font-medium text-white transition-all duration-200 hover:-translate-y-[1px] active:translate-y-0"
             style={{
               background:
@@ -154,9 +157,13 @@ const Navbar = () => {
                   "radial-gradient(80% 120% at 20% 0%, rgba(59,130,246,0.28), transparent 60%), radial-gradient(80% 120% at 100% 100%, rgba(139,92,246,0.28), transparent 60%)",
               }}
             />
-            <Mail className="h-4 w-4 relative" />
-            <span className="relative">Hubungi Kami</span>
-          </Link>
+            {ctaIsExternal ? (
+              <MessageCircle className="h-4 w-4 relative" />
+            ) : (
+              <Mail className="h-4 w-4 relative" />
+            )}
+            <span className="relative">{ctaIsExternal ? "Chat WhatsApp" : "Hubungi Kami"}</span>
+          </CtaLink>
         </div>
 
         {/* Mobile hamburger */}
@@ -201,8 +208,8 @@ const Navbar = () => {
                     );
                   })}
                 </nav>
-                <Link
-                  to="/kontak"
+                <CtaLink
+                  to={ctaHref({ source: "navbar-mobile" })}
                   onClick={() => setOpen(false)}
                   className="inline-flex items-center justify-center gap-2 w-full h-11 rounded-xl text-white text-[14px] font-medium"
                   style={{
@@ -212,9 +219,9 @@ const Navbar = () => {
                     boxShadow: "0 1px 0 rgba(255,255,255,0.06) inset, 0 8px 24px -12px rgba(109,94,247,0.55)",
                   }}
                 >
-                  <Mail className="h-4 w-4" />
-                  Hubungi Kami
-                </Link>
+                  {ctaIsExternal ? <MessageCircle className="h-4 w-4" /> : <Mail className="h-4 w-4" />}
+                  {ctaIsExternal ? "Chat WhatsApp" : "Hubungi Kami"}
+                </CtaLink>
               </div>
             </SheetContent>
           </Sheet>

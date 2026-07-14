@@ -8,6 +8,7 @@ import ContactPage from "@/pages/ContactPage";
 import PrivacyPage from "@/pages/PrivacyPage";
 import TermsPage from "@/pages/TermsPage";
 import NotFoundPage from "@/pages/NotFoundPage";
+import { LandingPageSettingsProvider } from "@/context/LandingPageSettingsContext";
 
 function App() {
   useEffect(() => {
@@ -18,16 +19,17 @@ function App() {
 
   return (
     <HelmetProvider>
-      <div className="App min-h-screen bg-[hsl(var(--dyn-bg-0))] text-white">
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/kontak" element={<ContactPage />} />
-            <Route path="/privacy" element={<PrivacyPage />} />
-            <Route path="/terms" element={<TermsPage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </BrowserRouter>
+      <LandingPageSettingsProvider>
+        <div className="App min-h-screen bg-[hsl(var(--dyn-bg-0))] text-white">
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/kontak" element={<ContactPage />} />
+              <Route path="/privacy" element={<PrivacyPage />} />
+              <Route path="/terms" element={<TermsPage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </BrowserRouter>
         <Toaster
           position="top-center"
           richColors
@@ -40,7 +42,8 @@ function App() {
             },
           }}
         />
-      </div>
+        </div>
+      </LandingPageSettingsProvider>
     </HelmetProvider>
   );
 }

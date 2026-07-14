@@ -7,9 +7,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Loader2, CheckCircle2, AlertCircle, ArrowLeft, Send, Mail, Phone, Store } from "lucide-react";
+import { Loader2, CheckCircle2, AlertCircle, ArrowLeft, Send, Mail, Phone, Store, MessageCircle, MapPin } from "lucide-react";
 import { toast } from "sonner";
 import { submitContact } from "@/lib/api";
+import useContact from "@/hooks/useContact";
 import { CONTACT } from "@/constants/testIds";
 
 const PLAN_OPTIONS = ["Belum yakin", "Starter", "Growth", "Enterprise"];
@@ -19,6 +20,15 @@ export default function ContactPage() {
   const params = new URLSearchParams(location.search);
   const prefilledPaket = params.get("paket") || "";
   const prefilledSrc = params.get("src") || "";
+  const { hasWhatsApp, whatsappUrl, email, address, mailtoUrl } = useContact();
+  const waHref = whatsappUrl(
+    prefilledPaket
+      ? `Halo Dynicty, saya tertarik dengan paket ${prefilledPaket}. Mohon informasinya, terima kasih.`
+      : undefined
+  );
+  const mailHref = mailtoUrl(
+    prefilledPaket ? `Pertanyaan paket ${prefilledPaket}` : "Halo Dynicty"
+  );
 
   const [form, setForm] = useState({
     nama: "",
@@ -152,6 +162,59 @@ export default function ContactPage() {
                   <div className="text-xs text-white/55">Kami bantu memilih paket sesuai kebutuhan bisnis Anda.</div>
                 </div>
               </div>
+            </div>
+
+            {/* Direct contact block — driven by Platform Settings API */}
+            <div
+              data-testid="contact-direct-block"
+              className="mt-8 rounded-xl border border-white/10 bg-white/[0.03] p-5 space-y-3"
+            >
+              <div className="text-[11px] uppercase tracking-[0.2em] text-white/45">
+                Hubungi langsung
+              </div>
+              {hasWhatsApp && waHref ? (
+                <a
+                  href={waHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-testid="contact-whatsapp-link"
+                  className="flex items-center gap-3 group"
+                >
+                  <div className="h-9 w-9 rounded-lg bg-[#25D366]/15 border border-[#25D366]/30 flex items-center justify-center">
+                    <MessageCircle className="h-4 w-4 text-[#25D366]" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-sm text-white group-hover:text-[#25D366] transition-colors">Chat WhatsApp</div>
+                    <div className="text-xs text-white/55">Respons cepat pada jam kerja.</div>
+                  </div>
+                </a>
+              ) : null}
+              {mailHref ? (
+                <a
+                  href={mailHref}
+                  data-testid="contact-email-link"
+                  className="flex items-center gap-3 group"
+                >
+                  <div className="h-9 w-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
+                    <Mail className="h-4 w-4 text-white/80" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-sm text-white group-hover:text-blue-300 transition-colors truncate">{email}</div>
+                    <div className="text-xs text-white/55">Kirim email langsung.</div>
+                  </div>
+                </a>
+              ) : null}
+              {address ? (
+                <div className="flex items-center gap-3" data-testid="contact-address">
+                  <div className="h-9 w-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
+                    <MapPin className="h-4 w-4 text-white/80" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-sm text-white">{address}</div>
+                    <div className="text-xs text-white/55">Lokasi operasional.</div>
+                  </div>
+                </div>
+              ) : null}
             </div>
           </div>
 

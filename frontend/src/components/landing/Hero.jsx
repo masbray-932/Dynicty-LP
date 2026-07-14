@@ -1,8 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, PlayCircle } from "lucide-react";
 import StorefrontMockup from "@/components/landing/StorefrontMockup";
+import CtaLink from "@/components/landing/CtaLink";
+import useContact from "@/hooks/useContact";
 import { HERO } from "@/constants/testIds";
 import { useRevealClass } from "@/hooks/useInView";
 
@@ -12,6 +13,7 @@ const Hero = () => {
   const r3 = useRevealClass(160);
   const r4 = useRevealClass(220);
   const r5 = useRevealClass(120);
+  const { ctaHref } = useContact();
 
   const scrollTo = (id) => {
     const el = document.querySelector(id);
@@ -109,9 +111,12 @@ const Hero = () => {
 
             <div className="mt-7 text-[13px] text-white/55">
               Untuk info paket dan onboarding,{" "}
-              <Link to="/kontak" className="underline underline-offset-[6px] decoration-white/25 text-white/80 hover:text-white hover:decoration-white/60 transition">
+              <CtaLink
+                to={ctaHref({ source: "hero-inline" })}
+                className="underline underline-offset-[6px] decoration-white/25 text-white/80 hover:text-white hover:decoration-white/60 transition"
+              >
                 hubungi tim Dynicty
-              </Link>.
+              </CtaLink>.
             </div>
           </div>
 

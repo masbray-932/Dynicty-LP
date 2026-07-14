@@ -1,14 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PRICING } from "@/constants/testIds";
 import { PRICING_PLANS } from "@/constants/plans";
-import { ctaHref } from "@/lib/cta";
+import CtaLink from "@/components/landing/CtaLink";
+import useContact from "@/hooks/useContact";
 import { useRevealClass } from "@/hooks/useInView";
 
 const PlanCard = ({ plan, delay }) => {
   const r = useRevealClass(delay);
+  const { ctaHref } = useContact();
   return (
     <div
       ref={r.ref}
@@ -37,14 +38,14 @@ const PlanCard = ({ plan, delay }) => {
         ))}
       </ul>
 
-      <Link to={ctaHref({ paket: plan.name, source: "pricing" })} className="mt-7 block">
+      <CtaLink to={ctaHref({ paket: plan.name, source: "pricing" })} className="mt-7 block">
         <Button
           data-testid={PRICING.cta}
           className="h-11 w-full text-[13.5px] dyn-cta-primary rounded-xl"
         >
           {plan.ctaLabel}
         </Button>
-      </Link>
+      </CtaLink>
     </div>
   );
 };
