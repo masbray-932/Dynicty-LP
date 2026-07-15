@@ -1,5 +1,5 @@
 import React from "react";
-import { ExternalLink, Clock } from "lucide-react";
+import { MessageCircle, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { TEMPLATES } from "@/constants/testIds";
@@ -71,8 +71,8 @@ const TemplateCard = ({ t, delay }) => {
               data-testid={TEMPLATES.preview}
               className="h-8 bg-white/5 border-white/15 text-white hover:bg-white/10 hover:text-white"
             >
-              Preview
-              <ExternalLink className="h-3.5 w-3.5 ml-1" />
+              Tanyakan Template
+              <MessageCircle className="h-3.5 w-3.5 ml-1" />
             </Button>
           </Link>
         ) : (
@@ -82,7 +82,7 @@ const TemplateCard = ({ t, delay }) => {
             data-testid={TEMPLATES.preview}
             className="h-8 px-3 rounded-md text-xs border border-white/10 bg-white/[0.02] text-white/35 cursor-not-allowed"
           >
-            Preview
+            Segera Hadir
           </button>
         )}
       </div>
@@ -104,7 +104,7 @@ const TemplateShowcase = () => {
             Dynicty sedang menyiapkan template untuk <span className="dyn-brand-gradient-text">berbagai kategori bisnis.</span>
           </h2>
           <p className="mt-4 text-white/70 text-base max-w-xl">
-            Sinar Telur tersedia sebagai template resmi pertama. Template kategori lainnya sedang kami siapkan.
+            Sinar Telur tersedia sebagai template resmi pertama. Hubungi tim kami untuk melihat contoh tampilan dan alur toko; template kategori lainnya sedang disiapkan.
           </p>
         </div>
 

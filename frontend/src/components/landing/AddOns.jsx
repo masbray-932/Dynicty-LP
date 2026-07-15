@@ -98,7 +98,8 @@ const AddOns = () => {
           </h2>
           <p className="mt-4 text-white/70">
             Perluas kemampuan toko Anda tanpa pindah platform — mulai dari
-            integrasi pengiriman, notifikasi, hingga program loyalitas.
+            integrasi pengiriman, notifikasi, hingga program loyalitas. Add-on
+            bersifat opsional dan tidak termasuk otomatis di dalam paket utama.
           </p>
         </div>
 

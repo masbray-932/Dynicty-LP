@@ -157,12 +157,8 @@ const Navbar = () => {
                   "radial-gradient(80% 120% at 20% 0%, rgba(59,130,246,0.28), transparent 60%), radial-gradient(80% 120% at 100% 100%, rgba(139,92,246,0.28), transparent 60%)",
               }}
             />
-            {ctaIsExternal ? (
-              <MessageCircle className="h-4 w-4 relative" />
-            ) : (
-              <Mail className="h-4 w-4 relative" />
-            )}
-            <span className="relative">{ctaIsExternal ? "Chat WhatsApp" : "Hubungi Kami"}</span>
+            <MessageCircle className="h-4 w-4 relative" />
+            <span className="relative">Konsultasi Gratis</span>
           </CtaLink>
         </div>
 
@@ -219,8 +215,8 @@ const Navbar = () => {
                     boxShadow: "0 1px 0 rgba(255,255,255,0.06) inset, 0 8px 24px -12px rgba(109,94,247,0.55)",
                   }}
                 >
-                  {ctaIsExternal ? <MessageCircle className="h-4 w-4" /> : <Mail className="h-4 w-4" />}
-                  {ctaIsExternal ? "Chat WhatsApp" : "Hubungi Kami"}
+                  <MessageCircle className="h-4 w-4" />
+                  Konsultasi Gratis
                 </CtaLink>
               </div>
             </SheetContent>

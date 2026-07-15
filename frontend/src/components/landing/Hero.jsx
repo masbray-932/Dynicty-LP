@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, PlayCircle } from "lucide-react";
+import { ArrowRight, MessageCircle, Store } from "lucide-react";
 import StorefrontMockup from "@/components/landing/StorefrontMockup";
 import CtaLink from "@/components/landing/CtaLink";
 import useContact from "@/hooks/useContact";
@@ -88,35 +88,38 @@ const Hero = () => {
               style={r4.style}
               className={`${r4.className} mt-9 flex flex-col sm:flex-row items-stretch sm:items-center gap-3`}
             >
-              <Button
-                size="lg"
-                data-testid={HERO.primaryCta}
-                onClick={() => scrollTo("#template")}
-                className="dyn-cta-primary h-12 px-7 text-[14.5px] rounded-xl"
-              >
-                Lihat Contoh Toko
-                <ArrowRight className="h-4 w-4 ml-2" />
-              </Button>
+              <CtaLink to={ctaHref({ source: "hero-primary" })}>
+                <Button
+                  size="lg"
+                  data-testid={HERO.primaryCta}
+                  className="dyn-cta-primary h-12 w-full sm:w-auto px-7 text-[14.5px] rounded-xl"
+                >
+                  <MessageCircle className="h-4 w-4 mr-2" />
+                  Konsultasi Gratis
+                  <ArrowRight className="h-4 w-4 ml-2" />
+                </Button>
+              </CtaLink>
               <Button
                 size="lg"
                 variant="ghost"
                 data-testid={HERO.secondaryCta}
-                onClick={() => scrollTo("#cara-kerja")}
+                onClick={() => scrollTo("#template")}
                 className="dyn-cta-secondary h-12 px-6 text-[14.5px] rounded-xl hover:text-white"
               >
-                <PlayCircle className="h-4 w-4 mr-2" />
-                Pelajari Cara Kerja
+                <Store className="h-4 w-4 mr-2" />
+                Lihat Contoh Tampilan
               </Button>
             </div>
 
             <div className="mt-7 text-[13px] text-white/55">
-              Untuk info paket dan onboarding,{" "}
-              <CtaLink
-                to={ctaHref({ source: "hero-inline" })}
+              Tim Dynicty mendampingi dari pemilihan paket hingga toko siap online.{" "}
+              <button
+                type="button"
+                onClick={() => scrollTo("#onboarding")}
                 className="underline underline-offset-[6px] decoration-white/25 text-white/80 hover:text-white hover:decoration-white/60 transition"
               >
-                hubungi tim Dynicty
-              </CtaLink>.
+                Lihat proses onboarding
+              </button>.
             </div>
           </div>
 

@@ -1,5 +1,5 @@
-// Feature matrix — source of truth from PRD v2.1 section 20.7-20.9
-// Each feature key comes from existing Feature Package Architecture.
+// Feature matrix — customer-facing source of truth for the published packages.
+// Keep this aligned with PRICING_PLANS so package badges never contradict pricing.
 export const PLAN_KEYS = { STARTER: "starter", GROWTH: "growth", ENTERPRISE: "enterprise" };
 
 export const PLAN_LABEL = {
@@ -22,21 +22,22 @@ export const FEATURE_MATRIX = {
   "reports.basic":        PLAN_KEYS.STARTER,
   "marketing.banner":     PLAN_KEYS.STARTER,
   "shipping.settings":    PLAN_KEYS.STARTER,
+  "integration.midtrans": PLAN_KEYS.STARTER,
+  "seo.basic":            PLAN_KEYS.STARTER,
 
   // GROWTH additions
   "marketing.voucher":       PLAN_KEYS.GROWTH,
   "marketing.popup_banner":  PLAN_KEYS.GROWTH,
   "reports.advanced":        PLAN_KEYS.GROWTH,
-  "integration.midtrans":    PLAN_KEYS.GROWTH,
+  "reports.export":          PLAN_KEYS.GROWTH,
   "branding.platform":       PLAN_KEYS.GROWTH,
-  "seo.platform":            PLAN_KEYS.GROWTH,
+  "notifications.browser":   PLAN_KEYS.GROWTH,
+  "support.priority":        PLAN_KEYS.GROWTH,
 
   // ENTERPRISE additions
-  "integration.jubelio":     PLAN_KEYS.ENTERPRISE,
-  "integration.marketplace": PLAN_KEYS.ENTERPRISE,
-  "api.access":              PLAN_KEYS.ENTERPRISE,
   "users.multi_admin":       PLAN_KEYS.ENTERPRISE,
-  "support.priority":        PLAN_KEYS.ENTERPRISE,
+  "notifications.pwa":       PLAN_KEYS.ENTERPRISE,
+  "features.early_access":   PLAN_KEYS.ENTERPRISE,
 };
 
 // Customer-facing copy for feature grid (Section Fitur)
@@ -54,17 +55,14 @@ export const FEATURE_CARDS = [
   { icon: "Users", title: "Kelola pelanggan",
     desc: "Simpan data pelanggan untuk komunikasi jangka panjang.",
     keys: ["core.customers"] },
-  { icon: "BarChart3", title: "Laporan penjualan",
-    desc: "Pantau performa toko dengan laporan dasar hingga lanjutan.",
-    keys: ["reports.basic", "reports.advanced"] },
+  { icon: "BarChart3", title: "Laporan penjualan dasar",
+    desc: "Pantau ringkasan performa dan aktivitas penjualan toko Anda.",
+    keys: ["reports.basic"] },
   { icon: "Megaphone", title: "Banner promosi",
     desc: "Tampilkan banner promosi di storefront Anda.",
     keys: ["marketing.banner"] },
-  { icon: "Ticket", title: "Voucher & popup promosi",
-    desc: "Buat kode promo dan popup untuk campaign khusus.",
-    keys: ["marketing.voucher", "marketing.popup_banner"] },
   { icon: "CreditCard", title: "Pembayaran online (Midtrans)",
-    desc: "Pembayaran online melalui integrasi Midtrans tersedia pada paket yang mendukung fitur ini.",
+    desc: "Terima pembayaran online melalui payment gateway yang terintegrasi.",
     keys: ["integration.midtrans"] },
   { icon: "Truck", title: "Pengaturan pengiriman",
     desc: "Atur opsi pengiriman untuk pesanan toko Anda.",
@@ -72,21 +70,24 @@ export const FEATURE_CARDS = [
   { icon: "Palette", title: "Kustomisasi branding",
     desc: "Sesuaikan tampilan storefront dengan branding Anda.",
     keys: ["branding.platform"] },
-  { icon: "Search", title: "Optimasi SEO",
-    desc: "Bantuan agar toko Anda lebih mudah ditemukan di mesin pencari.",
-    keys: ["seo.platform"] },
-  { icon: "Plug", title: "Integrasi Jubelio & marketplace",
-    desc: "Sinkronkan data operasional dengan Jubelio dan marketplace.",
-    keys: ["integration.jubelio", "integration.marketplace"] },
-  { icon: "Code2", title: "Akses API",
-    desc: "Untuk kebutuhan integrasi lanjutan dengan sistem Anda.",
-    keys: ["api.access"] },
+  { icon: "Search", title: "SEO dasar",
+    desc: "Fondasi SEO agar halaman toko lebih mudah dikenali mesin pencari.",
+    keys: ["seo.basic"] },
+  { icon: "FileSpreadsheet", title: "Laporan lanjutan & Export Excel",
+    desc: "Analisis performa lebih detail dan ekspor data untuk operasional bisnis.",
+    keys: ["reports.advanced", "reports.export"] },
+  { icon: "Bell", title: "Browser Notification",
+    desc: "Dapatkan notifikasi aktivitas toko melalui browser.",
+    keys: ["notifications.browser"] },
   { icon: "UserCog", title: "Multi Admin",
     desc: "Undang tim untuk mengelola toko bersama.",
     keys: ["users.multi_admin"] },
   { icon: "LifeBuoy", title: "Dukungan prioritas",
-    desc: "Prioritas dukungan untuk kebutuhan lanjutan.",
+    desc: "Dapatkan prioritas bantuan mulai dari paket Growth.",
     keys: ["support.priority"] },
+  { icon: "BellRing", title: "PWA Push Notification",
+    desc: "Notifikasi push untuk pengalaman aplikasi yang lebih lengkap.",
+    keys: ["notifications.pwa"] },
 ];
 
 // Return minimum plan required for a card (highest requirement wins across its keys)
@@ -109,7 +110,7 @@ export const PRICING_PLANS = [
     tagline: "Cocok untuk UMKM yang baru memulai toko online.",
     priceDisplay: "Rp 599.000",
     pricePeriod: "/ tahun",
-    ctaLabel: "Mulai Sekarang",
+    ctaLabel: "Konsultasikan Paket Starter",
     highlighted: false,
     features: [
       "Website toko online",
@@ -119,7 +120,7 @@ export const PRICING_PLANS = [
       "Kelola pesanan",
       "Kelola pelanggan",
       "SEO dasar",
-      "Payment Gateway",
+      "Payment Gateway (Midtrans)",
       "Shipping dasar",
       "Mobile responsive",
     ],
@@ -133,7 +134,7 @@ export const PRICING_PLANS = [
       "Untuk bisnis yang sedang berkembang dan membutuhkan identitas brand sendiri.",
     priceDisplay: "Rp 1.199.000",
     pricePeriod: "/ tahun",
-    ctaLabel: "Mulai Sekarang",
+    ctaLabel: "Konsultasikan Paket Growth",
     highlighted: true, // paket paling populer di antara ketiganya
     features: [
       "Semua fitur Starter",
@@ -154,7 +155,7 @@ export const PRICING_PLANS = [
       "Solusi lengkap untuk bisnis yang membutuhkan fitur premium dan operasional lebih besar.",
     priceDisplay: "Rp 2.399.000",
     pricePeriod: "/ tahun",
-    ctaLabel: "Mulai Sekarang",
+    ctaLabel: "Konsultasikan Paket Enterprise",
     highlighted: false,
     features: [
       "Semua fitur Growth",
@@ -185,7 +186,7 @@ export const ADDON_ITEMS = [
       "Cancel AWB",
       "Multi courier",
     ],
-    ctaLabel: "Hubungi Kami",
+    ctaLabel: "Tanyakan Add-on",
     waMessage:
       "Halo Admin Dynicty,\n\nSaya tertarik dengan add-on Jubelio Shipping Integration.\n\nMohon informasi lebih lanjut.",
   },
@@ -199,7 +200,7 @@ export const ADDON_ITEMS = [
       "Pembayaran berhasil",
       "Pesanan dikirim",
     ],
-    ctaLabel: "Hubungi Kami",
+    ctaLabel: "Tanyakan Add-on",
     waMessage:
       "Halo Admin Dynicty,\n\nSaya tertarik dengan add-on WhatsApp Notification.\n\nMohon informasi lebih lanjut.",
   },
@@ -213,7 +214,7 @@ export const ADDON_ITEMS = [
       "Riwayat percakapan",
       "Notifikasi pesan baru",
     ],
-    ctaLabel: "Hubungi Kami",
+    ctaLabel: "Tanyakan Add-on",
     waMessage:
       "Halo Admin Dynicty,\n\nSaya tertarik dengan add-on Customer Chat.\n\nMohon informasi lebih lanjut.",
   },
@@ -227,7 +228,7 @@ export const ADDON_ITEMS = [
       "Reward pembelian",
       "Program loyalitas",
     ],
-    ctaLabel: "Hubungi Kami",
+    ctaLabel: "Tanyakan Add-on",
     waMessage:
       "Halo Admin Dynicty,\n\nSaya tertarik dengan add-on Loyalty Point.\n\nMohon informasi lebih lanjut.",
   },
@@ -242,7 +243,7 @@ export const ADDON_ITEMS = [
       "Platinum",
       "Benefit pelanggan",
     ],
-    ctaLabel: "Hubungi Kami",
+    ctaLabel: "Tanyakan Add-on",
     waMessage:
       "Halo Admin Dynicty,\n\nSaya tertarik dengan add-on Membership Tier.\n\nMohon informasi lebih lanjut.",
   },

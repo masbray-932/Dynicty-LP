@@ -118,7 +118,7 @@ const Pricing = () => {
           </h2>
           <p className="mt-4 text-white/70">
             Pilih paket yang sesuai dengan skala bisnis Anda. Semua paket
-            berlaku per tahun, dapat diaktifkan langsung setelah pembayaran.
+            berlaku per tahun dan diaktifkan melalui proses konsultasi serta setup awal.
           </p>
         </div>
 
@@ -132,6 +132,9 @@ const Pricing = () => {
           Harga belum termasuk pajak yang berlaku. Biaya payment gateway dan
           layanan pihak ketiga dapat berlaku sesuai metode yang digunakan.
           Fitur per paket dapat berubah seiring pengembangan produk.
+        </p>
+        <p className="mt-3 text-center text-[13px] text-white/65 max-w-2xl mx-auto">
+          Belum yakin memilih paket? Konsultasikan kebutuhan Anda tanpa biaya sebelum aktivasi.
         </p>
       </div>
     </section>

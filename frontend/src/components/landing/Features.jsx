@@ -53,7 +53,7 @@ const Features = () => {
             <span className="dyn-brand-gradient-text">Semua yang Anda butuhkan</span> untuk menjalankan toko online.
           </h2>
           <p className="mt-4 text-white/70 text-base sm:text-lg max-w-xl">
-            Fitur yang praktis dan business-first — dibuat khusus untuk kebutuhan UMKM dan seller di Indonesia. Setiap fitur ditandai dengan paket minimum yang membukanya.
+            Ringkasan fitur utama untuk menjalankan toko online. Setiap fitur ditandai dengan paket minimum yang membukanya; add-on opsional ditampilkan terpisah di bawah paket.
           </p>
         </div>
 

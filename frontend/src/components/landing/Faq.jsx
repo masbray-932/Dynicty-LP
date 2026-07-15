@@ -14,11 +14,13 @@ const items = [
   { q: "Apakah saya bisa mengubah tampilan template?",
     a: "Ya. Anda bisa menyesuaikan branding — logo, warna, teks, dan foto produk — sesuai brand Anda." },
   { q: "Metode pembayaran apa saja yang tersedia?",
-    a: "Untuk paket yang mendukung pembayaran online, Dynicty terintegrasi dengan Midtrans. Metode lainnya akan ditambahkan seiring pengembangan produk." },
-  { q: "Bagaimana kalau saya butuh integrasi dengan sistem lain?",
-    a: "Paket Enterprise menyediakan integrasi Jubelio, marketplace, dan akses API untuk kebutuhan integrasi lanjutan." },
+    a: "Paket Starter sudah mencakup payment gateway melalui integrasi Midtrans. Biaya transaksi dari payment gateway tetap mengikuti ketentuan penyedia layanan." },
+  { q: "Apakah integrasi Jubelio sudah termasuk dalam paket Enterprise?",
+    a: "Tidak. Jubelio Shipping Integration tersedia sebagai add-on opsional dengan biaya terpisah, sehingga hanya perlu diaktifkan jika bisnis Anda membutuhkannya." },
+  { q: "Apa perbedaan dukungan pada setiap paket?",
+    a: "Paket Growth mendapatkan dukungan prioritas, sedangkan Enterprise mendapatkan tingkat prioritas tertinggi. Paket Starter tetap mendapatkan dukungan standar selama penggunaan layanan." },
   { q: "Bagaimana cara mulai menggunakan Dynicty?",
-    a: "Silakan hubungi tim kami melalui halaman kontak untuk informasi paket dan proses onboarding lebih lanjut." },
+    a: "Mulai dengan memilih paket lalu konsultasikan kebutuhan Anda. Tim Dynicty akan membantu setup awal dan pengecekan hingga toko siap go live; aktivasi bukan proses self-service instan." },
 ];
 
 const faqJsonLd = {

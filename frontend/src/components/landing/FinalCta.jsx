@@ -33,7 +33,7 @@ const FinalCta = () => {
               Saatnya punya <span className="underline decoration-white/50 decoration-2 underline-offset-[8px]">rumah brand Anda sendiri.</span>
             </h2>
             <p className="mt-5 text-white/90 max-w-2xl mx-auto text-[16px] leading-relaxed">
-              Marketplace membantu Anda ditemukan. Dynicty membantu brand Anda dimiliki. Pelajari lebih lanjut tentang paket yang paling cocok untuk bisnis Anda.
+              Ceritakan kebutuhan bisnis Anda. Tim Dynicty akan membantu memilih paket dan mendampingi proses setup sampai toko siap online.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
               <CtaLink to={ctaHref({ source: "final-cta" })}>
@@ -42,19 +42,19 @@ const FinalCta = () => {
                   data-testid={FINAL_CTA.cta}
                   className="bg-white text-[#0A0B1F] hover:bg-white/95 h-12 px-7 rounded-xl font-semibold shadow-[0_12px_30px_-10px_rgba(0,0,0,0.5)]"
                 >
-                  Hubungi Kami
+                  Konsultasi Gratis
                   <ArrowRight className="h-4 w-4 ml-2" />
                 </Button>
               </CtaLink>
               <a
-                href="#cara-kerja"
+                href="#onboarding"
                 onClick={(e) => {
                   e.preventDefault();
-                  document.querySelector("#cara-kerja")?.scrollIntoView({ behavior: "smooth" });
+                  document.querySelector("#onboarding")?.scrollIntoView({ behavior: "smooth" });
                 }}
                 className="text-white hover:text-white/95 text-[14px] font-medium underline underline-offset-[6px] decoration-white/40 hover:decoration-white/80"
               >
-                Pelajari Cara Kerja →
+                Lihat Proses Onboarding →
               </a>
             </div>
           </div>

@@ -6,6 +6,7 @@ import Problems from "@/components/landing/Problems";
 import Paradigm from "@/components/landing/Paradigm";
 import Solution from "@/components/landing/Solution";
 import HowItWorks from "@/components/landing/HowItWorks";
+import Onboarding from "@/components/landing/Onboarding";
 import TemplateShowcase from "@/components/landing/TemplateShowcase";
 import Features from "@/components/landing/Features";
 import Compare from "@/components/landing/Compare";
@@ -28,6 +29,7 @@ export default function LandingPage() {
         <Paradigm />
         <Solution />
         <HowItWorks />
+        <Onboarding />
         <TemplateShowcase />
         <Features />
         <Compare />

@@ -39,7 +39,7 @@ const FloatingWhatsApp = ({ message }) => {
       target="_blank"
       rel="noopener noreferrer"
       data-testid="floating-whatsapp-button"
-      aria-label="Chat via WhatsApp"
+      aria-label="Konsultasi gratis via WhatsApp"
       className={[
         "fixed bottom-6 right-6 z-50 group",
         "inline-flex items-center gap-2.5 pl-3.5 pr-4 py-3 rounded-full",
@@ -61,7 +61,7 @@ const FloatingWhatsApp = ({ message }) => {
         <span className="absolute inline-flex h-full w-full rounded-full bg-white/25 opacity-70 animate-ping" />
         <MessageCircle className="relative h-4 w-4" strokeWidth={2.5} />
       </span>
-      <span className="text-sm font-semibold tracking-tight">Chat WhatsApp</span>
+      <span className="hidden sm:inline text-sm font-semibold tracking-tight">Konsultasi via WhatsApp</span>
     </a>
   );
 };
