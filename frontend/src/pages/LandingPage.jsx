@@ -10,6 +10,8 @@ import TemplateShowcase from "@/components/landing/TemplateShowcase";
 import Features from "@/components/landing/Features";
 import Compare from "@/components/landing/Compare";
 import Pricing from "@/components/landing/Pricing";
+import AddOns from "@/components/landing/AddOns";
+import CustomWebApp from "@/components/landing/CustomWebApp";
 import Faq from "@/components/landing/Faq";
 import FinalCta from "@/components/landing/FinalCta";
 import Footer from "@/components/landing/Footer";
@@ -30,6 +32,8 @@ export default function LandingPage() {
         <Features />
         <Compare />
         <Pricing />
+        <AddOns />
+        <CustomWebApp />
         <Faq />
         <FinalCta />
       </main>

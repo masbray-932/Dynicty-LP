@@ -38,6 +38,15 @@ export const PRICING = {
   card: "pricing-plan-card",
   cta: "pricing-plan-cta",
 };
+export const ADDONS = {
+  section: "addons-section",
+  card: "addon-card",
+  cta: "addon-cta",
+};
+export const CUSTOM_WEB = {
+  section: "custom-web-app-section",
+  cta: "custom-web-app-cta",
+};
 export const FAQ = { section: "faq-section", item: "faq-item" };
 export const FINAL_CTA = { section: "final-cta-section", cta: "final-cta-contact" };
 export const FOOTER = { root: "site-footer" };

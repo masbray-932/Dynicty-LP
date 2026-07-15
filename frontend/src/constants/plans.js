@@ -100,61 +100,176 @@ export function minPlanForCard(card) {
   return max;
 }
 
-// Pricing cards (Opsi B — Segera Diumumkan) — locked per PRD v2.1 section 20.3
+// Pricing cards — Go Live v1.0 (paket resmi Dynicty).
+// Setiap paket menyertakan waMessage untuk CTA WhatsApp yang paket-aware.
 export const PRICING_PLANS = [
   {
     key: PLAN_KEYS.STARTER,
     name: "Starter",
-    tagline: "Untuk UMKM yang baru mulai memiliki toko sendiri.",
-    priceDisplay: "Segera Diumumkan",
-    ctaLabel: "Pelajari Paket",
+    tagline: "Cocok untuk UMKM yang baru memulai toko online.",
+    priceDisplay: "Rp 599.000",
+    pricePeriod: "/ tahun",
+    ctaLabel: "Mulai Sekarang",
     highlighted: false,
     features: [
-      "Dashboard toko",
-      "Kelola kategori dan produk",
+      "Website toko online",
+      "Subdomain Dynicty",
+      "Kelola produk",
+      "Kelola kategori",
       "Kelola pesanan",
       "Kelola pelanggan",
-      "Pengaturan toko dan langganan",
-      "Laporan penjualan dasar",
-      "Banner promosi di storefront",
-      "Pengaturan pengiriman dasar (manual)",
-      "Pilihan template yang tersedia",
+      "SEO dasar",
+      "Payment Gateway",
+      "Shipping dasar",
+      "Mobile responsive",
     ],
+    waMessage:
+      "Halo Admin Dynicty,\n\nSaya tertarik dengan paket Starter Dynicty.\n\nMohon informasi lebih lanjut.",
   },
   {
     key: PLAN_KEYS.GROWTH,
     name: "Growth",
-    tagline: "Untuk brand yang membutuhkan pembayaran online, promosi, branding, dan laporan lebih lengkap.",
-    priceDisplay: "Segera Diumumkan",
-    ctaLabel: "Pelajari Paket",
-    highlighted: false, // per PRD v2.1: badge Popular OFF for v1
+    tagline:
+      "Untuk bisnis yang sedang berkembang dan membutuhkan identitas brand sendiri.",
+    priceDisplay: "Rp 1.199.000",
+    pricePeriod: "/ tahun",
+    ctaLabel: "Mulai Sekarang",
+    highlighted: true, // paket paling populer di antara ketiganya
     features: [
       "Semua fitur Starter",
-      "Voucher & kode promo",
-      "Popup banner promosi",
-      "Laporan penjualan lanjutan",
-      "Pembayaran online (Midtrans)",
-      "Kustomisasi branding lebih lengkap",
-      "Optimasi SEO platform",
+      "Custom Domain Support",
+      "Advanced Reports",
+      "Export Excel",
+      "Browser Notification",
+      "Prioritas Support",
     ],
+    notes: "Custom domain didukung. Biaya domain ditanggung pelanggan.",
+    waMessage:
+      "Halo Admin Dynicty,\n\nSaya tertarik dengan paket Growth Dynicty.\n\nMohon informasi lebih lanjut.",
   },
   {
     key: PLAN_KEYS.ENTERPRISE,
     name: "Enterprise",
-    tagline: "Untuk bisnis dengan kebutuhan integrasi, tim, dan operasional lanjutan.",
-    priceDisplay: "Hubungi Kami",
-    ctaLabel: "Hubungi Tim Dynicty",
+    tagline:
+      "Solusi lengkap untuk bisnis yang membutuhkan fitur premium dan operasional lebih besar.",
+    priceDisplay: "Rp 2.399.000",
+    pricePeriod: "/ tahun",
+    ctaLabel: "Mulai Sekarang",
     highlighted: false,
     features: [
       "Semua fitur Growth",
-      "Integrasi Jubelio",
-      "Integrasi marketplace",
-      "Akses API",
-      "Multi Admin (banyak pengguna)",
-      "Dukungan prioritas",
+      "Gratis Domain .COM/.ID Tahun Pertama",
+      "Multi Admin",
+      "PWA Push Notification",
+      "Prioritas Support Tertinggi",
+      "Early Access Features",
     ],
+    waMessage:
+      "Halo Admin Dynicty,\n\nSaya tertarik dengan paket Enterprise Dynicty.\n\nMohon informasi lebih lanjut.",
   },
 ];
+
+// -----------------------------------------------------------------------------
+// Add-On Premium — fitur tambahan opsional (Go Live v1.0)
+// -----------------------------------------------------------------------------
+export const ADDON_ITEMS = [
+  {
+    key: "jubelio-shipping",
+    name: "Jubelio Shipping Integration",
+    priceDisplay: "Rp 999.000",
+    pricePeriod: "/ tahun",
+    features: [
+      "Auto cek ongkir",
+      "Auto generate AWB",
+      "Tracking otomatis",
+      "Cancel AWB",
+      "Multi courier",
+    ],
+    ctaLabel: "Hubungi Kami",
+    waMessage:
+      "Halo Admin Dynicty,\n\nSaya tertarik dengan add-on Jubelio Shipping Integration.\n\nMohon informasi lebih lanjut.",
+  },
+  {
+    key: "whatsapp-notification",
+    name: "WhatsApp Notification",
+    priceDisplay: "Rp 99.000",
+    pricePeriod: "/ bulan",
+    features: [
+      "Order masuk",
+      "Pembayaran berhasil",
+      "Pesanan dikirim",
+    ],
+    ctaLabel: "Hubungi Kami",
+    waMessage:
+      "Halo Admin Dynicty,\n\nSaya tertarik dengan add-on WhatsApp Notification.\n\nMohon informasi lebih lanjut.",
+  },
+  {
+    key: "customer-chat",
+    name: "Customer Chat",
+    priceDisplay: "Rp 99.000",
+    pricePeriod: "/ bulan",
+    features: [
+      "Chat Customer ↔ Seller",
+      "Riwayat percakapan",
+      "Notifikasi pesan baru",
+    ],
+    ctaLabel: "Hubungi Kami",
+    waMessage:
+      "Halo Admin Dynicty,\n\nSaya tertarik dengan add-on Customer Chat.\n\nMohon informasi lebih lanjut.",
+  },
+  {
+    key: "loyalty-point",
+    name: "Loyalty Point",
+    priceDisplay: "Rp 49.000",
+    pricePeriod: "/ bulan",
+    features: [
+      "Point pelanggan",
+      "Reward pembelian",
+      "Program loyalitas",
+    ],
+    ctaLabel: "Hubungi Kami",
+    waMessage:
+      "Halo Admin Dynicty,\n\nSaya tertarik dengan add-on Loyalty Point.\n\nMohon informasi lebih lanjut.",
+  },
+  {
+    key: "membership-tier",
+    name: "Membership Tier",
+    priceDisplay: "Rp 49.000",
+    pricePeriod: "/ bulan",
+    features: [
+      "Silver",
+      "Gold",
+      "Platinum",
+      "Benefit pelanggan",
+    ],
+    ctaLabel: "Hubungi Kami",
+    waMessage:
+      "Halo Admin Dynicty,\n\nSaya tertarik dengan add-on Membership Tier.\n\nMohon informasi lebih lanjut.",
+  },
+];
+
+// -----------------------------------------------------------------------------
+// Custom Web App — solusi custom, priced on request.
+// -----------------------------------------------------------------------------
+export const CUSTOM_WEB_APP = {
+  title: "Custom Web App",
+  priceDisplay: "Hubungi Kami",
+  description:
+    "Kami membantu membangun solusi digital custom seperti Marketplace, ERP, CRM, HRIS, Booking System, hingga Mobile App Android/iOS sesuai kebutuhan bisnis Anda.",
+  bullets: [
+    "Marketplace",
+    "ERP",
+    "CRM",
+    "HRIS",
+    "Booking System",
+    "Mobile App Android/iOS",
+    "Sistem Internal Perusahaan",
+    "Solusi Custom Sesuai Kebutuhan",
+  ],
+  ctaLabel: "Hubungi Kami",
+  waMessage:
+    "Halo Admin Dynicty,\n\nSaya tertarik membuat aplikasi atau sistem custom.\n\nBisakah saya berkonsultasi lebih lanjut mengenai kebutuhan proyek saya?",
+};
 
 // Templates — only Sinar Telur is published. Rest = Segera Hadir.
 export const TEMPLATES_LIST = [
