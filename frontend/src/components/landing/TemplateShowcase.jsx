@@ -43,10 +43,12 @@ const TemplateCard = ({ t, delay }) => {
       ref={r.ref}
       style={r.style}
       data-testid={TEMPLATES.card}
-      className={`${r.className} dyn-card group overflow-hidden`}
+      className={`${r.className} dyn-template-card group overflow-hidden`}
     >
-      <div className="relative aspect-[16/10] overflow-hidden">
-        <StorefrontIllustration accent={t.accent} />
+      <div className="relative aspect-[16/10] overflow-hidden bg-[hsl(var(--dyn-bg-0))]">
+        <div className="absolute inset-0 transition-transform duration-500 ease-out group-hover:scale-[1.025]">
+          <StorefrontIllustration accent={t.accent} />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--dyn-bg-1))] via-transparent to-transparent" />
         <span className="absolute top-3 left-3 rounded-full bg-black/40 backdrop-blur border border-white/15 text-[10px] uppercase tracking-widest px-2 py-1 text-white/85">
           {t.category}
@@ -58,10 +60,10 @@ const TemplateCard = ({ t, delay }) => {
           </span>
         )}
       </div>
-      <div className="flex items-center justify-between px-4 py-3.5">
+      <div className="flex min-h-[76px] items-center justify-between gap-3 px-5 py-4">
         <div>
-          <div className="font-semibold text-white text-sm">{t.name}</div>
-          <div className="text-xs text-white/50">{available ? "Tersedia" : "Belum tersedia"}</div>
+          <div className="font-semibold text-white text-[15px]">{t.name}</div>
+          <div className="mt-1 text-xs text-white/50">{available ? "Tersedia" : "Belum tersedia"}</div>
         </div>
         {available ? (
           <Link to="/kontak?src=template">
@@ -69,7 +71,7 @@ const TemplateCard = ({ t, delay }) => {
               size="sm"
               variant="outline"
               data-testid={TEMPLATES.preview}
-              className="h-8 bg-white/5 border-white/15 text-white hover:bg-white/10 hover:text-white"
+              className="h-9 rounded-lg bg-white/5 border-white/15 text-white hover:bg-white/10 hover:text-white"
             >
               Tanyakan Template
               <MessageCircle className="h-3.5 w-3.5 ml-1" />
@@ -95,7 +97,7 @@ const TemplateShowcase = () => {
     <section
       id="template"
       data-testid={TEMPLATES.section}
-      className="relative bg-[hsl(var(--dyn-bg-1))] dyn-section"
+      className="relative bg-[hsl(var(--dyn-bg-1))] dyn-section dyn-section-divider"
     >
       <div className="dyn-container">
         <div className="max-w-2xl">
@@ -108,7 +110,7 @@ const TemplateShowcase = () => {
           </p>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5">
           {TEMPLATES_LIST.map((t, i) => (
             <TemplateCard key={t.name} t={t} delay={(i % 3) * 60} />
           ))}

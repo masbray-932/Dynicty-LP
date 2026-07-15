@@ -30,31 +30,31 @@ const PlanCard = ({ plan, delay }) => {
       data-plan={plan.key}
       className={[
         r.className,
-        "dyn-card p-7 flex flex-col relative",
+        "dyn-pricing-card p-6 sm:p-7 flex flex-col relative overflow-hidden",
         plan.highlighted
-          ? "ring-1 ring-inset ring-[hsl(var(--dyn-brand-mid))]/30 shadow-[0_20px_60px_-20px_rgba(109,94,247,0.45)]"
+          ? "dyn-pricing-card-featured lg:-translate-y-3"
           : "",
       ].join(" ")}
     >
       {plan.highlighted ? (
         <span
           data-testid="pricing-popular-badge"
-          className="absolute -top-3 left-1/2 -translate-x-1/2 inline-flex items-center gap-1 px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-[0.14em] dyn-brand-gradient-bg text-white shadow-[0_8px_24px_-8px_rgba(109,94,247,0.65)]"
+          className="absolute top-0 right-0 inline-flex items-center gap-1.5 rounded-bl-xl px-3.5 py-2 text-[10px] font-semibold uppercase tracking-[0.14em] dyn-brand-gradient-bg text-white shadow-[0_8px_24px_-8px_rgba(109,94,247,0.65)]"
         >
           <Sparkles className="h-3 w-3" />
           Paling Populer
         </span>
       ) : null}
 
-      <div className="flex items-center justify-between">
-        <h3 className="text-xl font-semibold text-white tracking-tight">
+      <div className="flex min-h-7 items-center justify-between pr-24">
+        <h3 className="text-[19px] font-semibold text-white tracking-tight">
           {plan.name}
         </h3>
       </div>
 
-      <div className="mt-4 flex items-baseline gap-1.5 flex-wrap">
+      <div className="mt-5 flex items-baseline gap-1.5 flex-wrap">
         <span
-          className="text-[26px] sm:text-[30px] font-semibold text-white tracking-tight"
+          className="text-[29px] sm:text-[32px] font-semibold text-white tracking-[-0.035em]"
           data-testid="pricing-plan-price"
         >
           {plan.priceDisplay}
@@ -63,11 +63,11 @@ const PlanCard = ({ plan, delay }) => {
           <span className="text-[13px] text-white/55">{plan.pricePeriod}</span>
         ) : null}
       </div>
-      <p className="mt-2 text-[14px] dyn-body">{plan.tagline}</p>
+      <p className="mt-2 min-h-12 text-[13.5px] dyn-body">{plan.tagline}</p>
 
-      <div className="mt-5 h-px w-full bg-gradient-to-r from-transparent via-white/12 to-transparent" />
+      <div className="mt-5 h-px w-full bg-gradient-to-r from-transparent via-white/15 to-transparent" />
 
-      <ul className="mt-5 space-y-3 flex-1">
+      <ul className="mt-5 space-y-3.5 flex-1">
         {plan.features.map((f) => (
           <li
             key={f}
@@ -87,11 +87,11 @@ const PlanCard = ({ plan, delay }) => {
         </p>
       ) : null}
 
-      <CtaLink to={href} className="mt-7 block">
+      <CtaLink to={href} className="mt-7 block rounded-xl">
         <Button
           data-testid={PRICING.cta}
           className={[
-            "h-11 w-full text-[13.5px] rounded-xl",
+            "h-12 w-full text-[13.5px] rounded-xl font-semibold",
             plan.highlighted ? "dyn-cta-primary" : "dyn-cta-primary",
           ].join(" ")}
         >
@@ -107,8 +107,9 @@ const Pricing = () => {
     <section
       id="harga"
       data-testid={PRICING.section}
-      className="relative bg-[hsl(var(--dyn-bg-0))] dyn-section"
+      className="relative overflow-hidden bg-[hsl(var(--dyn-bg-0))] dyn-section dyn-section-divider"
     >
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-1/4 mx-auto h-[420px] max-w-5xl bg-[radial-gradient(ellipse_at_center,rgba(109,94,247,0.12),transparent_68%)]" />
       <div className="dyn-container">
         <div className="text-center max-w-2xl mx-auto">
           <div className="dyn-eyebrow">Harga</div>
@@ -122,7 +123,7 @@ const Pricing = () => {
           </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6 items-stretch">
+        <div className="relative mt-12 sm:mt-14 grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-5 items-stretch lg:pt-3">
           {PRICING_PLANS.map((plan, i) => (
             <PlanCard key={plan.key} plan={plan} delay={i * 80} />
           ))}

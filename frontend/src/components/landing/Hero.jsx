@@ -48,13 +48,13 @@ const Hero = () => {
         style={{ background: "radial-gradient(closest-side, rgba(109,94,247,0.35), rgba(109,94,247,0))" }}
       />
 
-      <div className="dyn-container relative pt-16 pb-24 lg:pt-28 lg:pb-36">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-10 items-center">
-          <div className="lg:col-span-6">
+      <div className="dyn-container relative pt-14 pb-16 sm:pt-20 sm:pb-20 lg:pt-24 lg:pb-24">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 xl:gap-12 items-center">
+          <div className="lg:col-span-6 xl:col-span-7">
             <div
               ref={r1.ref}
               style={r1.style}
-              className={`${r1.className} inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 text-[11px] uppercase tracking-[0.22em] backdrop-blur`}
+              className={`${r1.className} inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.045] px-3.5 py-1.5 text-[10px] sm:text-[11px] uppercase tracking-[0.2em] sm:tracking-[0.22em] backdrop-blur`}
             >
               <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-br from-blue-400 to-purple-400 shadow-[0_0_10px_rgba(139,92,246,0.7)]" />
               <span className="dyn-aurora font-medium">BUILD • GROW • EMPOWER</span>
@@ -64,7 +64,7 @@ const Hero = () => {
               ref={r2.ref}
               style={r2.style}
               data-testid={HERO.headline}
-              className={`${r2.className} mt-6 text-[42px] sm:text-6xl lg:text-[68px] font-semibold tracking-tight leading-[1.02]`}
+              className={`${r2.className} mt-6 max-w-[760px] text-[42px] sm:text-[58px] lg:text-[60px] xl:text-[68px] font-semibold tracking-[-0.035em] leading-[1.02]`}
             >
               <span className="dyn-text-gradient">Punya toko sendiri.</span>
               <br />
@@ -76,7 +76,7 @@ const Hero = () => {
             <p
               ref={r3.ref}
               style={r3.style}
-              className={`${r3.className} mt-6 text-[17px] sm:text-lg dyn-body max-w-xl`}
+              className={`${r3.className} mt-6 text-[16px] sm:text-[18px] dyn-body max-w-[620px]`}
             >
               Dynicty membantu UMKM dan seller marketplace membangun toko online
               profesional dengan branding sendiri — tanpa perlu memahami coding
@@ -86,13 +86,13 @@ const Hero = () => {
             <div
               ref={r4.ref}
               style={r4.style}
-              className={`${r4.className} mt-9 flex flex-col sm:flex-row items-stretch sm:items-center gap-3`}
+              className={`${r4.className} mt-8 sm:mt-9 flex flex-col sm:flex-row items-stretch sm:items-center gap-3`}
             >
               <CtaLink to={ctaHref({ source: "hero-primary" })}>
                 <Button
                   size="lg"
                   data-testid={HERO.primaryCta}
-                  className="dyn-cta-primary h-12 w-full sm:w-auto px-7 text-[14.5px] rounded-xl"
+                  className="dyn-cta-primary h-[50px] w-full sm:w-auto px-7 text-[14.5px] rounded-xl"
                 >
                   <MessageCircle className="h-4 w-4 mr-2" />
                   Konsultasi Gratis
@@ -104,14 +104,16 @@ const Hero = () => {
                 variant="ghost"
                 data-testid={HERO.secondaryCta}
                 onClick={() => scrollTo("#template")}
-                className="dyn-cta-secondary h-12 px-6 text-[14.5px] rounded-xl hover:text-white"
+                className="dyn-cta-secondary h-[50px] px-6 text-[14.5px] rounded-xl hover:text-white"
               >
                 <Store className="h-4 w-4 mr-2" />
                 Lihat Contoh Tampilan
               </Button>
             </div>
 
-            <div className="mt-7 text-[13px] text-white/55">
+            <div className="mt-6 flex items-start gap-2 text-[13px] leading-relaxed text-white/55">
+              <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.65)]" aria-hidden="true" />
+              <span>
               Tim Dynicty mendampingi dari pemilihan paket hingga toko siap online.{" "}
               <button
                 type="button"
@@ -120,13 +122,14 @@ const Hero = () => {
               >
                 Lihat proses onboarding
               </button>.
+              </span>
             </div>
           </div>
 
           <div
             ref={r5.ref}
             style={r5.style}
-            className={`${r5.className} lg:col-span-6 relative`}
+            className={`${r5.className} lg:col-span-6 xl:col-span-5 relative lg:translate-x-2`}
           >
             <div className="dyn-mockup-frame">
               <div className="dyn-mockup-glow" aria-hidden />

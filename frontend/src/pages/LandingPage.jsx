@@ -2,6 +2,7 @@ import React from "react";
 import SEO from "@/components/seo/SEO";
 import Navbar from "@/components/landing/Navbar";
 import Hero from "@/components/landing/Hero";
+import TrustCapabilities from "@/components/landing/TrustCapabilities";
 import Problems from "@/components/landing/Problems";
 import Paradigm from "@/components/landing/Paradigm";
 import Solution from "@/components/landing/Solution";
@@ -25,6 +26,7 @@ export default function LandingPage() {
       <Navbar />
       <main>
         <Hero />
+        <TrustCapabilities />
         <Problems />
         <Paradigm />
         <Solution />
