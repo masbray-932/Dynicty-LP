@@ -1,4 +1,4 @@
-# plan.md — DYNICTY Landing Page Repositioning v2.1 + SEO Foundation v1 + Landing Page Settings API Integration (Part B) (Updated)
+# plan.md — DYNICTY Landing Page Repositioning v2.1 + SEO Foundation v1 + Landing Page Settings API Integration (Part B) + Pricing Go Live v1.0 (Updated)
 
 ## 1) Objectives
 - Membuat landing page resmi **dynicty.com** (public) untuk konversi lead **UMKM & seller marketplace** (Shopee/TikTok/Tokopedia/Instagram/Facebook/WhatsApp), sepenuhnya **Bahasa Indonesia**, modern-premium.
@@ -11,27 +11,27 @@
   - Filosofi: **“Marketplace membantu Anda ditemukan. Dynicty membantu brand Anda dimiliki.”**
 - Kepatuhan brand: gunakan **HANYA** logo resmi Dynicty yang di-upload (tanpa redraw/rekayasa), termasuk favicon dan social preview.
 - Kepatuhan privacy: **tidak mengekspos** Platform Owner Portal di landing (tidak ada login/public route, tidak ada dashboard mockup).
-- CTA strategy v1:
-  - Default v2.1: semua CTA → **/kontak**.
-  - **Update (baru):** CTA dapat diarahkan oleh Platform Owner melalui **Landing Page Settings API** (mis. ke WhatsApp) tanpa deploy ulang.
-- Pricing v1: **tidak hardcode** angka harga. Tampilkan “Segera Diumumkan” (TBA).
+- CTA strategy:
+  - Default: semua CTA dapat fallback ke **/kontak**.
+  - **Update:** CTA dapat diarahkan oleh Platform Owner melalui **Landing Page Settings API** (mis. ke WhatsApp) tanpa deploy ulang.
+- **Pricing Go Live v1.0 (baru, DONE):** mengganti placeholder/TBA menjadi **harga resmi** + add-on premium + custom web app.
 - Template v1: hanya template yang benar-benar published dipasarkan. Saat ini **hanya “Sinar Telur”** = tersedia; 8 kategori lain **Segera Hadir**.
 - Feature marketing harus sesuai **Feature Package Matrix existing**.
 - Performance & quality: fast-loading, responsive, accessible; **tanpa framer-motion** (gunakan CSS + IntersectionObserver native).
 - **SEO Foundation v1 (DONE):** fondasi SEO production-ready untuk landing page.
-- **Landing Page Settings API Integration (Part B) (baru, DONE):** Landing Page menjadi consumer endpoint publik agar **kontak + SEO homepage + verification tags** dapat dikontrol Platform Owner **tanpa coding**.
+- **Landing Page Settings API Integration (Part B) (DONE):** Landing Page menjadi consumer endpoint publik agar **kontak + SEO homepage + verification tags** dapat dikontrol Platform Owner **tanpa coding**.
 
-**Status Objective (per sprint v2.1 + SEO v1 + Settings API Part B):**
+**Status Objective (per sprint v2.1 + SEO v1 + Settings API Part B + Pricing Go Live v1.0):**
 - ✅ Landing page v2.1 selesai dan production-ready (13 section + /kontak + /privacy + /terms + 404).
 - ✅ Copywriting & positioning sesuai PRD v2.1 (tanpa jargon teknis; tanpa klaim fiktif).
 - ✅ Contact form functional (POST /api/leads/contact), tersimpan ke MongoDB.
-- ✅ Pricing “Segera Diumumkan” (tanpa angka).
 - ✅ Template compliance: hanya “Sinar Telur” preview aktif; lainnya “Segera Hadir”.
 - ✅ Brand assets: **logo horizontal resmi sudah terpasang** untuk Navbar/Mobile Drawer/Footer.
 - ✅ **SEO Foundation v1 DONE:** dynamic title/description/OG/Twitter/canonical/robots/sitemap/manifest + structured data lengkap.
 - ✅ **Landing Page Settings API Integration (Part B) DONE:** Landing Page mengkonsumsi `GET https://app.dynicty.com/api/public/landing-page-settings` dengan fallback aman.
+- ✅ **Pricing Go Live v1.0 DONE:** paket Starter/Growth/Enterprise dengan harga resmi + Add-On Premium + Custom Web App.
 - ✅ `CI=true yarn build` PASS.
-- ✅ testing_agent_v3: 100% pass (SEO Foundation v1 17/17, Settings API Part B 34/34).
+- ✅ testing_agent_v3: 100% pass (SEO Foundation v1 17/17, Settings API Part B 34/34, Pricing Go Live v1.0 25/25).
 
 ---
 
@@ -43,7 +43,7 @@
 **Deliverables (DONE):**
 - PRD v2.1 final: positioning UMKM+seller marketplace, hero locked, scope v1 = 13 section.
 - Audit klaim & fitur: hapus semua angka/testimoni fiktif, “Coba Gratis”, “Login”, dan semua platform-owner exposure.
-- Pricing rules: “Segera Diumumkan”, tanpa endpoint pricing publik.
+- Pricing rules awal: “Segera Diumumkan”, tanpa endpoint pricing publik.
 
 **Status:** ✅ Selesai.
 
@@ -168,9 +168,9 @@
   - verification tags: google/bing/facebook (render hanya jika value tersedia)
   - keywords (meta) render bila API mengirim array keywords
 - Contact:
-  - `Navbar.jsx` CTA berubah menjadi WA-aware (label “Chat WhatsApp” bila WA tersedia)
+  - `Navbar.jsx` CTA menjadi WA-aware (label “Chat WhatsApp” bila WA tersedia)
   - `Hero.jsx` inline CTA menggunakan WA-aware link
-  - `Pricing.jsx` & `FinalCta.jsx` CTA menjadi WA-aware (paket-aware message)
+  - `Pricing.jsx` & `FinalCta.jsx` CTA menjadi WA-aware
   - `Footer.jsx` menampilkan WA/email/address dari API (dengan fallback)
   - `ContactPage.jsx` menampilkan “Hubungi langsung” block dari API
   - `LandingPage.jsx` mount `FloatingWhatsApp`
@@ -178,6 +178,7 @@
 #### 4.4 Environment (DONE)
 - `.env`:
   - ✅ Tambah `REACT_APP_PLATFORM_API_URL=https://app.dynicty.com`
+  - ✅ Add `CHOKIDAR_USEPOLLING=true` + `WATCHPACK_POLLING=true` untuk mitigasi issue `ENOSPC` file watchers pada environment dev server.
   - Catatan: preview env dapat terkena CORS (expected) → fallback wajib.
 
 #### 4.5 Testing & Verification (DONE)
@@ -188,21 +189,74 @@
   - MOBILE behavior (floating WA)
   - CACHE behavior (sessionStorage)
   - SEO rules: home override, non-home titles tetap unique, 404 noindex
-- ✅ Screenshots diambil:
-  - Fallback (CORS) state
-  - API success state (mock)
-  - Mobile floating WA
 
 **Status:** ✅ Selesai — Landing Page kini menjadi consumer settings API tanpa backend changes.
 
 ---
 
-### Phase 5 — Phase 2 Features (Deferred / Pending Prioritization)
+### Phase 5 — Pricing Go Live v1.0 — **COMPLETED**
+> Mengganti pricing placeholder “Segera Diumumkan” menjadi paket resmi Dynicty, menambah Add-On Premium, serta menambah card Custom Web App. Tanpa redesign besar (preserve UI/UX), tetap responsif, dan seluruh CTA terintegrasi dengan WhatsApp Settings API (tanpa hardcode nomor).
+
+#### 5.1 Package Pricing (DONE)
+- Paket:
+  - **Starter:** Rp 599.000 / tahun
+  - **Growth:** Rp 1.199.000 / tahun (**Paling Populer**) + notes custom domain
+  - **Enterprise:** Rp 2.399.000 / tahun
+- CTA paket: “Mulai Sekarang”
+- WhatsApp message paket-specific:
+  - Setiap paket punya `waMessage` dan di-encode via `encodeURIComponent`
+
+#### 5.2 Add-On Premium Section (DONE)
+- Section baru: **Add-On Premium** (di bawah Pricing)
+- 5 kartu add-on:
+  - Jubelio Shipping Integration — Rp 999.000 / tahun
+  - WhatsApp Notification — Rp 99.000 / bulan
+  - Customer Chat — Rp 99.000 / bulan
+  - Loyalty Point — Rp 49.000 / bulan
+  - Membership Tier — Rp 49.000 / bulan
+- CTA add-on: “Hubungi Kami” (WA jika tersedia, fallback `/kontak?paket=...&src=addon`)
+
+#### 5.3 Custom Web App (DONE)
+- Card/section terpisah setelah Add-Ons:
+  - Title: “Custom Web App”
+  - Price: “Hubungi Kami”
+  - 8 bullets solusi (Marketplace, ERP, CRM, HRIS, Booking System, Mobile App Android/iOS, Sistem Internal Perusahaan, Solusi Custom)
+- WhatsApp message custom project-specific
+
+#### 5.4 Implementation Notes (DONE)
+- **No hardcoded phone numbers** — semua CTA memakai `Landing Page Settings API` (whatsapp_number).
+- Fallback aman jika API gagal/CORS:
+  - `/kontak?paket=Starter&src=pricing` dst.
+  - add-ons: `/kontak?paket=...&src=addon`
+  - custom: `/kontak?paket=Custom+Web+App&src=custom-web-app`
+- UI preserved + responsive:
+  - Desktop: pricing 3-col, add-ons 3-col
+  - Mobile: cards stack 1-col
+
+#### 5.5 Known Issue (Low Priority)
+- Testing agent menemukan 1 issue kosmetik: **transient scroll-in reveal offset** (Starter card sesaat terlihat lebih rendah ~228px dibanding Growth/Enterprise). Tidak mempengaruhi final layout/CTA.
+
+#### 5.6 Testing & Verification (DONE)
+- ✅ `CI=true yarn build` PASS
+- ✅ testing_agent_v3 **100% PASS (25/25)**
+- ✅ Screenshot coverage:
+  - Pricing (desktop)
+  - Add-ons (desktop)
+  - Custom Web App (desktop)
+  - Mobile pricing/add-ons/custom
+
+**Status:** ✅ Selesai — Pricing resmi Dynicty siap Go Live.
+
+---
+
+### Phase 6 — Phase 2 Features (Deferred / Pending Prioritization)
 **Belum dikerjakan (menunggu prioritas user):**
 - Kalkulator Penghematan (interactive) (P1)
 - Newsletter: UI + integrasi endpoint (P2)
 - Blog section (P2)
-- Dynamic Pricing via `GET /api/public/pricing` (P2) — menggantikan “Segera Diumumkan” saat harga resmi tersedia
+- Dynamic Pricing via `GET /api/public/pricing` (P2) — **catatan:** kebutuhan ini kini berubah karena pricing sudah go-live secara statis di landing. Jika ingin pricing dikelola platform tanpa deploy ulang, pertimbangkan:
+  - (a) menambah field pricing ke `landing-page-settings` API, atau
+  - (b) mengaktifkan endpoint pricing publik terpisah.
 - Customer stories/testimoni nyata (P1) — menunggu data + izin
 - Platform SEO Settings API v2 (P2) — jika ingin mengganti sebagian `seo.js` statis menjadi full-dynamic di semua page (saat ini homepage sudah bisa di-override via landing-page-settings)
 
@@ -214,14 +268,15 @@
 1. ✅ Navbar logo horizontal sudah beres dan tervalidasi screenshot.
 2. ✅ SEO Foundation v1 selesai dan tervalidasi (testing_agent_v3 100%).
 3. ✅ Landing Page Settings API Integration (Part B) selesai dan tervalidasi (testing_agent_v3 34/34).
-4. Tentukan prioritas Phase 5 (pilih 1):
+4. ✅ Pricing Go Live v1.0 selesai dan tervalidasi (testing_agent_v3 25/25).
+5. Tentukan prioritas Phase 6 (pilih 1):
    - **P1:** Kalkulator Penghematan (value proof tercepat)
    - **P2:** Newsletter UI + integrasi endpoint
    - **P2:** Blog section
-   - **P2:** Dynamic Pricing endpoint + UI (butuh harga resmi)
-5. Opsional hardening:
+   - **P2:** Pricing via CMS/Platform (bila ingin harga bisa berubah tanpa deploy)
+6. Opsional hardening:
    - Tambah rate-limit server-side untuk `/api/leads/contact` (per IP) bila trafik meningkat.
-6. Jalankan quality gate setiap iterasi:
+7. Jalankan quality gate setiap iterasi:
    - ESLint
    - `CI=true yarn build`
    - testing_agent_v3
@@ -233,7 +288,11 @@
 - ✅ Landing page v2.1 sesuai PRD: positioning UMKM + seller marketplace, tanpa jargon teknis.
 - ✅ Hero copy locked + **storefront-only**.
 - ✅ Contact form berhasil POST dan tersimpan ke MongoDB.
-- ✅ Pricing: “Segera Diumumkan” (Starter/Growth) dan “Hubungi Kami” (Enterprise), tanpa hardcode angka.
+- ✅ Pricing Go Live v1.0:
+  - ✅ Starter/Growth/Enterprise tampil dengan harga resmi + period
+  - ✅ Growth punya badge “Paling Populer” + notes custom domain
+  - ✅ Add-On Premium tampil (5 kartu)
+  - ✅ Custom Web App tampil (8 bullets)
 - ✅ Template: hanya “Sinar Telur” tersedia; kategori lain “Segera Hadir”.
 - ✅ Feature section akurat mengikuti feature matrix existing + badge paket minimum.
 - ✅ Tidak ada “Coba Gratis”, tidak ada login, tidak ada exposure platform portal.
@@ -262,4 +321,5 @@
 **Quality gates:**
 - ✅ `CI=true yarn build` PASS
 - ✅ testing_agent_v3 100% PASS
-- ✅ **Navbar + mobile drawer menggunakan logo horizontal resmi yang terbaca pada tema gelap.**
+- ✅ Navbar + mobile drawer menggunakan logo horizontal resmi yang terbaca pada tema gelap.
+- ✅ Pricing Go Live v1.0 verified (desktop + mobile) dengan CTA WhatsApp dinamis dan fallback aman.
