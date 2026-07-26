@@ -271,6 +271,27 @@
             0 30px 64px -30px rgba(0, 0, 0, 0.88),
             0 0 44px -28px rgba(109, 94, 247, 0.48);
     }
+    .dyn-template-skeleton {
+        position: relative;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.055);
+    }
+    .dyn-template-skeleton::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        transform: translateX(-100%);
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.09),
+            transparent
+        );
+        animation: dyn-template-shimmer 1.5s ease-in-out infinite;
+    }
+    @keyframes dyn-template-shimmer {
+        100% { transform: translateX(100%); }
+    }
 
     .dyn-final-cta {
         box-shadow:
@@ -490,6 +511,7 @@
         .dyn-float, .dyn-float-delayed, .dyn-aurora { animation: none; }
         .dyn-mockup-frame > .dyn-mockup { transform: none; }
         .dyn-trust-item, .dyn-pricing-card, .dyn-template-card { transition: none; }
+        .dyn-template-skeleton::after { animation: none; }
         html { scroll-behavior: auto; }
     }
 
