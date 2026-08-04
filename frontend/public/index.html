@@ -27,11 +27,11 @@
         />
 
         <!--
-          NOTE: All SEO tags (title, description, canonical, og:*, twitter:*)
-          are injected at runtime by <SEO /> (react-helmet-async) driven by
-          /src/constants/seo.js. Do NOT add static tags here — Helmet will
-          not dedupe pre-existing static tags and this would cause duplicate
-          meta tags which fail SEO validation.
+          NOTE: Page SEO tags (title, description, canonical, og:*, twitter:*)
+          are injected at runtime by <SEO /> (react-helmet-async). Search-engine
+          verification tags are injected into build/index.html after the React
+          build and then kept in sync by VerificationMetaUpdater at runtime.
+          Do not add either set of tags manually here.
         -->
 
         <script>window.addEventListener("error",function(e){if(e.error instanceof DOMException&&e.error.name==="DataCloneError"&&e.message&&e.message.includes("PerformanceServerTiming")){e.stopImmediatePropagation();e.preventDefault()}},true);</script>

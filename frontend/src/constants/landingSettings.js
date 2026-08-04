@@ -1,7 +1,7 @@
 // -----------------------------------------------------------------------------
 // Landing Page Settings — static fallback + shape normalization
 // -----------------------------------------------------------------------------
-// Contract source (canonical): GET {REACT_APP_PLATFORM_API_URL}/api/public/landing-page-settings
+// Contract source (canonical): GET {REACT_APP_PLATFORM_API_BASE}/api/public/landing-page-settings
 // Documented in LANDING_PAGE_INTEGRATION_GUIDE.md (Platform Backend, out-of-repo).
 //
 // Response shape (v1):

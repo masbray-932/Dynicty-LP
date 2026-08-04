@@ -62,7 +62,9 @@
   },
   "scripts": {
     "start": "craco start",
-    "build": "craco build",
+    "build": "craco build && node scripts/inject-seo-verification.js",
+    "inject:seo-verification": "node scripts/inject-seo-verification.js",
+    "test:seo-verification": "node --test scripts/inject-seo-verification.test.js",
     "test": "craco test"
   },
   "browserslist": {

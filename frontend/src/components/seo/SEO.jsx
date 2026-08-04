@@ -10,7 +10,8 @@ import {
   breadcrumbSchema,
   SCHEMA_BUILDERS,
 } from "@/constants/seo";
-import { useSeoSettings } from "@/context/LandingPageSettingsContext";
+import { useLandingPageSettings } from "@/context/LandingPageSettingsContext";
+import VerificationMetaUpdater from "@/components/seo/VerificationMetaUpdater";
 
 /**
  * <SEO /> — Landing Page SEO renderer.
@@ -37,7 +38,8 @@ const SEO = ({
   noindex: noindexProp,
   extraJsonLd = null,
 }) => {
-  const apiSeo = useSeoSettings();
+  const { data: landingSettings, isFromApi } = useLandingPageSettings();
+  const apiSeo = landingSettings?.seo || {};
 
   const page = pageKey ? getPageSeo(pageKey) : null;
   const isHome = page?.key === "home";
@@ -106,7 +108,9 @@ const SEO = ({
       : null;
 
   return (
-    <Helmet prioritizeSeoTags>
+    <>
+      <VerificationMetaUpdater seo={apiSeo} enabled={isFromApi} />
+      <Helmet prioritizeSeoTags>
       {/* Base */}
       <html lang={SITE.language.toLowerCase()} />
       <title>{title}</title>
@@ -123,23 +127,6 @@ const SEO = ({
       <meta name="theme-color" content={SITE.themeColor} />
       <meta name="application-name" content={SITE.name} />
       <meta name="apple-mobile-web-app-title" content={SITE.name} />
-
-      {/* Search-engine verification (only if configured) */}
-      {apiSeo.google_site_verification ? (
-        <meta
-          name="google-site-verification"
-          content={apiSeo.google_site_verification}
-        />
-      ) : null}
-      {apiSeo.bing_site_verification ? (
-        <meta name="msvalidate.01" content={apiSeo.bing_site_verification} />
-      ) : null}
-      {apiSeo.facebook_domain_verification ? (
-        <meta
-          name="facebook-domain-verification"
-          content={apiSeo.facebook_domain_verification}
-        />
-      ) : null}
 
       {/* Open Graph */}
       <meta property="og:type" content="website" />
@@ -191,7 +178,8 @@ const SEO = ({
           {JSON.stringify(extraJsonLd)}
         </script>
       ) : null}
-    </Helmet>
+      </Helmet>
+    </>
   );
 };
 

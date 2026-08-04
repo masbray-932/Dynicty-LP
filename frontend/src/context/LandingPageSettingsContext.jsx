@@ -16,7 +16,8 @@ import {
 // LandingPageSettingsContext
 // -----------------------------------------------------------------------------
 // Single fetcher for GET /api/public/landing-page-settings hosted on the
-// Platform API (REACT_APP_PLATFORM_API_URL). The response controls:
+// Platform API (REACT_APP_PLATFORM_API_BASE, with the legacy
+// REACT_APP_PLATFORM_API_URL name still supported). The response controls:
 //   • Contact info (WhatsApp/email/address) surfaced on Navbar, Hero, Pricing,
 //     Footer, Contact Page, Floating WhatsApp.
 //   • SEO overrides (homepage title/description, OG/Twitter images,
@@ -39,7 +40,11 @@ const ETAG_KEY = "dynicty.landing-settings.etag.v1";
 const FETCH_TIMEOUT_MS = 5000;
 
 const PLATFORM_API_URL =
-  (process.env.REACT_APP_PLATFORM_API_URL || "").replace(/\/+$/, "") || null;
+  (
+    process.env.REACT_APP_PLATFORM_API_BASE ||
+    process.env.REACT_APP_PLATFORM_API_URL ||
+    ""
+  ).replace(/\/+$/, "") || null;
 
 const readCache = () => {
   try {
