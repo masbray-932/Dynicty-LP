@@ -66,11 +66,9 @@ const Hero = () => {
               data-testid={HERO.headline}
               className={`${r2.className} mt-6 max-w-[760px] text-[42px] sm:text-[58px] lg:text-[60px] xl:text-[68px] font-semibold tracking-[-0.035em] leading-[1.02]`}
             >
-              <span className="dyn-text-gradient">Punya toko sendiri.</span>
-              <br />
-              <span className="dyn-text-gradient">Punya brand sendiri.</span>
-              <br />
-              <span className="dyn-brand-gradient-text">Punya masa depan sendiri.</span>
+              <span className="dyn-text-gradient">Jasa Pembuatan Website</span>
+              <br />{" "}
+              <span className="dyn-brand-gradient-text">E-commerce untuk UMKM</span>
             </h1>
 
             <p
@@ -78,9 +76,8 @@ const Hero = () => {
               style={r3.style}
               className={`${r3.className} mt-6 text-[16px] sm:text-[18px] dyn-body max-w-[620px]`}
             >
-              Dynicty membantu UMKM dan seller marketplace membangun toko online
-              profesional dengan branding sendiri — tanpa perlu memahami coding
-              atau mengelola hosting.
+              Dynicty membantu UMKM memiliki toko online sendiri yang profesional,
+              mudah dikelola, dan siap digunakan untuk menjalankan bisnis online.
             </p>
 
             <div
@@ -88,7 +85,7 @@ const Hero = () => {
               style={r4.style}
               className={`${r4.className} mt-8 sm:mt-9 flex flex-col sm:flex-row items-stretch sm:items-center gap-3`}
             >
-              <CtaLink to={ctaHref({ source: "hero-primary" })}>
+              <CtaLink to={ctaHref({ source: "hero-primary" })} trackingContext={{ source: "hero-primary" }}>
                 <Button
                   size="lg"
                   data-testid={HERO.primaryCta}

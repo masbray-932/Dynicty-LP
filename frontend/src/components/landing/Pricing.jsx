@@ -87,7 +87,7 @@ const PlanCard = ({ plan, delay }) => {
         </p>
       ) : null}
 
-      <CtaLink to={href} className="mt-7 block rounded-xl">
+      <CtaLink to={href} trackingContext={{ source: "pricing", plan: plan.name }} className="mt-7 block rounded-xl">
         <Button
           data-testid={PRICING.cta}
           className={[
@@ -114,8 +114,8 @@ const Pricing = () => {
         <div className="text-center max-w-2xl mx-auto">
           <div className="dyn-eyebrow">Harga</div>
           <h2 className="mt-3 text-[32px] sm:text-[40px] lg:text-[52px] font-semibold tracking-[-0.02em] leading-[1.05] text-white">
-            Paket untuk{" "}
-            <span className="dyn-brand-gradient-text">setiap tahap bisnis.</span>
+            Pilih paket yang{" "}
+            <span className="dyn-brand-gradient-text">sesuai dengan bisnis Anda.</span>
           </h2>
           <p className="mt-4 text-white/70">
             Pilih paket yang sesuai dengan skala bisnis Anda. Semua paket

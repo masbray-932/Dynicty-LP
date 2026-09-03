@@ -22,6 +22,7 @@ import {
 //     Footer, Contact Page, Floating WhatsApp.
 //   • SEO overrides (homepage title/description, OG/Twitter images,
 //     canonical base, verification tags) merged with the static registry.
+//   • Public analytics identifiers (numeric Meta Pixel ID only).
 //
 // Design principles:
 //   1. NEVER blocks first paint — the app renders with static fallback while
@@ -89,7 +90,7 @@ const LandingPageSettingsContext = createContext({
 export const LandingPageSettingsProvider = ({ children }) => {
   const cached = useMemo(() => readCache(), []);
   const [data, setData] = useState(cached || LANDING_SETTINGS_FALLBACK);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(Boolean(PLATFORM_API_URL));
   const [error, setError] = useState(null);
   const inFlight = useRef(null);
 
@@ -196,6 +197,12 @@ export const useContactSettings = () => {
 export const useSeoSettings = () => {
   const { data } = useLandingPageSettings();
   return data.seo;
+};
+
+/** Convenience hook — returns only the normalized `analytics` slice. */
+export const useAnalyticsSettings = () => {
+  const { data } = useLandingPageSettings();
+  return data.analytics;
 };
 
 export default LandingPageSettingsContext;

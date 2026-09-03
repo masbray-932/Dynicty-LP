@@ -48,7 +48,7 @@ const CustomWebApp = () => {
             <div className="lg:col-span-7">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/12 bg-white/[0.03] text-[11px] uppercase tracking-[0.2em] text-white/70">
                 <Layers className="h-3.5 w-3.5" />
-                Solusi Custom
+                Layanan Tambahan
               </div>
 
               <h2 className="mt-4 text-[30px] sm:text-[38px] lg:text-[46px] font-semibold tracking-[-0.02em] leading-[1.05] text-white">
@@ -59,7 +59,7 @@ const CustomWebApp = () => {
               </h2>
 
               <p className="mt-4 text-white/70 max-w-xl leading-relaxed">
-                {CUSTOM_WEB_APP.description}
+                Di luar platform e-commerce Dynicty, {CUSTOM_WEB_APP.description.charAt(0).toLowerCase() + CUSTOM_WEB_APP.description.slice(1)}
               </p>
 
               <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5">
@@ -93,7 +93,7 @@ const CustomWebApp = () => {
                   dan timeline. Tim kami akan menyiapkan proposal yang sesuai
                   dengan kebutuhan Anda.
                 </p>
-                <CtaLink to={href} className="mt-6 block">
+                <CtaLink to={href} trackingContext={{ source: "custom-web-app" }} className="mt-6 block">
                   <Button
                     data-testid={CUSTOM_WEB.cta}
                     className="h-12 w-full text-[14px] dyn-cta-primary rounded-xl"

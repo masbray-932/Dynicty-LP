@@ -2,6 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet-async";
 import {
   SITE,
+  SCHEMA_IDS,
   absoluteUrl,
   getPageSeo,
   organizationSchema,
@@ -18,9 +19,7 @@ import VerificationMetaUpdater from "@/components/seo/VerificationMetaUpdater";
  *
  * Merge order (highest priority first):
  *   1. Explicit props (title / description / url / noindex)
- *   2. Platform Settings API  →  ONLY on the homepage (see `pageKey === "home"`)
- *      • api.seo.site_title            → home <title> / og:title / twitter:title
- *      • api.seo.meta_description      → home description / og:description / twitter:description
+ *   2. Platform Settings API
  *      • api.seo.canonical_base_url    → SITE.url (canonical base for ALL pages)
  *      • api.seo.og_image_url          → OG image (all pages, unless a page provides its own)
  *      • api.seo.twitter_image_url     → Twitter image (all pages)
@@ -54,17 +53,12 @@ const SEO = ({
     return `${canonicalOrigin}${p.startsWith("/") ? p : `/${p}`}`;
   };
 
-  // Compose per-page metadata with API override applied only on the homepage.
+  // Keep page title and description in the static registry so an outdated
+  // runtime response cannot create conflicting homepage metadata.
   const registryTitle = page?.title ?? SITE.name;
   const registryDesc = page?.description ?? SITE.description;
-  const title =
-    titleProp ??
-    (isHome && apiSeo.site_title ? apiSeo.site_title : registryTitle);
-  const description =
-    descProp ??
-    (isHome && apiSeo.meta_description
-      ? apiSeo.meta_description
-      : registryDesc);
+  const title = titleProp ?? registryTitle;
+  const description = descProp ?? registryDesc;
 
   const canonicalPath = page?.path ?? "/";
   const canonicalUrl = urlProp ?? buildCanonical(canonicalPath);
@@ -75,7 +69,7 @@ const SEO = ({
   const twitterImage =
     apiSeo.twitter_image_url || apiSeo.og_image_url || absoluteUrl(SITE.twitterImage);
 
-  // Structured data — WebPage uses the resolved (potentially API-overridden) title/desc.
+  // Structured data — WebPage links to the single primary WebSite entity.
   const pageWebPage = {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -84,9 +78,7 @@ const SEO = ({
     url: canonicalUrl,
     inLanguage: SITE.language,
     isPartOf: {
-      "@type": "WebSite",
-      name: SITE.name,
-      url: canonicalOrigin,
+      "@id": SCHEMA_IDS.website,
     },
     primaryImageOfPage: ogImage,
   };

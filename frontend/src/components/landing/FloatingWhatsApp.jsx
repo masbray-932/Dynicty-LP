@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { MessageCircle } from "lucide-react";
 import useContact from "@/hooks/useContact";
+import { trackMetaContact } from "@/lib/metaPixel";
 
 /**
  * FloatingWhatsApp
@@ -40,6 +41,7 @@ const FloatingWhatsApp = ({ message }) => {
       rel="noopener noreferrer"
       data-testid="floating-whatsapp-button"
       aria-label="Konsultasi gratis via WhatsApp"
+      onClick={() => trackMetaContact({ contact_method: "whatsapp", destination_type: "outbound", source: "floating-whatsapp" })}
       className={[
         "fixed bottom-6 right-6 z-50 group",
         "inline-flex items-center gap-2.5 pl-3.5 pr-4 py-3 rounded-full",

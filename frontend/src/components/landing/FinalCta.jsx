@@ -41,7 +41,7 @@ const FinalCta = () => {
               <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4" />Biaya transparan</span>
             </div>
             <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
-              <CtaLink to={ctaHref({ source: "final-cta" })}>
+              <CtaLink to={ctaHref({ source: "final-cta" })} trackingContext={{ source: "final-cta" }}>
                 <Button
                   size="lg"
                   data-testid={FINAL_CTA.cta}

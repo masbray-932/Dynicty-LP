@@ -4,6 +4,7 @@ import { Mail, MapPin, MessageCircle } from "lucide-react";
 import BrandLogo from "@/components/brand/BrandLogo";
 import useContact from "@/hooks/useContact";
 import { FOOTER } from "@/constants/testIds";
+import { trackMetaContact } from "@/lib/metaPixel";
 
 const Footer = () => {
   const { email, address, hasWhatsApp, whatsappUrl, mailtoUrl } = useContact();
@@ -51,8 +52,8 @@ const Footer = () => {
           <div className="lg:col-span-5">
             <BrandLogo height={0} className="h-10 w-auto object-contain" />
             <p className="mt-4 text-sm text-white/65 max-w-sm">
-              Dynicty membantu UMKM dan seller marketplace membangun toko online
-              profesional dengan branding sendiri.
+              Dynicty adalah layanan pembuatan website dan platform e-commerce
+              untuk membantu UMKM membangun serta mengelola toko online sendiri.
             </p>
             <div className="mt-4 text-[11px] uppercase tracking-[0.24em] text-white/45">
               BUILD • GROW • EMPOWER
@@ -70,6 +71,7 @@ const Footer = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     data-testid="footer-whatsapp-link"
+                    onClick={() => trackMetaContact({ contact_method: "whatsapp", destination_type: "outbound", source: "footer" })}
                     className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors"
                   >
                     <MessageCircle className="h-4 w-4 text-[#25D366]" />

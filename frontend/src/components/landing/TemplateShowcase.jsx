@@ -10,6 +10,7 @@ import {
   fetchPublicTemplates,
   mergeTemplatesWithRoadmap,
 } from "@/services/templateShowcaseApi";
+import { trackMetaViewContent } from "@/lib/metaPixel";
 
 const accentMap = {
   amber:    "from-amber-500/40 to-orange-500/25",
@@ -123,6 +124,13 @@ const TemplateCard = ({ template, delay, whatsappHref }) => {
                 rel="noopener noreferrer"
                 data-testid={TEMPLATES.preview}
                 aria-label={`Lihat demo ${template.name}`}
+                onClick={() => trackMetaViewContent({
+                  content_type: "template",
+                  content_name: template.name,
+                  content_ids: [template.slug || template.name],
+                  content_category: template.category,
+                  featured: template.featured,
+                })}
               >
                 Lihat Demo
                 <ExternalLink className="h-3.5 w-3.5 ml-1.5" />
@@ -139,6 +147,7 @@ const TemplateCard = ({ template, delay, whatsappHref }) => {
                 to={whatsappHref}
                 testId={TEMPLATES.preview}
                 ariaLabel={`Tanyakan template ${template.name}`}
+                trackingContext={{ source: "template-showcase", template: template.name }}
               >
                 Tanyakan Template
                 <MessageCircle className="h-3.5 w-3.5 ml-1.5" />

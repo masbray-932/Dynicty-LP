@@ -139,6 +139,7 @@ const Navbar = () => {
         <div className="hidden lg:flex items-center pl-2">
           <CtaLink
             to={ctaHref({ source: "navbar" })}
+            trackingContext={{ source: "navbar" }}
             testId={NAV.ctaContact}
             className="nav-cta group relative inline-flex items-center gap-2 h-11 px-5 rounded-xl text-[14px] font-medium text-white transition-all duration-200 hover:-translate-y-[1px] active:translate-y-0"
             style={{
@@ -206,6 +207,7 @@ const Navbar = () => {
                 </nav>
                 <CtaLink
                   to={ctaHref({ source: "navbar-mobile" })}
+                  trackingContext={{ source: "navbar-mobile" }}
                   onClick={() => setOpen(false)}
                   className="inline-flex items-center justify-center gap-2 w-full h-11 rounded-xl text-white text-[14px] font-medium"
                   style={{

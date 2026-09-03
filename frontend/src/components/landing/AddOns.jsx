@@ -69,7 +69,7 @@ const AddonCard = ({ addon, delay }) => {
         ))}
       </ul>
 
-      <CtaLink to={href} className="mt-6 block">
+      <CtaLink to={href} trackingContext={{ source: "addon", addon: addon.name }} className="mt-6 block">
         <Button
           data-testid={ADDONS.cta}
           variant="outline"

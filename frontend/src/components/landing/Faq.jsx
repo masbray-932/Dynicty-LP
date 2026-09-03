@@ -3,6 +3,8 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { FAQ } from "@/constants/testIds";
 
 const items = [
+  { q: "Apakah Dynicty hanya jasa pembuatan web?",
+    a: "Bukan. Dynicty menggabungkan layanan pembuatan website dengan platform e-commerce siap pakai, sehingga UMKM tidak hanya mendapatkan website, tetapi juga sistem untuk mengelola toko online sendiri." },
   { q: "Saya belum pernah bikin website. Apakah bisa pakai Dynicty?",
     a: "Dynicty dirancang agar mudah digunakan bahkan bagi yang belum pernah bikin website. Anda tinggal memilih template, menyesuaikan branding, dan menambahkan produk." },
   { q: "Apakah saya harus menutup toko Shopee/TikTok Shop/Tokopedia saya?",

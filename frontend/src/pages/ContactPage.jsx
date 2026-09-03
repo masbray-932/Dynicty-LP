@@ -9,17 +9,24 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Loader2, CheckCircle2, AlertCircle, ArrowLeft, Send, Mail, Phone, Store, MessageCircle, MapPin } from "lucide-react";
 import { toast } from "sonner";
-import { submitContact } from "@/lib/api";
+import { submitContactLead } from "@/lib/contactLead";
 import useContact from "@/hooks/useContact";
 import { CONTACT } from "@/constants/testIds";
+import { trackMetaContact } from "@/lib/metaPixel";
 
 const PLAN_OPTIONS = ["Belum yakin", "Starter", "Growth", "Enterprise"];
+const TRACKABLE_SOURCES = new Set([
+  "contact-page", "navbar", "navbar-mobile", "hero-primary", "pricing",
+  "addon", "custom-web-app", "final-cta", "template-showcase",
+]);
 
 export default function ContactPage() {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const prefilledPaket = params.get("paket") || "";
   const prefilledSrc = params.get("src") || "";
+  const trackingSource = TRACKABLE_SOURCES.has(prefilledSrc) ? prefilledSrc : "contact-page";
+  const trackingPlan = PLAN_OPTIONS.includes(prefilledPaket) ? prefilledPaket : "";
   const { hasWhatsApp, whatsappUrl, email, address, mailtoUrl } = useContact();
   const waHref = whatsappUrl(
     prefilledPaket
@@ -90,7 +97,11 @@ export default function ContactPage() {
           `\nPesan:\n${form.pesan.trim()}`,
         honeypot: form.honeypot,
       };
-      const res = await submitContact(payload);
+      const res = await submitContactLead(payload, {
+        source: trackingSource,
+        selectedPlan: form.paket || "unspecified",
+        leadChannel: looksLikeEmail ? "email" : "whatsapp",
+      });
       setSuccess(true);
       toast.success(res?.message || "Pesan Anda telah kami terima.");
       // scroll top for success visibility
@@ -178,6 +189,12 @@ export default function ContactPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   data-testid="contact-whatsapp-link"
+                  onClick={() => trackMetaContact({
+                    contact_method: "whatsapp",
+                    destination_type: "outbound",
+                    source: "contact-page-direct",
+                    plan: trackingPlan,
+                  })}
                   className="flex items-center gap-3 group"
                 >
                   <div className="h-9 w-9 rounded-lg bg-[#25D366]/15 border border-[#25D366]/30 flex items-center justify-center">

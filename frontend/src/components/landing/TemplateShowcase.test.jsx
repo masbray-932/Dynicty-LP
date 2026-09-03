@@ -2,6 +2,7 @@ import React, { act } from "react";
 import { createRoot } from "react-dom/client";
 import TemplateShowcase from "./TemplateShowcase";
 import { fetchPublicTemplates } from "@/services/templateShowcaseApi";
+import { trackMetaViewContent } from "@/lib/metaPixel";
 
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 
@@ -25,6 +26,11 @@ jest.mock("@/services/templateShowcaseApi", () => ({
 
 jest.mock("@/hooks/useInView", () => ({
   useRevealClass: () => ({ ref: null, style: {}, className: "" }),
+}));
+
+jest.mock("@/lib/metaPixel", () => ({
+  trackMetaViewContent: jest.fn(),
+  trackMetaContact: jest.fn(),
 }));
 
 const flushRender = async (promise) => {
@@ -93,6 +99,13 @@ describe("TemplateShowcase", () => {
     const demo = container.querySelector('a[href="https://demo.example.com/"]');
     expect(demo?.getAttribute("target")).toBe("_blank");
     expect(demo?.getAttribute("rel")).toBe("noopener noreferrer");
+    demo.click();
+    expect(trackMetaViewContent).toHaveBeenCalledTimes(1);
+    expect(trackMetaViewContent).toHaveBeenCalledWith(expect.objectContaining({
+      content_type: "template",
+      content_name: "Fashion Store",
+      content_ids: ["fashion-store"],
+    }));
     await act(async () => root.unmount());
   });
 

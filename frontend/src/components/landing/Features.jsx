@@ -50,10 +50,10 @@ const Features = () => {
         <div className="max-w-2xl">
           <div className="dyn-eyebrow">Fitur untuk Kelola Toko Anda</div>
           <h2 className="mt-3 text-[32px] sm:text-[40px] lg:text-[52px] font-semibold tracking-[-0.02em] leading-[1.05] text-white">
-            <span className="dyn-brand-gradient-text">Semua yang Anda butuhkan</span> untuk menjalankan toko online.
+            <span className="dyn-brand-gradient-text">Fitur lengkap</span> untuk mengelola e-commerce Anda.
           </h2>
           <p className="mt-4 text-white/70 text-base sm:text-lg max-w-xl">
-            Ringkasan fitur utama untuk menjalankan toko online. Setiap fitur ditandai dengan paket minimum yang membukanya; add-on opsional ditampilkan terpisah di bawah paket.
+            Kelola produk, pesanan, pelanggan, pembayaran, dan pengiriman dalam satu website bisnis. Setiap fitur ditandai dengan paket minimum yang membukanya.
           </p>
         </div>
 

@@ -9,6 +9,9 @@ import PrivacyPage from "@/pages/PrivacyPage";
 import TermsPage from "@/pages/TermsPage";
 import NotFoundPage from "@/pages/NotFoundPage";
 import { LandingPageSettingsProvider } from "@/context/LandingPageSettingsContext";
+import { AnalyticsConsentProvider } from "@/context/AnalyticsConsentContext";
+import AnalyticsConsentBanner from "@/components/analytics/AnalyticsConsentBanner";
+import MetaPixelTracker from "@/components/analytics/MetaPixelTracker";
 
 function App() {
   useEffect(() => {
@@ -20,29 +23,33 @@ function App() {
   return (
     <HelmetProvider>
       <LandingPageSettingsProvider>
-        <div className="App min-h-screen bg-[hsl(var(--dyn-bg-0))] text-white">
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<LandingPage />} />
-              <Route path="/kontak" element={<ContactPage />} />
-              <Route path="/privacy" element={<PrivacyPage />} />
-              <Route path="/terms" element={<TermsPage />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-          </BrowserRouter>
-        <Toaster
-          position="top-center"
-          richColors
-          theme="dark"
-          toastOptions={{
-            style: {
-              background: "rgba(15, 18, 51, 0.95)",
-              border: "1px solid rgba(255,255,255,0.12)",
-              color: "#F5F7FF",
-            },
-          }}
-        />
-        </div>
+        <AnalyticsConsentProvider>
+          <div className="App min-h-screen bg-[hsl(var(--dyn-bg-0))] text-white">
+            <BrowserRouter>
+              <MetaPixelTracker />
+              <Routes>
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/kontak" element={<ContactPage />} />
+                <Route path="/privacy" element={<PrivacyPage />} />
+                <Route path="/terms" element={<TermsPage />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
+              <AnalyticsConsentBanner />
+            </BrowserRouter>
+            <Toaster
+              position="top-center"
+              richColors
+              theme="dark"
+              toastOptions={{
+                style: {
+                  background: "rgba(15, 18, 51, 0.95)",
+                  border: "1px solid rgba(255,255,255,0.12)",
+                  color: "#F5F7FF",
+                },
+              }}
+            />
+          </div>
+        </AnalyticsConsentProvider>
       </LandingPageSettingsProvider>
     </HelmetProvider>
   );

@@ -23,6 +23,9 @@
 //     "bing_site_verification":     "",
 //     "facebook_domain_verification": ""
 //   },
+//   "analytics": {
+//     "meta_pixel_id":             "123456789012345"
+//   },
 //   "version":     "1",
 //   "updated_at":  "2026-07-14T10:00:00Z"
 // }
@@ -53,6 +56,9 @@ export const LANDING_SETTINGS_FALLBACK = Object.freeze({
     bing_site_verification: "",
     facebook_domain_verification: "",
   },
+  analytics: {
+    meta_pixel_id: "",
+  },
   version: "0",
   updated_at: null,
   _source: "fallback",
@@ -63,6 +69,13 @@ const asStringArray = (v) =>
   Array.isArray(v)
     ? v.filter((x) => typeof x === "string" && x.trim().length > 0).map((x) => x.trim())
     : [];
+const asMetaPixelId = (value) => {
+  const candidate =
+    typeof value === "string" || typeof value === "number"
+      ? String(value).trim()
+      : "";
+  return /^\d{5,25}$/.test(candidate) ? candidate : "";
+};
 
 /**
  * Normalize an arbitrary API response into the exact shape the app expects.
@@ -76,6 +89,7 @@ export const normalizeLandingSettings = (raw) => {
   if (!raw || typeof raw !== "object") return LANDING_SETTINGS_FALLBACK;
   const c = raw.contact && typeof raw.contact === "object" ? raw.contact : {};
   const s = raw.seo && typeof raw.seo === "object" ? raw.seo : {};
+  const a = raw.analytics && typeof raw.analytics === "object" ? raw.analytics : {};
 
   return {
     contact: {
@@ -98,6 +112,9 @@ export const normalizeLandingSettings = (raw) => {
       google_site_verification: asString(s.google_site_verification),
       bing_site_verification: asString(s.bing_site_verification),
       facebook_domain_verification: asString(s.facebook_domain_verification),
+    },
+    analytics: {
+      meta_pixel_id: asMetaPixelId(a.meta_pixel_id),
     },
     version: asString(raw.version) || "0",
     updated_at: asString(raw.updated_at) || null,

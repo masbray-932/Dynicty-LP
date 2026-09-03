@@ -42,7 +42,7 @@ export const SITE = {
   category: "SaaS Website Builder",
   // Description used as WebSite / Organization fallback.
   description:
-    "Dynicty membantu UMKM dan seller marketplace di Indonesia membangun toko online profesional dengan branding sendiri, tanpa perlu memahami coding atau mengelola hosting.",
+    "Dynicty adalah jasa pembuatan website dan platform e-commerce siap pakai untuk membantu UMKM membangun dan mengelola toko online sendiri.",
 };
 
 // -----------------------------------------------------------------------------
@@ -83,9 +83,9 @@ export const PAGES = {
   home: {
     path: "/",
     title:
-      "Dynicty — Bangun Toko Online Sendiri untuk UMKM & Marketplace Seller",
+      "Dynicty — Jasa Pembuatan Website & Platform E-commerce untuk UMKM",
     description:
-      "Bangun toko online profesional dengan branding sendiri. Dynicty membantu UMKM & seller marketplace di Indonesia punya website sendiri — tanpa coding, tanpa ribet hosting.",
+      "Dynicty menyediakan jasa pembuatan website dan platform e-commerce untuk UMKM. Bangun toko online sendiri dengan pengelolaan produk, pembayaran, pengiriman, dan branding profesional.",
     breadcrumb: [{ name: "Home", path: "/" }],
     schemas: ["SoftwareApplication"],
   },
@@ -153,30 +153,35 @@ export const getPageSeo = (pageKey) => {
 // -----------------------------------------------------------------------------
 // JSON-LD schema builders (schema.org)
 // -----------------------------------------------------------------------------
+export const SCHEMA_IDS = Object.freeze({
+  organization: absoluteUrl("/#organization"),
+  website: absoluteUrl("/#website"),
+});
+
 export const organizationSchema = () => ({
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": SCHEMA_IDS.organization,
   name: SITE.name,
   legalName: SITE.legalName,
-  url: SITE.url,
+  url: absoluteUrl("/"),
   logo: absoluteUrl(SITE.logo),
   slogan: SITE.tagline,
   description: SITE.description,
   email: SITE.contact.email,
-  sameAs: SITE.sameAs,
+  ...(SITE.sameAs.length > 0 ? { sameAs: SITE.sameAs } : {}),
 });
 
 export const websiteSchema = () => ({
   "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": SCHEMA_IDS.website,
   name: SITE.name,
-  url: SITE.url,
+  url: absoluteUrl("/"),
   inLanguage: SITE.language,
   description: SITE.description,
   publisher: {
-    "@type": "Organization",
-    name: SITE.name,
-    logo: absoluteUrl(SITE.logo),
+    "@id": SCHEMA_IDS.organization,
   },
 });
 
@@ -188,9 +193,7 @@ export const webPageSchema = (page) => ({
   url: absoluteUrl(page.path),
   inLanguage: SITE.language,
   isPartOf: {
-    "@type": "WebSite",
-    name: SITE.name,
-    url: SITE.url,
+    "@id": SCHEMA_IDS.website,
   },
   primaryImageOfPage: absoluteUrl(SITE.ogImage),
 });
@@ -218,9 +221,7 @@ export const softwareApplicationSchema = () => {
     image: absoluteUrl(SITE.ogImage),
     description: SITE.description,
     publisher: {
-      "@type": "Organization",
-      name: SITE.name,
-      url: SITE.url,
+      "@id": SCHEMA_IDS.organization,
     },
     featureList: APPLICATION.featureList,
   };
@@ -252,6 +253,7 @@ export const getIndexablePages = () =>
 
 export default {
   SITE,
+  SCHEMA_IDS,
   APPLICATION,
   PAGES,
   absoluteUrl,

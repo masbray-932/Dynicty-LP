@@ -45,12 +45,12 @@ const Solution = () => {
         <div className="text-center max-w-2xl mx-auto">
           <div className="dyn-eyebrow">Kenalkan Dynicty</div>
           <h2 className="mt-3 text-[32px] sm:text-[40px] lg:text-[52px] font-semibold tracking-[-0.02em] leading-[1.05] text-white">
-            Toko online Anda sendiri —
+            Bangun toko online milik bisnis Anda sendiri —
             <br />
             <span className="dyn-brand-gradient-text">dengan branding sendiri, tanpa perlu ngoding.</span>
           </h2>
           <p className="mt-4 text-white/70">
-            Pilih template. Sesuaikan branding. Kelola produk dan pesanan dari satu tempat. Semuanya mudah digunakan, bahkan untuk yang baru pertama kali punya website.
+            Dynicty memadukan jasa pembuatan website dengan platform e-commerce siap pakai. Pilih template, sesuaikan branding, lalu kelola produk dan pesanan dari satu tempat.
           </p>
         </div>
 
