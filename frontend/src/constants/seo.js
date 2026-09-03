@@ -34,8 +34,8 @@ export const SITE = {
     email: "hello@dynicty.com",
     supportEmail: "support@dynicty.com",
   },
-  // Reserved for future Social Profiles — kept empty on purpose for v1.
-  sameAs: [],
+  // Verified official brand profiles used by Organization structured data.
+  sameAs: ["https://www.facebook.com/dynicty/"],
   // Twitter/X handle (blank until brand social launches).
   twitterSite: "",
   // Business classification.

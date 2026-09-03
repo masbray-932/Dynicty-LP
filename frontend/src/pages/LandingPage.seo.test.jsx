@@ -101,7 +101,15 @@ describe("Dynicty homepage SEO foundation", () => {
       url: "https://dynicty.com/",
       logo: "https://dynicty.com/brand/dynicty-logo.png",
     }));
-    expect(organizationSchemas[0]).not.toHaveProperty("sameAs");
+    expect(organizationSchemas[0].sameAs).toEqual([
+      "https://www.facebook.com/dynicty/",
+    ]);
+    expect(
+      JSON.stringify(schemas).match(/https:\/\/www\.facebook\.com\/dynicty\//g)
+    ).toHaveLength(1);
+    expect(JSON.stringify(schemas)).not.toContain(
+      "https://www.facebook.com/profile.php?id=61593129026292"
+    );
     expect(schemas.every((schema) => JSON.parse(JSON.stringify(schema)))).toBe(true);
   });
 });
